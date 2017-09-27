@@ -8,7 +8,7 @@ package interfaz;
 
 /**
  *
- * @author Shonny
+ * @author Shonny & juank
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
