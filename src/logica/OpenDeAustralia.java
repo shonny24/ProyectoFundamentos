@@ -20,8 +20,8 @@ public class OpenDeAustralia {
     }
 
     public boolean agregarJugador(Jugador juga) {
-        String cedu = juga.getIdJugador();
-        Jugador verificacion = buscarJugador(cedu);
+        String id = juga.getIdJugador();
+        Jugador verificacion = buscarJugador(id);
 
         if (verificacion == null) {
             for (int i = 0; i < jugadores.length; i++) {
@@ -38,9 +38,38 @@ public class OpenDeAustralia {
 
     public Jugador buscarJugador(String idJugador) {
         for (int i = 0; i < jugadores.length; i++) {
-            Jugador p = jugadores[i];
+            Jugador j = jugadores[i];
+            if (j != null) {
+                if (idJugador.equals(j.getIdJugador())) {
+                    return j;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public boolean agregarPista(Pista pis) {
+        String id = pis.getIdPista();
+        Pista verificacion =buscarPista(id);
+
+        if (verificacion == null) {
+            for (int i = 0; i < pistas.length; i++) {
+                if (pistas[i] == null) {
+                    pistas[i] = pis;
+                    break;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public Pista buscarPista(String idPista) {
+        for (int i = 0; i < pistas.length; i++) {
+            Pista p = pistas[i];
             if (p != null) {
-                if (idJugador.equals(p.getIdJugador())) {
+                if (idPista.equals(p.getIdPista())) {
                     return p;
                 }
             }
