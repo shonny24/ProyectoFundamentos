@@ -63,6 +63,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Pista");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem2);
 
         jMenu1.add(jMenu4);
@@ -96,6 +101,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaAgregarJugador agregarJugador =new VentanaAgregarJugador();
         agregarJugador.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        VentanaAgregarPista pistas = new VentanaAgregarPista();
+        pistas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
