@@ -10,13 +10,22 @@ package logica;
  * @author Shonny & juank
  */
 public class Pista {
-
+    private String idPista;
     private String nombre;
     private int capacidadMax;
 
-    public Pista(String nombre, int capacidadMax) {
+    public Pista(String idPista, String nombre, int capacidadMax) {
+        this.idPista = idPista;
         this.nombre = nombre;
         this.capacidadMax = capacidadMax;
+    }
+
+    public String getIdPista() {
+        return idPista;
+    }
+
+    public void setIdPista(String idPista) {
+        this.idPista = idPista;
     }
 
     public String getNombre() {
@@ -34,4 +43,6 @@ public class Pista {
     public void setCapacidadMax(int capacidadMax) {
         this.capacidadMax = capacidadMax;
     }
+
+
 }
