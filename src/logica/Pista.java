@@ -10,7 +10,8 @@ package logica;
  * @author Shonny & juank
  */
 public class Pista {
-    private String nombre; 
+
+    private String nombre;
     private int capacidadMax;
 
     public Pista(String nombre, int capacidadMax) {

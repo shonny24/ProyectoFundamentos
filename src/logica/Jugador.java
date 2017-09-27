@@ -10,6 +10,7 @@ package logica;
  * @author Shonny & Juank
  */
 public class Jugador {
+
     private String idJugador;
     private String nombre;
     private int edad;
@@ -31,6 +32,7 @@ public class Jugador {
     public void setIdJugador(String idJugador) {
         this.idJugador = idJugador;
     }
+
     public String getNombre() {
         return nombre;
     }

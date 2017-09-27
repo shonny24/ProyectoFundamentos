@@ -20,5 +20,5 @@ public class ProyectoFundamentos {
         // TODO code application logic here
         VentanaPrincipal.main(args);
     }
-    
+
 }
