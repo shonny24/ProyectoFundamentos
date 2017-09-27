@@ -7,7 +7,7 @@ package logica;
 
 /**
  *
- * @author Shonny & juank
+ * @author Shonny & Juank
  */
 public class Jugador {
     private String nombre;
