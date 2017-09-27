@@ -10,5 +10,47 @@ package logica;
  * @author Shonny
  */
 public class Jugador {
-    
+    private String nombre;
+    private int edad;
+    private int rankinATP;
+    private int puntosObtenidos;
+
+    public Jugador(String nombre, int edad, int rankinATP, int puntosObtenidos) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.rankinATP = rankinATP;
+        this.puntosObtenidos = puntosObtenidos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public int getRankinATP() {
+        return rankinATP;
+    }
+
+    public void setRankinATP(int rankinATP) {
+        this.rankinATP = rankinATP;
+    }
+
+    public int getPuntosObtenidos() {
+        return puntosObtenidos;
+    }
+
+    public void setPuntosObtenidos(int puntosObtenidos) {
+        this.puntosObtenidos = puntosObtenidos;
+    }
 }
