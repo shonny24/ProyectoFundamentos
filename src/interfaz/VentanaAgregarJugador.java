@@ -181,6 +181,11 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTableJugadores);
+        if (jTableJugadores.getColumnModel().getColumnCount() > 0) {
+            jTableJugadores.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jTableJugadores.getColumnModel().getColumn(1).setPreferredWidth(120);
+            jTableJugadores.getColumnModel().getColumn(2).setPreferredWidth(20);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,8 +193,8 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,8 +212,8 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,8 +251,8 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jTpuntosATP.setText(null);
             jTrankingJugador.setText(null);
         } else {
-            JOptionPane.showMessageDialog(rootPane, "ERROR!! \n" + ValidarDatosAgregarJugador(), "Validando Datos",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! \n" + ValidarDatosAgregarJugador(), "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_jBagregarJugadorActionPerformed
@@ -368,7 +373,7 @@ public static void imprimir(String msj) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
             campo.setCursor(null);
         } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
                 || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
@@ -377,7 +382,7 @@ public static void imprimir(String msj) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
             campo.setCursor(null);
         }
     }
@@ -389,7 +394,7 @@ public static void imprimir(String msj) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "No puede ingresar numeros!!!", "Validando Datos",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
             campo.setCursor(null);
         } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
                 || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
@@ -398,7 +403,7 @@ public static void imprimir(String msj) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
             campo.setCursor(null);
         }
     }
