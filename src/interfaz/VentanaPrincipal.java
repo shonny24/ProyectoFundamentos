@@ -1,5 +1,6 @@
 package interfaz;
 
+import logica.Jugador;
 import logica.OpenDeAustralia;
 
 /*
@@ -14,12 +15,12 @@ import logica.OpenDeAustralia;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private OpenDeAustralia miOpenAustralia = new OpenDeAustralia();
+    private Jugador miJugador;
     /**
      * Creates new form VentanaPrincipal
      */
-//    private OpenDeAustralia miOpenAustralia;
     public VentanaPrincipal() {
-//        miOpenAustralia =new OpenDeAustralia();
         initComponents();
         
         //************************
@@ -98,7 +99,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        VentanaAgregarJugador agregarJugador =new VentanaAgregarJugador();
+        VentanaAgregarJugador agregarJugador =new VentanaAgregarJugador(miOpenAustralia);
         agregarJugador.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
