@@ -1,5 +1,7 @@
 package interfaz;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import logica.Jugador;
 import logica.OpenDeAustralia;
 
@@ -22,6 +24,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        
+        try {
+            miOpenAustralia.inicializarAtributos();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "El archivo no pudo ser leído");
+        }
         
         //************************
         //Centrar Jframe

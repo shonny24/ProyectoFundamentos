@@ -5,6 +5,10 @@
  */
 package logica;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author Shonny & juank
@@ -47,10 +51,10 @@ public class OpenDeAustralia {
         }
         return null;
     }
-    
+
     public boolean agregarPista(Pista pis) {
         String id = pis.getIdPista();
-        Pista verificacion =buscarPista(id);
+        Pista verificacion = buscarPista(id);
 
         if (verificacion == null) {
             for (int i = 0; i < pistas.length; i++) {
@@ -64,7 +68,7 @@ public class OpenDeAustralia {
             return false;
         }
     }
-    
+
     public Pista buscarPista(String idPista) {
         for (int i = 0; i < pistas.length; i++) {
             Pista p = pistas[i];
@@ -75,6 +79,22 @@ public class OpenDeAustralia {
             }
         }
         return null;
+    }
+
+    public void inicializarAtributos() throws IOException {
+        FileReader lector = new FileReader("src/persistencia/Jugadores.txt");
+        BufferedReader entradatxt = new BufferedReader(lector);
+        String linea = entradatxt.readLine();
+        int i = 0;
+
+        while (linea != null) {
+            String ep[] = linea.split("--");
+            Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]), Integer.parseInt(ep[3]), Integer.parseInt(ep[4]));
+            jugadores[i] = nuevoJugador;
+            i++;
+            linea = entradatxt.readLine();
+        }
+        entradatxt.close();
     }
 
     public Jugador[] getJugadores() {
