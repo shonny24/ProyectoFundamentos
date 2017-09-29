@@ -8,6 +8,7 @@ package logica;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,8 @@ public class OpenDeAustralia {
 
     private Jugador[] jugadores;
     private Pista[] pistas;
+    
+    private ArrayList<Partido> octavos = new ArrayList<Partido>();
 
     public OpenDeAustralia() {
         this.jugadores = new Jugador[16];
