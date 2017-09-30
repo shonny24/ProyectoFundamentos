@@ -295,14 +295,12 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         boolean eliminado;
         try {
             filSelec = jTableJugadores.getSelectedRow();
-            System.out.println(filSelec);
             if (filSelec == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un item de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
                 resp = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este jugador?", "Eliminar", JOptionPane.YES_NO_OPTION);
                 if (resp == JOptionPane.YES_OPTION) {
                     id = jTableJugadores.getValueAt(filSelec, 0).toString();
-                    System.out.println(id);
                     eliminado = miOpenAustralia.eliminarJugador(id);
                     DefaultTableModel dtm = (DefaultTableModel) jTableJugadores.getModel();
                     dtm.removeRow(filSelec);
