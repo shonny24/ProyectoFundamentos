@@ -18,7 +18,7 @@ public class OpenDeAustralia {
 
     private Jugador[] jugadores;
     private Pista[] pistas;
-    
+
     private ArrayList<Partido> octavos = new ArrayList<Partido>();
 
     public OpenDeAustralia() {
@@ -53,6 +53,66 @@ public class OpenDeAustralia {
             }
         }
         return null;
+    }
+
+    public boolean eliminarJugador(String id) {
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] != null) {
+                if (id.equals(jugadores[i].getIdJugador())) {
+                    jugadores[i] = null;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    // se puede volver mas pequeño es una prueba
+    public void modificarJugador(String id, String dato, int col) {
+        switch (col) {
+            case 1:
+                for (int i = 0; i < jugadores.length; i++) {
+                    if (jugadores[i] != null) {
+                        if (id.equals(jugadores[i].getIdJugador())) {
+                            jugadores[i].setNombre(dato);
+                        }
+                    }
+                }
+                break;
+            case 2:
+                int edad = Integer.parseInt(dato);
+                for (int i = 0; i < jugadores.length; i++) {
+                    if (jugadores[i] != null) {
+                        if (id.equals(jugadores[i].getIdJugador())) {
+                            jugadores[i].setEdad(edad);
+                        }
+                    }
+                }
+                break;
+            case 3:
+                int puntosAtp = Integer.parseInt(dato);
+                for (int i = 0; i < jugadores.length; i++) {
+                    if (jugadores[i] != null) {
+                        if (id.equals(jugadores[i].getIdJugador())) {
+                            jugadores[i].setPuntosObtenidos(puntosAtp);
+                        }
+                    }
+                }
+                break;
+            case 4:
+                int rankinAtp = Integer.parseInt(dato);
+                for (int i = 0; i < jugadores.length; i++) {
+                    if (jugadores[i] != null) {
+                        if (id.equals(jugadores[i].getIdJugador())) {
+                            jugadores[i].setRankinATP(rankinAtp);
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 
     public boolean agregarPista(Pista pis) {
@@ -92,7 +152,7 @@ public class OpenDeAustralia {
 
         while (linea != null) {
             String ep[] = linea.split("--");
-            Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]), Integer.parseInt(ep[3]), Integer.parseInt(ep[4]));
+            Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]), Integer.parseInt(ep[3]));
             jugadores[i] = nuevoJugador;
             i++;
             linea = entradatxt.readLine();

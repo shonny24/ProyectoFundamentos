@@ -14,6 +14,12 @@ public class Partido {
     private Jugador jugador2;
     private Pista pista;
     private Estadistica estadistica;
+    
+    public Partido(Jugador jugador1, Jugador jugador2, Pista pista) {
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.pista = pista;
+    }
 
     public Jugador getJugador1() {
         return jugador1;
@@ -45,12 +51,6 @@ public class Partido {
 
     public void setEstadistica(Estadistica estadistica) {
         this.estadistica = estadistica;
-    }
-
-    public Partido(Jugador jugador1, Jugador jugador2, Pista pista) {
-        this.jugador1 = jugador1;
-        this.jugador2 = jugador2;
-        this.pista = pista;
     }
     
     

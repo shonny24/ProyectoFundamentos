@@ -17,12 +17,12 @@ public class Jugador {
     private int rankinATP;
     private int puntosObtenidos;
 
-    public Jugador(String idJugador, String nombre, int edad, int rankinATP, int puntosObtenidos) {
+    public Jugador(String idJugador, String nombre, int edad, int rankinATP) {
         this.idJugador = idJugador;
         this.nombre = nombre;
         this.edad = edad;
         this.rankinATP = rankinATP;
-        this.puntosObtenidos = puntosObtenidos;
+        this.puntosObtenidos = 180;
     }
 
     public String getIdJugador() {

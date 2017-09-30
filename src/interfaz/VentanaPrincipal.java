@@ -1,16 +1,13 @@
-package interfaz;
-
-import java.io.IOException;
-import javax.swing.JOptionPane;
-import logica.Jugador;
-import logica.OpenDeAustralia;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package interfaz;
 
+import java.io.IOException;
+import javax.swing.*;
+import logica.*;
 /**
  *
  * @author Shonny & juank
@@ -19,18 +16,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia = new OpenDeAustralia();
     private Jugador miJugador;
+
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        
+        //PONER EL FAVICON AL PROGRAMA
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
         try {
             miOpenAustralia.inicializarAtributos();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "El archivo no pudo ser leído");
         }
-        
+
         //************************
         //Centrar Jframe
         setLocationRelativeTo(null);
@@ -107,7 +106,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        VentanaAgregarJugador agregarJugador =new VentanaAgregarJugador(miOpenAustralia);
+        VentanaAgregarJugador agregarJugador = new VentanaAgregarJugador(miOpenAustralia);
         agregarJugador.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -128,7 +127,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -147,6 +146,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new VentanaPrincipal().setVisible(true);
             }
         });

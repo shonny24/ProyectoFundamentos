@@ -6,8 +6,9 @@
 package interfaz;
 
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import logica.*;
 
@@ -26,6 +27,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     public VentanaAgregarJugador(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
 
         //************************
         //Centrar Jframe
@@ -53,11 +55,10 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         jTrankingJugador = new javax.swing.JTextField();
         jTedadJugador = new javax.swing.JTextField();
         jBagregarJugador = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTpuntosATP = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableJugadores = new javax.swing.JTable();
+        jBborrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Jugador");
@@ -97,6 +98,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             }
         });
 
+        jBagregarJugador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/agregar16.png"))); // NOI18N
         jBagregarJugador.setText("Agregar");
         jBagregarJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,23 +106,15 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Puntos ATP:");
-
-        jTpuntosATP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTpuntosATPKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBagregarJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBagregarJugador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
@@ -128,18 +122,14 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTnombreJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(jTidJugador)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTedadJugador)
-                            .addComponent(jTpuntosATP)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addComponent(jTrankingJugador)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTrankingJugador)
+                            .addComponent(jTedadJugador))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,15 +149,11 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                     .addComponent(jTedadJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTpuntosATP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTrankingJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBagregarJugador)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Jugadores"));
@@ -179,13 +165,35 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nombre", "Edad", "Puntos ATP", "Ranking ATP"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableJugadores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableJugadores);
         if (jTableJugadores.getColumnModel().getColumnCount() > 0) {
+            jTableJugadores.getColumnModel().getColumn(0).setResizable(false);
             jTableJugadores.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jTableJugadores.getColumnModel().getColumn(1).setResizable(false);
             jTableJugadores.getColumnModel().getColumn(1).setPreferredWidth(120);
+            jTableJugadores.getColumnModel().getColumn(2).setResizable(false);
             jTableJugadores.getColumnModel().getColumn(2).setPreferredWidth(20);
+            jTableJugadores.getColumnModel().getColumn(3).setResizable(false);
+            jTableJugadores.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        jBborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/borrar16.png"))); // NOI18N
+        jBborrar.setText("Borrar");
+        jBborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBborrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,14 +201,18 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                    .addComponent(jBborrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBborrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -234,9 +246,8 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             String idJuga = jTidJugador.getText();
             String nombre = jTnombreJugador.getText();
             int edad = Integer.parseInt(jTedadJugador.getText());
-            int puntosATP = Integer.parseInt(jTpuntosATP.getText());
             int rankinAtp = Integer.parseInt(jTrankingJugador.getText());
-            miJugador = new Jugador(idJuga, nombre, edad, rankinAtp, puntosATP);
+            miJugador = new Jugador(idJuga, nombre, edad, rankinAtp);
             boolean agregarJuga = miOpenAustralia.agregarJugador(miJugador);
 
             if (agregarJuga) {
@@ -248,7 +259,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jTidJugador.setText(null);
             jTnombreJugador.setText(null);
             jTedadJugador.setText(null);
-            jTpuntosATP.setText(null);
             jTrankingJugador.setText(null);
         } else {
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! \n" + ValidarDatosAgregarJugador(), "Validando Datos",
@@ -272,15 +282,42 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         validarNumeros(jTedadJugador, evt);
     }//GEN-LAST:event_jTedadJugadorKeyTyped
 
-    private void jTpuntosATPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpuntosATPKeyTyped
-        // TODO add your handling code here:
-        validarNumeros(jTpuntosATP, evt);
-    }//GEN-LAST:event_jTpuntosATPKeyTyped
-
     private void jTrankingJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTrankingJugadorKeyTyped
         // TODO add your handling code here:
         validarNumeros(jTrankingJugador, evt);
     }//GEN-LAST:event_jTrankingJugadorKeyTyped
+
+    private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
+        // TODO add your handling code here:
+        int filSelec;
+        int resp;
+        String id;
+        boolean eliminado;
+        try {
+            filSelec = jTableJugadores.getSelectedRow();
+            System.out.println(filSelec);
+            if (filSelec == -1) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un item de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                resp = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este jugador?", "Eliminar", JOptionPane.YES_NO_OPTION);
+                if (resp == JOptionPane.YES_OPTION) {
+                    id = jTableJugadores.getValueAt(filSelec, 0).toString();
+                    System.out.println(id);
+                    eliminado = miOpenAustralia.eliminarJugador(id);
+                    DefaultTableModel dtm = (DefaultTableModel) jTableJugadores.getModel();
+                    dtm.removeRow(filSelec);
+
+                    if (eliminado == true) {
+                        imprimir("El jugador se elimino correctamente");
+                    } else {
+                        imprimir("Error!!! no se elimino");
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jBborrarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -318,11 +355,11 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregarJugador;
+    private javax.swing.JButton jBborrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -330,7 +367,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     private javax.swing.JTextField jTedadJugador;
     private javax.swing.JTextField jTidJugador;
     private javax.swing.JTextField jTnombreJugador;
-    private javax.swing.JTextField jTpuntosATP;
     private javax.swing.JTextField jTrankingJugador;
     // End of variables declaration//GEN-END:variables
 public static void imprimir(String msj) {
@@ -364,6 +400,24 @@ public static void imprimir(String msj) {
                 dtm.addRow(datos);
             }
         }
+        //**************************************************
+        //metodo que modifica las celdas de la tabla
+        dtm.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int columna = e.getColumn();
+                    int fila =e.getFirstRow();
+                    String id = jTableJugadores.getValueAt(fila, 0).toString();
+                    String dato = jTableJugadores.getValueAt(fila, columna).toString();
+                    
+                    miOpenAustralia.modificarJugador(id, dato, columna);
+                }
+            }
+        });
+        //**************************************************
+
     }
 
     public void validarNumeros(JTextField campo, KeyEvent evt) {
@@ -418,9 +472,6 @@ public static void imprimir(String msj) {
         }
         if (jTedadJugador.getText().equals("")) {//Si jTidCita esta vacio
             msj += "Por favor digite la Edad. \n";
-        }
-        if (jTpuntosATP.getText().equals("")) {//Si jTidCita esta vacio
-            msj += "Por favor digite los Puntos ATP. \n";
         }
         if (jTrankingJugador.getText().equals("")) {//Si jTidCita esta vacio
             msj += "Por favor digite el Ranking ATP. \n";
