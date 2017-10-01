@@ -242,24 +242,38 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     private void jBagregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarJugadorActionPerformed
         // TODO add your handling code here:
+        //validar datos
         if (ValidarDatosAgregarJugador().equals("")) {
+
+            //Obtenemos los datos de los campos de texto
             String idJuga = jTidJugador.getText();
             String nombre = jTnombreJugador.getText();
             int edad = Integer.parseInt(jTedadJugador.getText());
             int rankinAtp = Integer.parseInt(jTrankingJugador.getText());
+
+            //llamamos al contructor de jugador
             miJugador = new Jugador(idJuga, nombre, edad, rankinAtp);
+
+            //llamamos el metodo agregar
             boolean agregarJuga = miOpenAustralia.agregarJugador(miJugador);
 
+            //Mostramos mensaje de que se agrego o no el jugador
             if (agregarJuga) {
                 imprimir("El Jugador se agrego");
             } else {
                 imprimir("No se puede agregar el jugador");
             }
+
+            //llamamos el metodo de la tabla para llenarla
             llenarTablaJugador();
+
+            //ponemos en blanco los campo de textos
             jTidJugador.setText(null);
             jTnombreJugador.setText(null);
             jTedadJugador.setText(null);
             jTrankingJugador.setText(null);
+
+            //se llama el metodo validar datos y se imprime en un joptionpane
         } else {
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! \n" + ValidarDatosAgregarJugador(), "Validando Datos",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -398,18 +412,22 @@ public static void imprimir(String msj) {
                 dtm.addRow(datos);
             }
         }
-        //**************************************************
         //metodo que modifica las celdas de la tabla
         dtm.addTableModelListener(new TableModelListener() {
+            //metodo que verifica si existe un cambio en la tabla
             @Override
             public void tableChanged(TableModelEvent e) {
-                
+                //if que verifica si existe cambio
                 if (e.getType() == TableModelEvent.UPDATE) {
+                    //se obtiene la columna en la cual se modifico la celda
                     int columna = e.getColumn();
-                    int fila =e.getFirstRow();
+                    //se obtiene la dila en la cual se modifico la celda
+                    int fila = e.getFirstRow();
+                    //se obtiene el id del jugador de la fila seleccionada 
                     String id = jTableJugadores.getValueAt(fila, 0).toString();
+                    //se obtiene el elemento modificado
                     String dato = jTableJugadores.getValueAt(fila, columna).toString();
-                    
+
                     miOpenAustralia.modificarJugador(id, dato, columna);
                 }
             }
