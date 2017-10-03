@@ -24,11 +24,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         //PONER EL FAVICON AL PROGRAMA
         setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
+        //*********************************
+        //inicializamos la persistencia del jugador
         try {
-            miOpenAustralia.inicializarAtributos();
+            miOpenAustralia.inicializarAtributosJugador();
+            miOpenAustralia.inicializarAtributosPista();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "El archivo no pudo ser leído");
         }
+        //*********************************
 
         //************************
         //Centrar Jframe
@@ -112,7 +116,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        VentanaAgregarPista pistas = new VentanaAgregarPista();
+        VentanaAgregarPista pistas = new VentanaAgregarPista(miOpenAustralia);
         pistas.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

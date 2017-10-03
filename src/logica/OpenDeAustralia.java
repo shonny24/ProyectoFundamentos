@@ -67,6 +67,7 @@ public class OpenDeAustralia {
 
         return false;
     }
+
     // se puede volver mas pequeño es una prueba
     public void modificarJugador(String id, String dato, int col) {
         switch (col) {
@@ -132,6 +133,19 @@ public class OpenDeAustralia {
         }
     }
 
+    public boolean eliminarPista(String id) {
+        for (int i = 0; i < pistas.length; i++) {
+            if (pistas[i] != null) {
+                if (id.equals(pistas[i].getIdPista())) {
+                    pistas[i] = null;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public Pista buscarPista(String idPista) {
         for (int i = 0; i < pistas.length; i++) {
             Pista p = pistas[i];
@@ -144,7 +158,34 @@ public class OpenDeAustralia {
         return null;
     }
 
-    public void inicializarAtributos() throws IOException {
+    // se puede volver mas pequeño es una prueba
+    public void modificarPista(String id, String dato, int col) {
+        switch (col) {
+            case 1:
+                for (int i = 0; i < pistas.length; i++) {
+                    if (pistas[i] != null) {
+                        if (id.equals(pistas[i].getIdPista())) {
+                            pistas[i].setNombre(dato);
+                        }
+                    }
+                }
+                break;
+            case 2:
+                int capacidadMaxi = Integer.parseInt(dato);
+                for (int i = 0; i < pistas.length; i++) {
+                    if (pistas[i] != null) {
+                        if (id.equals(pistas[i].getIdPista())) {
+                            pistas[i].setCapacidadMax(capacidadMaxi);
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void inicializarAtributosJugador() throws IOException {
         FileReader lector = new FileReader("src/persistencia/Jugadores.txt");
         BufferedReader entradatxt = new BufferedReader(lector);
         String linea = entradatxt.readLine();
@@ -154,6 +195,22 @@ public class OpenDeAustralia {
             String ep[] = linea.split("--");
             Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]), Integer.parseInt(ep[3]));
             jugadores[i] = nuevoJugador;
+            i++;
+            linea = entradatxt.readLine();
+        }
+        entradatxt.close();
+    }
+
+    public void inicializarAtributosPista() throws IOException {
+        FileReader lector = new FileReader("src/persistencia/Pistas.txt");
+        BufferedReader entradatxt = new BufferedReader(lector);
+        String linea = entradatxt.readLine();
+        int i = 0;
+
+        while (linea != null) {
+            String pist[] = linea.split("--");
+            Pista nuevaPista = new Pista(pist[0], pist[1], Integer.parseInt(pist[2]));
+            pistas[i] = nuevaPista;
             i++;
             linea = entradatxt.readLine();
         }

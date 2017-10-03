@@ -308,14 +308,19 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         String id;
         boolean eliminado;
         try {
+            //selecciono una fila
             filSelec = jTableJugadores.getSelectedRow();
+            //verifico si estoy seleccionando una fila
             if (filSelec == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un item de la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
                 resp = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar este jugador?", "Eliminar", JOptionPane.YES_NO_OPTION);
                 if (resp == JOptionPane.YES_OPTION) {
+                    //obtengo el los datos de la columna 0
                     id = jTableJugadores.getValueAt(filSelec, 0).toString();
+                    //llamo el metodo eliminar
                     eliminado = miOpenAustralia.eliminarJugador(id);
+                    
                     DefaultTableModel dtm = (DefaultTableModel) jTableJugadores.getModel();
                     dtm.removeRow(filSelec);
 
