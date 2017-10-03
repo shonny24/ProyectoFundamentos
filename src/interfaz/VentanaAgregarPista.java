@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -24,6 +25,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     public VentanaAgregarPista(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
         //************************
         //Centrar Jframe
         setLocationRelativeTo(null);
@@ -54,7 +56,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
         jBBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Agragar Pista");
+        setTitle("Agregar Pista");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Pista"));
@@ -131,6 +133,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablePista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTablePista);
         if (jTablePista.getColumnModel().getColumnCount() > 0) {
             jTablePista.getColumnModel().getColumn(0).setPreferredWidth(20);
