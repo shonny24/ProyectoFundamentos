@@ -1,2 +1,5 @@
-1--JUank--3000
-2--Jhonny--1000
+1--Rod Laver--15000
+2--Hisense--10000
+3--Margaret Court--6000
+4--Pista 1--3000
+5--Pista 2--3000

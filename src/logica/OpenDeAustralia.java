@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -19,11 +20,30 @@ public class OpenDeAustralia {
     private Jugador[] jugadores;
     private Pista[] pistas;
 
-    private ArrayList<Partido> octavos = new ArrayList<Partido>();
+    private ArrayList<Partido> octavos;
 
     public OpenDeAustralia() {
+        this.octavos = new ArrayList<Partido>();
         this.jugadores = new Jugador[16];
         this.pistas = new Pista[5];
+    }
+
+    public void generarOctavos() {
+        Random aleatorio = new Random();
+        Jugador jugador1 = null;
+        Jugador jugador2 = null;
+        Pista pista = null;
+        //tomamos el primer jugador con el ultimo
+        for (int i = 0; i < 8; i++) {
+            jugador1 = jugadores[i];
+            jugador2 = jugadores[15 - i];
+            //Pista aleatoria
+            pista = pistas[aleatorio.nextInt(5)];
+            //creamos un objeto partido (llamamos al contructor para inicializar)
+            Partido parti = new Partido(jugador1, jugador2, pista);
+            //agregamos al arraylist
+            octavos.add(parti);
+        }
     }
 
     public boolean agregarJugador(Jugador juga) {
@@ -233,4 +253,11 @@ public class OpenDeAustralia {
         this.pistas = pistas;
     }
 
+    public ArrayList<Partido> getOctavos() {
+        return octavos;
+    }
+
+    public void setOctavos(ArrayList<Partido> octavos) {
+        this.octavos = octavos;
+    }
 }

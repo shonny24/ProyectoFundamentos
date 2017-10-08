@@ -16,6 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia = new OpenDeAustralia();
     private Jugador miJugador;
+    private Partido miPartido;
 
     /**
      * Creates new form VentanaPrincipal
@@ -54,8 +55,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMOctavos = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Open de Australia");
@@ -86,10 +88,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Editar");
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Ver");
+
+        jMOctavos.setText("Rondas");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Octavos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMOctavos.add(jMenuItem3);
+
+        jMenu3.add(jMOctavos);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -119,6 +132,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaAgregarPista pistas = new VentanaAgregarPista(miOpenAustralia);
         pistas.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
+        if(miOpenAustralia.getOctavos().isEmpty()){
+            miOpenAustralia.generarOctavos();
+        }
+        
+        VentanaVerRondas rondas =new VentanaVerRondas(miOpenAustralia);
+        rondas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,12 +181,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMOctavos;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
