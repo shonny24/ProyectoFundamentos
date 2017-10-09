@@ -20,7 +20,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia;
     private Jugador miJugador;
-    private VentanaPrincipal miVentanaPrincipal;
 
     /**
      * Creates new form VentanaAgregarJugador
