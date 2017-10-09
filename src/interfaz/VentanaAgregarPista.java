@@ -5,8 +5,10 @@
  */
 package interfaz;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +21,7 @@ import logica.*;
 public class VentanaAgregarPista extends javax.swing.JFrame {
     private OpenDeAustralia miOpenAustralia;
     private Pista miPista;
+    private VentanaPrincipal miVentanaPrincipal;
     /**
      * Creates new form VentanaAgragarPista
      */
@@ -63,9 +66,27 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
 
         jLabel1.setText("Id:");
 
+        jTIdPista.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTIdPistaKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Nombre");
 
+        jTNombrePista.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombrePistaKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Capacidad");
+
+        jTCapacidadPista.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTCapacidadPistaKeyTyped(evt);
+            }
+        });
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/agregar16.png"))); // NOI18N
         jBAgregar.setText("Agregar");
@@ -195,6 +216,8 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        
+        if (ValidarDatosAgregarPista().equals("")) {
         String idPista = jTIdPista.getText();
         String nombrePista = jTNombrePista.getText();
         int capacidadMaxima = Integer.parseInt(jTCapacidadPista.getText());
@@ -214,7 +237,12 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
           jTNombrePista.setText(null);
           jTCapacidadPista.setText(null);
     }//GEN-LAST:event_jBAgregarActionPerformed
-
+        else{
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! \n" + ValidarDatosAgregarPista(), "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
         int filSelec;
         int resp;
@@ -249,6 +277,21 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
         }
      
     }//GEN-LAST:event_jBBorrarActionPerformed
+
+    private void jTIdPistaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIdPistaKeyTyped
+        // TODO add your handling code here:
+        validarNumeros(jTIdPista, evt);
+    }//GEN-LAST:event_jTIdPistaKeyTyped
+
+    private void jTNombrePistaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombrePistaKeyTyped
+        // TODO add your handling code here:
+        validarLetras(jTNombrePista, evt);
+    }//GEN-LAST:event_jTNombrePistaKeyTyped
+
+    private void jTCapacidadPistaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCapacidadPistaKeyTyped
+        // TODO add your handling code here:
+        validarNumeros(jTCapacidadPista, evt);      
+    }//GEN-LAST:event_jTCapacidadPistaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -350,5 +393,60 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
             }
         });
         //**************************************************
+    }
+        public void validarNumeros(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
+    }
+
+    public void validarLetras(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar numeros!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
+    }
+    
+    public String ValidarDatosAgregarPista() {//Metodo para comprobar que los datos esten completos
+        String msj = "";
+        if (jTIdPista.getText().equals("")) {//Si jTnombreCita esta vacio
+            msj += "Por favor digite el Id de la pista. \n";
+        }
+        if (jTNombrePista.getText().equals("")) {//Si jTidCita esta vacio
+            msj += "Por favor digite el Nombre de la pista. \n";
+        }
+        if (jTCapacidadPista.getText().equals("")) {//Si jTidCita esta vacio
+            msj += "Por favor digite la Capacidad de la pista. \n";
+        }
+        return msj;//devuelve msj
     }
 }

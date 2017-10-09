@@ -114,6 +114,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTIdPista">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTIdPistaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -121,6 +124,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTNombrePista">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTNombrePistaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -128,6 +134,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTCapacidadPista">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTCapacidadPistaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBAgregar">
           <Properties>
