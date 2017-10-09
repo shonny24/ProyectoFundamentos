@@ -284,22 +284,22 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     private void jTidJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidJugadorKeyTyped
         // TODO add your handling code here:
-        miVentanaPrincipal.validarNumeros(jTidJugador, evt);
+        validarNumeros(jTidJugador, evt);
     }//GEN-LAST:event_jTidJugadorKeyTyped
 
     private void jTnombreJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnombreJugadorKeyTyped
         // TODO add your handling code here:
-        miVentanaPrincipal.validarLetras(jTnombreJugador, evt);
+        validarLetras(jTnombreJugador, evt);
     }//GEN-LAST:event_jTnombreJugadorKeyTyped
 
     private void jTedadJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTedadJugadorKeyTyped
         // TODO add your handling code here:
-        miVentanaPrincipal.validarNumeros(jTedadJugador, evt);
+        validarNumeros(jTedadJugador, evt);
     }//GEN-LAST:event_jTedadJugadorKeyTyped
 
     private void jTrankingJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTrankingJugadorKeyTyped
         // TODO add your handling code here:
-        miVentanaPrincipal.validarNumeros(jTrankingJugador, evt);
+        validarNumeros(jTrankingJugador, evt);
     }//GEN-LAST:event_jTrankingJugadorKeyTyped
 
     private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
@@ -440,6 +440,47 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         });
         //**************************************************
 
+    }
+        public void validarNumeros(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
+    }
+
+    public void validarLetras(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar numeros!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
     }
 
     public String ValidarDatosAgregarJugador() {//Metodo para comprobar que los datos esten completos
