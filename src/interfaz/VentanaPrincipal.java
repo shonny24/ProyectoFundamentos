@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.*;
 import logica.*;
@@ -190,4 +191,45 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
+    public void validarNumeros(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
+    }
+
+    public void validarLetras(JTextField campo, KeyEvent evt) {
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar numeros!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No puede ingresar simbolos!!!", "Validando Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
+            campo.setCursor(null);
+        }
+    }
 }
