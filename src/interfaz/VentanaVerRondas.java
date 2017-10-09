@@ -7,6 +7,7 @@ package interfaz;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.OpenDeAustralia;
 import logica.Partido;
@@ -17,7 +18,6 @@ import logica.Partido;
  */
 public class VentanaVerRondas extends javax.swing.JFrame {
     private OpenDeAustralia miOpenAustralia;
-    private Partido miPartido;
 
     /**
      * Creates new form VentanaVerRondas
@@ -57,11 +57,28 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Hora y Fecha", "Jugador 1", "Jugador 2", "Pista"
+                "Id", "Hora y Fecha", "Jugador 1", "Jugador 2", "Pista"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableVerRondas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableVerRondas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVerRondasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableVerRondas);
+        if (jTableVerRondas.getColumnModel().getColumnCount() > 0) {
+            jTableVerRondas.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jTableVerRondas.getColumnModel().getColumn(1).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,7 +86,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,6 +116,23 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableVerRondasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerRondasMouseClicked
+        // TODO add your handling code here:
+        VentanaJugarPartido partido =new VentanaJugarPartido(miOpenAustralia);
+        int filSelec;
+        String id;
+        filSelec = jTableVerRondas.getSelectedRow();
+        if(evt.getClickCount() == 2 && filSelec!=-1){
+            //obtengo el los datos de la columna 0
+            id = jTableVerRondas.getValueAt(filSelec, 0).toString();
+            VentanaJugarPartido.idPartido=id;
+            System.out.println(VentanaJugarPartido.idPartido);
+            partido.inicializarDatosVentanaPartido();
+
+        partido.setVisible(true);
+        }
+    }//GEN-LAST:event_jTableVerRondasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -149,7 +183,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
-        Object[] datos = new Object[4];
+        Object[] datos = new Object[5];
         
         for (int i = 0; i < octavos.size(); i++) {
 
@@ -157,10 +191,11 @@ public class VentanaVerRondas extends javax.swing.JFrame {
             //Se agrega este if para evitar que el extraiga datos en un campo null
             if (octa != null) {
 
-                datos[0] = octa.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
-                datos[1] = octa.getJugador1().getNombre();
-                datos[2] = octa.getJugador2().getNombre();
-                datos[3] = octa.getPista().getNombre();
+                datos[0] = octa.getId();
+                datos[1] = octa.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
+                datos[2] = octa.getJugador1().getNombre();
+                datos[3] = octa.getJugador2().getNombre();
+                datos[4] = octa.getPista().getNombre();
                
 
                 //agrego al TableModleo ese arreglo

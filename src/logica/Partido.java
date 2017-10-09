@@ -14,22 +14,28 @@ import java.util.Random;
  * @author Shonny
  */
 public class Partido {
+
+    private String id;
     private Jugador jugador1;
     private Jugador jugador2;
     private Pista pista;
     private Estadistica estadistica;
     private String fechaHora;
+    private int sets[][];
 
-    public Partido(Jugador jugador1, Jugador jugador2, Pista pista) {
+    public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
+        this.id = id;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.pista = pista;
 //        this.estadistica = estadistica;
         this.fechaHora = fechaHoraAleatoria();
+        this.sets = new int[2][6];
+        inicializarSets();
+
     }
 
-    
-    public String fechaHoraAleatoria(){
+    public String fechaHoraAleatoria() {
         Calendar unaFecha = Calendar.getInstance();
         Random aleatorio = new Random();
 
@@ -87,12 +93,75 @@ public class Partido {
 //
 //            "dd" -> "03″
 //
-        
-            unaFecha.set(2017, aleatorio.nextInt(3) + 9, aleatorio.nextInt(30) + 1, aleatorio.nextInt(24) + 1, aleatorio.nextInt(60));
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa -- dd/MMMMM/yyyy");
-            String fechaHora = sdf.format(unaFecha.getTime());
+        unaFecha.set(2017, aleatorio.nextInt(3) + 9, aleatorio.nextInt(30) + 1, aleatorio.nextInt(24) + 1, aleatorio.nextInt(60));
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa -- dd/MMMMM/yyyy");
+        String fechaHora = sdf.format(unaFecha.getTime());
 
         return fechaHora;
+    }
+
+    public void generarSets222(int set) {
+        Random aleatorio = new Random();
+        int acumuladorSet1 = 0;
+        int acumuladorSet2 = 0;
+        if (aleatorio.nextBoolean() == true) {
+            switch (sets[0][5]) {
+                case 0:
+                    sets[0][5] = 15;
+                    break;
+                case 15:
+                    sets[0][5] = 30;
+                    break;
+                case 30:
+                    sets[0][5] = 40;
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (sets[1][5]) {
+                case 0:
+                    sets[1][5] = 15;
+                    break;
+                case 15:
+                    sets[1][5] = 30;
+                    break;
+                case 30:
+                    sets[1][5] = 40;
+                    break;
+                default:
+                    break;
+            }
+        }
+//        for (i = 0; i < 5; i++) {
+//            int jugador1=sets[0][i];
+//            int jugador2=sets[1][i];
+//        }
+//        if(sets[0][5]==40 && sets[0][5]!=40){
+        int jugador1 = sets[0][set];
+        int jugador2 = sets[1][set];
+//        }
+        if (sets[0][set] == 0 && sets[0][5] == 40) {
+            sets[0][set]=1;
+            sets[0][5]=0;
+        } else if (sets[0][set] != 0 && sets[0][5] == 40) {
+            sets[0][set] += 1;
+            sets[0][5]=0;
+        } else if (sets[1][set] == 0 && sets[1][5] == 40) {
+            sets[1][set]= 1;
+            sets[1][5]=0;
+        } else if (sets[1][set] != 0 && sets[1][5] == 40) {
+            sets[1][set] += 1;
+            sets[1][5]=0;
+        }
+    }
+
+    public void inicializarSets() {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 6; j++) {
+                sets[i][j] = 0;
+            }
+        }
     }
 
     public Jugador getJugador1() {
@@ -134,6 +203,21 @@ public class Partido {
     public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
-    
-    
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int[][] getSets() {
+        return sets;
+    }
+
+    public void setSets(int[][] sets) {
+        this.sets = sets;
+    }
+
 }

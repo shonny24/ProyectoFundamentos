@@ -39,12 +39,27 @@ public class OpenDeAustralia {
             jugador2 = jugadores[15 - i];
             //Pista aleatoria
             pista = pistas[aleatorio.nextInt(5)];
+            
+            String idPartido=(octavos.size()+1)+"";
             //creamos un objeto partido (llamamos al contructor para inicializar)
-            Partido parti = new Partido(jugador1, jugador2, pista);
+            Partido parti = new Partido(idPartido,jugador1, jugador2, pista);
             //agregamos al arraylist
             octavos.add(parti);
         }
     }
+    
+    public Partido buscarPartidaOctavos(String id) {
+        for (int i = 0; i < octavos.size(); i++) {
+            Partido partido = octavos.get(i);
+            if (id.equals(partido.getId())) {
+                return partido;
+            }
+        }
+        return null;
+    }
+    
+    
+    
 
     public boolean agregarJugador(Jugador juga) {
         String id = juga.getIdJugador();
