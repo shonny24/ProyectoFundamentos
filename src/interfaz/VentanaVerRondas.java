@@ -17,6 +17,7 @@ import logica.Partido;
  * @author Shonny
  */
 public class VentanaVerRondas extends javax.swing.JFrame {
+
     private OpenDeAustralia miOpenAustralia;
 
     /**
@@ -119,18 +120,18 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
     private void jTableVerRondasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerRondasMouseClicked
         // TODO add your handling code here:
-        VentanaJugarPartido partido =new VentanaJugarPartido(miOpenAustralia);
+        VentanaJugarPartido partido = new VentanaJugarPartido(miOpenAustralia);
         int filSelec;
         String id;
         filSelec = jTableVerRondas.getSelectedRow();
-        if(evt.getClickCount() == 2 && filSelec!=-1){
+        if (evt.getClickCount() == 2 && filSelec != -1) {
             //obtengo el los datos de la columna 0
             id = jTableVerRondas.getValueAt(filSelec, 0).toString();
-            VentanaJugarPartido.idPartido=id;
+            VentanaJugarPartido.idPartido = id;
             System.out.println(VentanaJugarPartido.idPartido);
             partido.inicializarDatosVentanaPartido();
 
-        partido.setVisible(true);
+            partido.setVisible(true);
         }
     }//GEN-LAST:event_jTableVerRondasMouseClicked
 
@@ -184,10 +185,10 @@ public class VentanaVerRondas extends javax.swing.JFrame {
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
         Object[] datos = new Object[5];
-        
+
         for (int i = 0; i < octavos.size(); i++) {
 
-           Partido octa = octavos.get(i);
+            Partido octa = octavos.get(i);
             //Se agrega este if para evitar que el extraiga datos en un campo null
             if (octa != null) {
 
@@ -196,7 +197,6 @@ public class VentanaVerRondas extends javax.swing.JFrame {
                 datos[2] = octa.getJugador1().getNombre();
                 datos[3] = octa.getJugador2().getNombre();
                 datos[4] = octa.getPista().getNombre();
-               
 
                 //agrego al TableModleo ese arreglo
                 dtm.addRow(datos);

@@ -20,10 +20,12 @@ public class Partido {
     private Jugador jugador2;
     private Pista pista;
     private Estadistica estadistica;
+    private String tiempo;
     private String fechaHora;
     private int sets[][];
 
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
+        this.tiempo="00:00:00:00";
         this.id = id;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
@@ -218,6 +220,14 @@ public class Partido {
 
     public void setSets(int[][] sets) {
         this.sets = sets;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 
 }

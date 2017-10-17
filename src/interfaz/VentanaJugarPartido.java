@@ -5,8 +5,11 @@
  */
 package interfaz;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import logica.OpenDeAustralia;
 import logica.Partido;
@@ -19,12 +22,14 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia;
     public static String idPartido;
+    private boolean ejecutar = true;
+    private Timer t;
+    private int h, m, s, cs;
 
     /**
      * Creates new form VentanaJugarPartido
      */
     public VentanaJugarPartido(OpenDeAustralia open) {
-
         miOpenAustralia = open;
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
@@ -32,6 +37,9 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         //Centrar Jframe
         setLocationRelativeTo(null);
         //************************
+        t = new Timer(10, acciones);
+        
+
     }
 
     /**
@@ -50,6 +58,8 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLTiempoPartido = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLidPartido = new javax.swing.JLabel();
         jBJugar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -57,6 +67,11 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadisticas Partido"));
 
@@ -70,7 +85,11 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
         jLabel3.setText("Tiempo de la partida:");
 
-        jLTiempoPartido.setText("jLabel4");
+        jLTiempoPartido.setText("0:0:0");
+
+        jLabel4.setText("Partido:");
+
+        jLidPartido.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -87,8 +106,12 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jLTiempoPartido)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addComponent(jLTiempoPartido))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLidPartido)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +122,10 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                     .addComponent(jLCancha))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLidPartido))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -155,17 +182,17 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBJugar)
-                .addGap(113, 113, 113))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
+                .addGap(95, 95, 95))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 127, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +202,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(35, 35, 35)
                         .addComponent(jBJugar)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,13 +231,29 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
     private void jBJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBJugarActionPerformed
         // TODO add your handling code here:
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(idPartido);
+        String id = jLidPartido.getText();
+        System.out.println(id);
+        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
         System.out.println(partido.getJugador1().getNombre());
         partido.generarSets222(0);
         llenarTablaJugarPartido();
-
-
+        if(t.isRunning()==false){
+            t.start();
+        }
     }//GEN-LAST:event_jBJugarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        String id = jLidPartido.getText();
+        System.out.println(id);
+        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
+        String tiempoLabel = jLTiempoPartido.getText();
+        partido.setTiempo(tiempoLabel);
+//        jLTiempoPartido.setText("0:0:0");
+        System.out.println(tiempoLabel + " cerrando");
+        System.out.println(partido.getTiempo() + " EXTRACCION");
+
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -254,6 +297,8 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLidPartido;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -262,14 +307,29 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void inicializarDatosVentanaPartido() {
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(idPartido);
+        jLidPartido.setText(idPartido);
+        String id = jLidPartido.getText();
+        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
         String nombreCancha = partido.getPista().getNombre();
+        //obtengo el tiempo del objeto y inicializo los valores
+        String tiempo = partido.getTiempo();
+        String[] partirHora = tiempo.split(":");
+        h = Integer.parseInt(partirHora[0]);
+        m = Integer.parseInt(partirHora[1]);
+        s = Integer.parseInt(partirHora[2]);
+        cs = Integer.parseInt(partirHora[3]);
+        //obtengo el nombre de la cancha y la muestro en el label
         jLCancha.setText(nombreCancha);
+        //obtengo el timpo y los muestro en el label
+        jLTiempoPartido.setText(tiempo);
+
         llenarTablaJugarPartido();
+
     }
 
     public void llenarTablaJugarPartido() {
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(idPartido);
+        String id = jLidPartido.getText();
+        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
         DefaultTableModel dtm = (DefaultTableModel) jTableEstadisticas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(2);
         dtm.setColumnCount(7);
@@ -282,6 +342,32 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                 jTableEstadisticas.setValueAt(sets[i][j], i, j + 1);
             }
         }
+    }
+
+    private ActionListener acciones = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+
+            ++cs;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+            actualizarLabel();
+        }
+    };
+
+    private void actualizarLabel() {
+        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
+        jLTiempoPartido.setText(tiempo);
     }
 
 }
