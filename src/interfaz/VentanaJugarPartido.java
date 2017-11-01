@@ -333,7 +333,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTableEstadisticas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(2);
         dtm.setColumnCount(7);
-        int[][] sets = partido.getSets();
+        String[][] sets = partido.getSets();
 
         jTableEstadisticas.setValueAt(partido.getJugador1().getNombre(), 0, 0);
         jTableEstadisticas.setValueAt(partido.getJugador2().getNombre(), 1, 0);

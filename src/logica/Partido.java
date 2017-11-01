@@ -22,7 +22,7 @@ public class Partido {
     private Estadistica estadistica;
     private String tiempo;
     private String fechaHora;
-    private int sets[][];
+    private String sets[][];
 
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
         this.tiempo="00:00:00:00";
@@ -32,7 +32,7 @@ public class Partido {
         this.pista = pista;
 //        this.estadistica = estadistica;
         this.fechaHora = fechaHoraAleatoria();
-        this.sets = new int[2][6];
+        this.sets = new String[2][6];
         inicializarSets();
 
     }
@@ -108,28 +108,28 @@ public class Partido {
         int acumuladorSet2 = 0;
         if (aleatorio.nextBoolean() == true) {
             switch (sets[0][5]) {
-                case 0:
-                    sets[0][5] = 15;
+                case "0":
+                    sets[0][5] = "15";
                     break;
-                case 15:
-                    sets[0][5] = 30;
+                case "15":
+                    sets[0][5] = "30";
                     break;
-                case 30:
-                    sets[0][5] = 40;
+                case "30":
+                    sets[0][5] = "40";
                     break;
                 default:
                     break;
             }
         } else {
             switch (sets[1][5]) {
-                case 0:
-                    sets[1][5] = 15;
+                case "0":
+                    sets[1][5] = "15";
                     break;
-                case 15:
-                    sets[1][5] = 30;
+                case "15":
+                    sets[1][5] = "30";
                     break;
-                case 30:
-                    sets[1][5] = 40;
+                case "30":
+                    sets[1][5] = "40";
                     break;
                 default:
                     break;
@@ -140,28 +140,28 @@ public class Partido {
 //            int jugador2=sets[1][i];
 //        }
 //        if(sets[0][5]==40 && sets[0][5]!=40){
-        int jugador1 = sets[0][set];
-        int jugador2 = sets[1][set];
+        String jugador1 = sets[0][set];
+        String jugador2 = sets[1][set];
 //        }
-        if (sets[0][set] == 0 && sets[0][5] == 40) {
-            sets[0][set]=1;
-            sets[0][5]=0;
-        } else if (sets[0][set] != 0 && sets[0][5] == 40) {
+        if ("0".equals(sets[0][set]) && "40".equals(sets[0][5])) {
+            sets[0][set]=1+"";
+            sets[0][5]=0+"";
+        } else if (!"0".equals(sets[0][set]) && "40".equals(sets[0][5])) {
             sets[0][set] += 1;
-            sets[0][5]=0;
-        } else if (sets[1][set] == 0 && sets[1][5] == 40) {
-            sets[1][set]= 1;
-            sets[1][5]=0;
-        } else if (sets[1][set] != 0 && sets[1][5] == 40) {
-            sets[1][set] += 1;
-            sets[1][5]=0;
+            sets[0][5]=0+"";
+        } else if ("0".equals(sets[1][set]) && "40".equals(sets[1][5])) {
+            sets[1][set]= 1+"";
+            sets[1][5]=0+"";
+        } else if (!"0".equals(sets[1][set]) && "40".equals(sets[1][5])) {
+            sets[1][set] += 1+"";
+            sets[1][5]=0+"";
         }
     }
 
     public void inicializarSets() {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 6; j++) {
-                sets[i][j] = 0;
+                sets[i][j] = "0";
             }
         }
     }
@@ -214,11 +214,11 @@ public class Partido {
         this.id = id;
     }
 
-    public int[][] getSets() {
+    public String[][] getSets() {
         return sets;
     }
 
-    public void setSets(int[][] sets) {
+    public void setSets(String[][] sets) {
         this.sets = sets;
     }
 
