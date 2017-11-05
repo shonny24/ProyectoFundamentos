@@ -8,6 +8,7 @@ package logica;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,8 +25,14 @@ public class Partido {
     private String fechaHora;
     private String sets[][];
 
+    private int setJ1 = 0;
+    private int setJ2 = 0;
+    private int nSet = 0;
+    private int acumulador1 = 0;
+    private int acumulador2 = 0;
+
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
-        this.tiempo="00:00:00:00";
+        this.tiempo = "00:00:00:00";
         this.id = id;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
@@ -102,59 +109,53 @@ public class Partido {
         return fechaHora;
     }
 
-    public void generarSets222(int set) {
-        Random aleatorio = new Random();
-        int acumuladorSet1 = 0;
-        int acumuladorSet2 = 0;
-        if (aleatorio.nextBoolean() == true) {
-            switch (sets[0][5]) {
-                case "0":
-                    sets[0][5] = "15";
-                    break;
-                case "15":
-                    sets[0][5] = "30";
-                    break;
-                case "30":
-                    sets[0][5] = "40";
-                    break;
-                default:
-                    break;
+    public void jugar() {
+        boolean ganador = determinarGanador();
+        boolean punto = false;
+        boolean gameGanado = false;
+        boolean setGanado = false;
+
+        int j1 = (Integer.parseInt(sets[0][nSet]));
+        int j2 = (Integer.parseInt(sets[1][nSet]));
+        int n=0;
+
+        if (ganador == false) {
+            punto = generarPuntos();
+            if (punto == true) {
+                acumulador1++;
+            } else {
+                acumulador2++;
             }
-        } else {
-            switch (sets[1][5]) {
-                case "0":
-                    sets[1][5] = "15";
-                    break;
-                case "15":
-                    sets[1][5] = "30";
-                    break;
-                case "30":
-                    sets[1][5] = "40";
-                    break;
-                default:
-                    break;
+            if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {
+                sumarTiebreak(punto);
+                n=5;
+            } else {
+                sumarPunto(acumulador1, acumulador2, punto);
+                n=3;
             }
-        }
-//        for (i = 0; i < 5; i++) {
-//            int jugador1=sets[0][i];
-//            int jugador2=sets[1][i];
-//        }
-//        if(sets[0][5]==40 && sets[0][5]!=40){
-        String jugador1 = sets[0][set];
-        String jugador2 = sets[1][set];
-//        }
-        if ("0".equals(sets[0][set]) && "40".equals(sets[0][5])) {
-            sets[0][set]=1+"";
-            sets[0][5]=0+"";
-        } else if (!"0".equals(sets[0][set]) && "40".equals(sets[0][5])) {
-            sets[0][set] += 1;
-            sets[0][5]=0+"";
-        } else if ("0".equals(sets[1][set]) && "40".equals(sets[1][5])) {
-            sets[1][set]= 1+"";
-            sets[1][5]=0+"";
-        } else if (!"0".equals(sets[1][set]) && "40".equals(sets[1][5])) {
-            sets[1][set] += 1+"";
-            sets[1][5]=0+"";
+            gameGanado = determinarGanadorGame(acumulador1,acumulador2,n,punto);
+            if(gameGanado==true){
+                if(punto==true){
+                    sets[0][nSet] = ((Integer.parseInt(sets[0][nSet])) + 1) + "";
+                }else{
+                    sets[1][nSet] = ((Integer.parseInt(sets[1][nSet])) + 1) + "";
+                }
+                sets[0][5]="0";
+                sets[1][5]="0";
+                
+                acumulador1=0;
+                acumulador2=0;
+                
+                setGanado=determinarGanadorSet(n);
+                if(setGanado==true){
+                    nSet++;
+                    if(punto==true){
+                        setJ1++;
+                    }else{
+                        setJ2++;
+                    }
+                }
+            }
         }
     }
 
@@ -230,4 +231,243 @@ public class Partido {
         this.tiempo = tiempo;
     }
 
+    public void generarJuegoAutomatico() {
+        boolean ganador;
+        ganador = determinarGanador();
+        for (int i = 0; i < 5; i++) {
+            if (ganador == false) {
+                jugarSet(i);
+            } else {
+                i = 5;
+            }
+            ganador = determinarGanador();
+        }
+        sets[0][5] = "";
+        sets[1][5] = "";
+    }
+
+    private boolean jugarGame() {//Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano ese game.
+        boolean punto = false;
+        boolean ganarPunto = false;
+        int comparador1 = 0;
+        int comparador2 = 0;
+        while (ganarPunto == false) {
+            if (((comparador1 > 3) && (comparador2 < (comparador1 - 1))) || ((comparador2 > 3) && (comparador1 < (comparador2 - 1)))) {
+                ganarPunto = true;
+            } else {
+                punto = generarPuntos();
+                if (punto == true) {
+                    comparador1++;
+                } else {
+                    comparador2++;
+                }
+                sumarPunto(comparador1, comparador2, punto);
+            }
+        }
+        return punto;
+    }
+
+    private boolean determinarGanador() {
+        boolean ganador = false;
+        if (setJ1 >= 3) {
+            ganador = true;
+        }
+        if (setJ2 >= 3) {
+            ganador = true;
+        }
+        return ganador;
+    }
+
+    private void jugarSet(int set) {
+        boolean ganarSet = false;
+        boolean game;
+        boolean ganadorTieBreak = false;
+        int j1 = (Integer.parseInt(sets[0][set]));
+        int j2 = (Integer.parseInt(sets[1][set]));
+        while (ganarSet == false) {
+            if ((j1 == j2) && ((j1 == 6) && (j2 == 6))) {
+                if (set == 4) {
+                    jugarDobleGame();
+                    ganarSet = true;
+                } else {
+                    ganadorTieBreak = jugarTieBreak(set);
+                    ganarSet = true;
+                    if (ganadorTieBreak == true) {
+                        //sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + "";
+                        setJ1++;
+                    } else {
+                        //sets[1][set] = ((Integer.parseInt(sets[1][set])) + 1) + "";
+                        setJ2++;
+                    }
+                }
+            } else {
+                game = jugarGame();
+                if (game == true) {
+                    sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + "";
+                } else {
+                    sets[1][set] = ((Integer.parseInt(sets[1][set])) + 1) + "";
+                }
+            }
+            j1 = (Integer.parseInt(sets[0][set]));
+            j2 = (Integer.parseInt(sets[1][set]));
+            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+                ganarSet = true;
+                if (j1 > j2) {
+                    setJ1++;
+                } else {
+                    setJ2++;
+                }
+            }
+        }
+    }
+
+    private boolean jugarTieBreak(int set) {
+        sets[0][5] = "0";
+        sets[1][5] = "0";
+        int j1 = 0;
+        int j2 = 0;
+        boolean ganarTieBreak = false;
+        boolean punto = false;
+        while (ganarTieBreak == false) {
+            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+                ganarTieBreak = true;
+            } else {
+                punto = generarPuntos();
+                if (punto == true) {
+                    sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + "";
+                } else {
+                    sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + "";
+                }
+            }
+            j1 = (Integer.parseInt(sets[0][5]));
+            j2 = (Integer.parseInt(sets[1][5]));
+        }
+        if (punto == true) {
+            sets[0][set] = "7";
+        } else {
+            sets[1][set] = "7";
+        }
+        return punto;
+    }
+
+    private boolean jugarDobleGame() {
+        int j1 = (Integer.parseInt(sets[0][4]));
+        int j2 = (Integer.parseInt(sets[1][4]));
+        boolean ganarDobleGame = false;
+        boolean game = false;
+        while (ganarDobleGame == false) {
+            if ((j1 < (j2 - 1)) || (j2 < (j1 - 1))) {
+                ganarDobleGame = true;
+                if (j1 > j2) {
+                    setJ1++;
+                } else {
+                    setJ2++;
+                }
+            } else {
+                game = jugarGame();
+                if (game == true) {
+                    sets[0][4] = ((Integer.parseInt(sets[0][4])) + 1) + "";
+                } else {
+                    sets[1][4] = ((Integer.parseInt(sets[1][4])) + 1) + "";
+                }
+            }
+            j1 = (Integer.parseInt(sets[0][4]));
+            j2 = (Integer.parseInt(sets[1][4]));
+        }
+        if (j1 > j2) {
+            game = true;
+        } else {
+            game = false;
+        }
+        return game;
+    }
+
+    public boolean generarPuntos() {
+        Random aleatorio = new Random();
+        return aleatorio.nextBoolean();
+    }
+
+    private void sumarPunto(int comparador1, int comparador2, boolean punto) {
+        if (punto == true) {
+            switch (comparador1) {
+                case 1:
+                    sets[0][5] = "15";
+                    break;
+
+                case 2:
+                    sets[0][5] = "30";
+                    break;
+
+                case 3:
+                    sets[0][5] = "40";
+                    break;
+
+                default:
+                    if (comparador1 == comparador2) {
+                        sets[0][5] = "40";
+                        sets[1][5] = "40";
+                    } else {
+                        sets[0][5] = "AD";
+                        sets[1][5] = "-";
+                    }
+                    break;
+            }
+        } else {
+            switch (comparador2) {
+                case 1:
+                    sets[1][5] = "15";
+                    break;
+
+                case 2:
+                    sets[1][5] = "30";
+                    break;
+
+                case 3:
+                    sets[1][5] = "40";
+                    break;
+
+                default:
+                    if (comparador2 == comparador1) {
+                        sets[0][5] = "40";
+                        sets[1][5] = "40";
+                    } else {
+                        sets[0][5] = "-";
+                        sets[1][5] = "AD";
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void sumarTiebreak(boolean punto) {
+        if(punto==true){
+            sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + "";
+        }else{
+            sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + "";
+        }
+    }
+
+    private boolean determinarGanadorGame(int acum1, int acum2,int n, boolean punto) {
+        boolean ganador=false;
+        if (((acum1 > n) && (acum2 < (acum1 - 1))) || ((acum2 > n) && (acum1 < (acum2 - 1)))) {
+            ganador = true;
+        }
+        return ganador;
+    }
+
+    private boolean determinarGanadorSet(int n) {
+        boolean ganador = false;
+        
+        int j1 = (Integer.parseInt(sets[0][nSet]));
+        int j2 = (Integer.parseInt(sets[1][nSet]));
+        
+        if(n==5){
+            ganador = true;
+        }else{
+            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+             ganador = true;
+            }
+        }
+        return ganador;
+    }
 }

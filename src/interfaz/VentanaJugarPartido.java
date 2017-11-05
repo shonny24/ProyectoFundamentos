@@ -64,6 +64,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEstadisticas = new javax.swing.JTable();
+        jBAutomatico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -179,6 +180,13 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jBAutomatico.setText("Automatico");
+        jBAutomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAutomaticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,6 +194,8 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jBAutomatico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBJugar)
                 .addGap(95, 95, 95))
@@ -203,7 +213,9 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jBJugar)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBAutomatico)
+                            .addComponent(jBJugar))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -235,7 +247,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         System.out.println(id);
         Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
         System.out.println(partido.getJugador1().getNombre());
-        partido.generarSets222(0);
+        partido.jugar();
         llenarTablaJugarPartido();
         if(t.isRunning()==false){
             t.start();
@@ -254,6 +266,12 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         System.out.println(partido.getTiempo() + " EXTRACCION");
 
     }//GEN-LAST:event_formWindowClosing
+
+    private void jBAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAutomaticoActionPerformed
+        int id = Integer.parseInt(jLidPartido.getText());
+        miOpenAustralia.getOctavos().get(id-1).generarJuegoAutomatico();
+        llenarTablaJugarPartido();
+    }//GEN-LAST:event_jBAutomaticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +309,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAutomatico;
     private javax.swing.JButton jBJugar;
     private javax.swing.JLabel jLCancha;
     private javax.swing.JLabel jLTiempoPartido;
