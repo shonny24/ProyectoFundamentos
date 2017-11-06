@@ -20,7 +20,6 @@ public class Partido {
     private Jugador jugador1;
     private Jugador jugador2;
     private Pista pista;
-    private Estadistica estadistica;
     private String tiempo;
     private String fechaHora;
     private String sets[][];
@@ -189,14 +188,6 @@ public class Partido {
 
     public void setPista(Pista pista) {
         this.pista = pista;
-    }
-
-    public Estadistica getEstadistica() {
-        return estadistica;
-    }
-
-    public void setEstadistica(Estadistica estadistica) {
-        this.estadistica = estadistica;
     }
 
     public String getFechaHora() {
