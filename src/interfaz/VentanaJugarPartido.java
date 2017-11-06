@@ -269,7 +269,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
     private void jBAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAutomaticoActionPerformed
         int id = Integer.parseInt(jLidPartido.getText());
-        miOpenAustralia.getOctavos().get(id-1).generarJuegoAutomatico();
+        miOpenAustralia.getPartidos().get(id-1).generarJuegoAutomatico();
         llenarTablaJugarPartido();
     }//GEN-LAST:event_jBAutomaticoActionPerformed
 

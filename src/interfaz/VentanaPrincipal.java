@@ -137,7 +137,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
-        if(miOpenAustralia.getOctavos().isEmpty()){
+        if(miOpenAustralia.getPartidos().isEmpty()){
             miOpenAustralia.generarOctavos();
         }
         

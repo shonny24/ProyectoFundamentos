@@ -180,7 +180,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTableVerRondas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
         //los datos se agregan la defaultTableModel.
-        ArrayList<Partido> octavos = miOpenAustralia.getOctavos();//sacando al informacion a agregar en la tabla.
+        ArrayList<Partido> octavos = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
 
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.

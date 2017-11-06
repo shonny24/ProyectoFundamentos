@@ -20,10 +20,10 @@ public class OpenDeAustralia {
     private Jugador[] jugadores;
     private Pista[] pistas;
 
-    private ArrayList<Partido> octavos;
+    private ArrayList<Partido> partidos;
 
     public OpenDeAustralia() {
-        this.octavos = new ArrayList<Partido>();
+        this.partidos = new ArrayList<Partido>();
         this.jugadores = new Jugador[16];
         this.pistas = new Pista[5];
     }
@@ -40,17 +40,17 @@ public class OpenDeAustralia {
             //Pista aleatoria
             pista = pistas[aleatorio.nextInt(5)];
             
-            String idPartido=(octavos.size()+1)+"";
+            String idPartido=(partidos.size()+1)+"";
             //creamos un objeto partido (llamamos al contructor para inicializar)
             Partido parti = new Partido(idPartido,jugador1, jugador2, pista);
             //agregamos al arraylist
-            octavos.add(parti);
+            partidos.add(parti);
         }
     }
     
     public Partido buscarPartidaOctavos(String id) {
-        for (int i = 0; i < octavos.size(); i++) {
-            Partido partido = octavos.get(i);
+        for (int i = 0; i < partidos.size(); i++) {
+            Partido partido = partidos.get(i);
             if (id.equals(partido.getId())) {
                 return partido;
             }
@@ -268,11 +268,11 @@ public class OpenDeAustralia {
         this.pistas = pistas;
     }
 
-    public ArrayList<Partido> getOctavos() {
-        return octavos;
+    public ArrayList<Partido> getPartidos() {
+        return partidos;
     }
 
-    public void setOctavos(ArrayList<Partido> octavos) {
-        this.octavos = octavos;
+    public void setPartidos(ArrayList<Partido> partidos) {
+        this.partidos = partidos;
     }
 }
