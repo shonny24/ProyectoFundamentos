@@ -270,19 +270,22 @@ public class Partido {
     }
 
     private void jugarSet(int set) {
-        boolean ganarSet = false;
+        boolean ganadorSet = false;
         boolean game;
         boolean ganadorTieBreak = false;
         int j1 = (Integer.parseInt(sets[0][set]));
         int j2 = (Integer.parseInt(sets[1][set]));
-        while (ganarSet == false) {
+        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+             ganadorSet = true;
+            }
+        while (ganadorSet == false) {
             if ((j1 == j2) && ((j1 == 6) && (j2 == 6))) {
                 if (set == 4) {
                     jugarDobleGame();
-                    ganarSet = true;
+                    ganadorSet = true;
                 } else {
                     ganadorTieBreak = jugarTieBreak(set);
-                    ganarSet = true;
+                    ganadorSet = true;
                     if (ganadorTieBreak == true) {
                         //sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + "";
                         setJ1++;
@@ -302,7 +305,7 @@ public class Partido {
             j1 = (Integer.parseInt(sets[0][set]));
             j2 = (Integer.parseInt(sets[1][set]));
             if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
-                ganarSet = true;
+                ganadorSet = true;
                 if (j1 > j2) {
                     setJ1++;
                 } else {
