@@ -268,9 +268,12 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jBAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAutomaticoActionPerformed
+        t.stop();
         int id = Integer.parseInt(jLidPartido.getText());
         miOpenAustralia.getPartidos().get(id-1).generarJuegoAutomatico();
         llenarTablaJugarPartido();
+        jLTiempoPartido.setText(miOpenAustralia.getPartidos().get(id-1).getTiempo());
+        System.out.println(jLTiempoPartido.getText());
     }//GEN-LAST:event_jBAutomaticoActionPerformed
 
     /**
@@ -343,7 +346,6 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         jLTiempoPartido.setText(tiempo);
 
         llenarTablaJugarPartido();
-
     }
 
     public void llenarTablaJugarPartido() {
