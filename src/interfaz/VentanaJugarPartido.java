@@ -245,7 +245,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = jLidPartido.getText();
         System.out.println(id);
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
+        Partido partido = miOpenAustralia.buscarPartido(id);
         System.out.println(partido.getJugador1().getNombre());
         partido.jugar();
         llenarTablaJugarPartido();
@@ -258,7 +258,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = jLidPartido.getText();
         System.out.println(id);
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
+        Partido partido = miOpenAustralia.buscarPartido(id);
         String tiempoLabel = jLTiempoPartido.getText();
         partido.setTiempo(tiempoLabel);
 //        jLTiempoPartido.setText("0:0:0");
@@ -328,7 +328,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     public void inicializarDatosVentanaPartido() {
         jLidPartido.setText(idPartido);
         String id = jLidPartido.getText();
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
+        Partido partido = miOpenAustralia.buscarPartido(id);
         String nombreCancha = partido.getPista().getNombre();
         //obtengo el tiempo del objeto y inicializo los valores
         String tiempo = partido.getTiempo();
@@ -348,7 +348,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
 
     public void llenarTablaJugarPartido() {
         String id = jLidPartido.getText();
-        Partido partido = miOpenAustralia.buscarPartidaOctavos(id);
+        Partido partido = miOpenAustralia.buscarPartido(id);
         DefaultTableModel dtm = (DefaultTableModel) jTableEstadisticas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(2);
         dtm.setColumnCount(7);

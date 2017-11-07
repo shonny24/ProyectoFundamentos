@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.*;
 import logica.*;
+
 /**
  *
  * @author Shonny & juank
@@ -59,6 +60,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMOctavos = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Open de Australia");
@@ -102,6 +104,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMOctavos.add(jMenuItem3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setText("Cuartos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMOctavos.add(jMenuItem4);
+
         jMenu3.add(jMOctavos);
 
         jMenuBar1.add(jMenu3);
@@ -136,14 +147,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
+        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
         //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
-        if(miOpenAustralia.getPartidos().isEmpty()){
+        if (miOpenAustralia.getPartidos().isEmpty()) {
             miOpenAustralia.generarOctavos();
         }
-        
-        VentanaVerRondas rondas =new VentanaVerRondas(miOpenAustralia);
+
+        rondas.llenarTablaOctavos();
         rondas.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+
+        if (miOpenAustralia.getPartidos().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
+        } else if (miOpenAustralia.getPartidos().size() < 12) {
+            miOpenAustralia.generarCuartos();
+            rondas.llenarTablaCuartos();
+            rondas.setVisible(true);
+        } else {
+            rondas.llenarTablaCuartos();
+            rondas.setVisible(true);
+        }
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +219,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 
 }

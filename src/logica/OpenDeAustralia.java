@@ -21,6 +21,7 @@ public class OpenDeAustralia {
     private Pista[] pistas;
 
     private ArrayList<Partido> partidos;
+    int aux = -1;
 
     public OpenDeAustralia() {
         this.partidos = new ArrayList<Partido>();
@@ -39,16 +40,67 @@ public class OpenDeAustralia {
             jugador2 = jugadores[15 - i];
             //Pista aleatoria
             pista = pistas[aleatorio.nextInt(5)];
-            
-            String idPartido=(partidos.size()+1)+"";
+
+            String idPartido = (partidos.size() + 1) + "";
             //creamos un objeto partido (llamamos al contructor para inicializar)
-            Partido parti = new Partido(idPartido,jugador1, jugador2, pista);
+            Partido parti = new Partido(idPartido, jugador1, jugador2, pista);
             //agregamos al arraylist
             partidos.add(parti);
         }
+
     }
-    
-    public Partido buscarPartidaOctavos(String id) {
+
+    public void generarCuartos() {
+        Jugador[] jugadoresCuartos = new Jugador[8];
+        Random aleatorio = new Random();
+        Jugador jugadorGanador = null;
+        int jugador1Acumulador = 0;
+        int jugador2Acumulador = 0;
+        Pista pista = null;
+        Jugador jugador1 = null;
+        Jugador jugador2 = null;
+        for (int i = 0; i < 8; i++) {
+            //recorre la matriz de los sets y va acumulando
+            for (int j = 0; j < 5; j++) {
+                if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                    jugador1Acumulador++;
+                } else {
+                    jugador2Acumulador++;
+                }
+            }
+            System.out.println(aux + " AUXILIAR---------");
+
+            //compara los acumuladores para definir el ganador y los guarda en una matriz
+            if (jugador1Acumulador > jugador2Acumulador) {
+                jugadorGanador = partidos.get(i).getJugador1();
+                aux++;
+                jugadoresCuartos[aux] = jugadorGanador;
+            } else {
+                jugadorGanador = partidos.get(i).getJugador2();
+                aux++;
+                jugadoresCuartos[aux] = jugadorGanador;
+            }
+
+            System.out.println(aux + " AUXILIAR");
+        }
+        aux = 0;
+
+        for (int i = 0; i < 4; i++) {
+            jugador1 = jugadoresCuartos[i];
+            jugador2 = jugadoresCuartos[7 - i];
+            //Pista aleatoria
+            pista = pistas[aleatorio.nextInt(5)];
+            String idPartido = (partidos.size() + 1) + "";
+            System.out.println(idPartido + "------ID PARTIDO");
+            //creamos un objeto partido (llamamos al contructor para inicializar)
+            Partido parti = new Partido(idPartido, jugador1, jugador2, pista);
+
+            partidos.add(parti);
+
+        }
+    }
+
+    public Partido buscarPartido(String id) {
         for (int i = 0; i < partidos.size(); i++) {
             Partido partido = partidos.get(i);
             if (id.equals(partido.getId())) {
@@ -57,9 +109,6 @@ public class OpenDeAustralia {
         }
         return null;
     }
-    
-    
-    
 
     public boolean agregarJugador(Jugador juga) {
         String id = juga.getIdJugador();
