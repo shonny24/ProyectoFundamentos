@@ -160,17 +160,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            if (miOpenAustralia.numeroGanadores() == 8) {
+                if (miOpenAustralia.getPartidos().size() < 12) {
+                    miOpenAustralia.generarCuartos();
+                    rondas.llenarTablaCuartos();
+                    rondas.setVisible(true);
+                }else{
+                    rondas.llenarTablaCuartos();
+                    rondas.setVisible(true);
+                }
 
-        if (miOpenAustralia.getPartidos().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
-        } else if (miOpenAustralia.getPartidos().size() < 12) {
-            miOpenAustralia.generarCuartos();
-            rondas.llenarTablaCuartos();
-            rondas.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
+            }
         } else {
-            rondas.llenarTablaCuartos();
-            rondas.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
         }
+
+//        if (miOpenAustralia.getPartidos().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
+//        } else if (miOpenAustralia.getPartidos().size() < 12) {
+//            System.out.println(miOpenAustralia.numeroGanadores()+" NUMERO DE GANADORES");
+//            miOpenAustralia.generarCuartos();
+//            rondas.llenarTablaCuartos();
+//            rondas.setVisible(true);
+//        } else {
+//            rondas.llenarTablaCuartos();
+//            rondas.setVisible(true);
+//        }
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

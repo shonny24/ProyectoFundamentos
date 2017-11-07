@@ -54,17 +54,19 @@ public class OpenDeAustralia {
         Jugador[] jugadoresCuartos = new Jugador[8];
         Random aleatorio = new Random();
         Jugador jugadorGanador = null;
-        int jugador1Acumulador = 0;
-        int jugador2Acumulador = 0;
+        int jugador1Acumulador ;
+        int jugador2Acumulador;
         Pista pista = null;
         Jugador jugador1 = null;
         Jugador jugador2 = null;
         for (int i = 0; i < 8; i++) {
+            jugador1Acumulador = 0;
+            jugador2Acumulador = 0;
             //recorre la matriz de los sets y va acumulando
             for (int j = 0; j < 5; j++) {
                 if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador1Acumulador++;
-                } else {
+                } else if(Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador2Acumulador++;
                 }
             }
@@ -75,7 +77,7 @@ public class OpenDeAustralia {
                 jugadorGanador = partidos.get(i).getJugador1();
                 aux++;
                 jugadoresCuartos[aux] = jugadorGanador;
-            } else {
+            } else if (jugador1Acumulador < jugador2Acumulador) {
                 jugadorGanador = partidos.get(i).getJugador2();
                 aux++;
                 jugadoresCuartos[aux] = jugadorGanador;
@@ -86,6 +88,7 @@ public class OpenDeAustralia {
         aux = 0;
 
         for (int i = 0; i < 4; i++) {
+
             jugador1 = jugadoresCuartos[i];
             jugador2 = jugadoresCuartos[7 - i];
             //Pista aleatoria
@@ -98,6 +101,88 @@ public class OpenDeAustralia {
             partidos.add(parti);
 
         }
+    }
+    
+        public void generarFinal() {
+        Jugador[] jugadoresCuartos = new Jugador[4];
+        Random aleatorio = new Random();
+        Jugador jugadorGanador = null;
+        int jugador1Acumulador ;
+        int jugador2Acumulador;
+        Pista pista = null;
+        Jugador jugador1 = null;
+        Jugador jugador2 = null;
+        for (int i = 7; i < 12; i++) {
+            jugador1Acumulador = 0;
+            jugador2Acumulador = 0;
+            //recorre la matriz de los sets y va acumulando
+            for (int j = 0; j < 5; j++) {
+                if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                    jugador1Acumulador++;
+                } else if(Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                    jugador2Acumulador++;
+                }
+            }
+            System.out.println(aux + " AUXILIAR---------");
+
+            //compara los acumuladores para definir el ganador y los guarda en una matriz
+            if (jugador1Acumulador > jugador2Acumulador) {
+                jugadorGanador = partidos.get(i).getJugador1();
+                aux++;
+                jugadoresCuartos[aux] = jugadorGanador;
+            } else if (jugador1Acumulador < jugador2Acumulador) {
+                jugadorGanador = partidos.get(i).getJugador2();
+                aux++;
+                jugadoresCuartos[aux] = jugadorGanador;
+            }
+
+            System.out.println(aux + " AUXILIAR");
+        }
+        aux = 0;
+
+        for (int i = 0; i < 4; i++) {
+
+            jugador1 = jugadoresCuartos[i];
+            jugador2 = jugadoresCuartos[3 - i];
+            //Pista aleatoria
+            pista = pistas[aleatorio.nextInt(5)];
+            String idPartido = (partidos.size() + 1) + "";
+            System.out.println(idPartido + "------ID PARTIDO");
+            //creamos un objeto partido (llamamos al contructor para inicializar)
+            Partido parti = new Partido(idPartido, jugador1, jugador2, pista);
+
+            partidos.add(parti);
+
+        }
+    }
+
+    public int numeroGanadores() {
+        int jugador1Acumulador;
+        int jugador2Acumulador;
+        int res = 0;
+        Jugador jugadorGanador = null;
+        for (int i = 0; i < 8; i++) {
+            jugador1Acumulador = 0;
+            jugador2Acumulador = 0;
+            //recorre la matriz de los sets y va acumulando
+            for (int j = 0; j < 5; j++) {
+                if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                    jugador1Acumulador++;
+                } else if(Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                    jugador2Acumulador++;
+                }
+            }
+            System.out.println(jugador1Acumulador + "---- jugador1Acumulador");
+            System.out.println(jugador2Acumulador + "---- jugador2Acumulador");
+            //compara los acumuladores para definir el ganador y los guarda en una matriz
+            if (jugador1Acumulador > jugador2Acumulador) {
+                res++;
+            } else if (jugador1Acumulador < jugador2Acumulador) {
+                res++;
+            }
+        }
+
+        return res;
     }
 
     public Partido buscarPartido(String id) {

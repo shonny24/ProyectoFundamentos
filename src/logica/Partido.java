@@ -116,7 +116,7 @@ public class Partido {
 
         int j1 = (Integer.parseInt(sets[0][nSet]));
         int j2 = (Integer.parseInt(sets[1][nSet]));
-        int n=0;
+        int n = 0;
 
         if (ganador == false) {
             punto = generarPuntos();
@@ -127,30 +127,30 @@ public class Partido {
             }
             if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {
                 sumarTiebreak(punto);
-                n=5;
+                n = 5;
             } else {
                 sumarPunto(acumulador1, acumulador2, punto);
-                n=3;
+                n = 3;
             }
-            gameGanado = determinarGanadorGame(acumulador1,acumulador2,n,punto);
-            if(gameGanado==true){
-                if(punto==true){
+            gameGanado = determinarGanadorGame(acumulador1, acumulador2, n, punto);
+            if (gameGanado == true) {
+                if (punto == true) {
                     sets[0][nSet] = ((Integer.parseInt(sets[0][nSet])) + 1) + "";
-                }else{
+                } else {
                     sets[1][nSet] = ((Integer.parseInt(sets[1][nSet])) + 1) + "";
                 }
-                sets[0][5]="0";
-                sets[1][5]="0";
-                
-                acumulador1=0;
-                acumulador2=0;
-                
-                setGanado=determinarGanadorSet(n);
-                if(setGanado==true){
+                sets[0][5] = "0";
+                sets[1][5] = "0";
+
+                acumulador1 = 0;
+                acumulador2 = 0;
+
+                setGanado = determinarGanadorSet(n);
+                if (setGanado == true) {
                     nSet++;
-                    if(punto==true){
+                    if (punto == true) {
                         setJ1++;
-                    }else{
+                    } else {
                         setJ2++;
                     }
                 }
@@ -235,6 +235,7 @@ public class Partido {
         }
         sets[0][5] = "";
         sets[1][5] = "";
+        generarTiempoPartido();
     }
 
     private boolean jugarGame() {//Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano ese game.
@@ -276,8 +277,8 @@ public class Partido {
         int j1 = (Integer.parseInt(sets[0][set]));
         int j2 = (Integer.parseInt(sets[1][set]));
         if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
-             ganadorSet = true;
-            }
+            ganadorSet = true;
+        }
         while (ganadorSet == false) {
             if ((j1 == j2) && ((j1 == 6) && (j2 == 6))) {
                 if (set == 4) {
@@ -434,15 +435,15 @@ public class Partido {
     }
 
     private void sumarTiebreak(boolean punto) {
-        if(punto==true){
+        if (punto == true) {
             sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + "";
-        }else{
+        } else {
             sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + "";
         }
     }
 
-    private boolean determinarGanadorGame(int acum1, int acum2,int n, boolean punto) {
-        boolean ganador=false;
+    private boolean determinarGanadorGame(int acum1, int acum2, int n, boolean punto) {
+        boolean ganador = false;
         if (((acum1 > n) && (acum2 < (acum1 - 1))) || ((acum2 > n) && (acum1 < (acum2 - 1)))) {
             ganador = true;
         }
@@ -451,17 +452,36 @@ public class Partido {
 
     private boolean determinarGanadorSet(int n) {
         boolean ganador = false;
-        
+
         int j1 = (Integer.parseInt(sets[0][nSet]));
         int j2 = (Integer.parseInt(sets[1][nSet]));
-        
-        if(n==5){
+
+        if (n == 5) {
             ganador = true;
-        }else{
+        } else {
             if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
-             ganador = true;
+                ganador = true;
             }
         }
         return ganador;
+    }
+
+    private void generarTiempoPartido() {
+        int hora, minuto, segundo;
+        String tiempo, min, seg;
+        Random aleatorio = new Random();
+        hora = aleatorio.nextInt(4) + 1;
+        minuto = aleatorio.nextInt(59) + 0;
+        segundo = aleatorio.nextInt(59) + 0;
+        min = (minuto + "");
+        seg = (segundo + "");
+        if (minuto < 10) {
+            min = ("0" + minuto);
+        }
+        if (segundo < 10) {
+            seg = ("0" + segundo);
+        }
+        tiempo = ("00:0" + hora + ":" + min + ":" + seg);
+        setTiempo(tiempo);
     }
 }
