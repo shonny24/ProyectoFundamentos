@@ -60,7 +60,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMOctavos = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMCuartos = new javax.swing.JMenuItem();
+        jMSemiFinal = new javax.swing.JMenuItem();
+        jMFinal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Open de Australia");
@@ -104,14 +106,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMOctavos.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Cuartos");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMCuartos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMCuartos.setText("Cuartos");
+        jMCuartos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMCuartosActionPerformed(evt);
             }
         });
-        jMOctavos.add(jMenuItem4);
+        jMOctavos.add(jMCuartos);
+
+        jMSemiFinal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMSemiFinal.setText("Semi Final");
+        jMSemiFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSemiFinalActionPerformed(evt);
+            }
+        });
+        jMOctavos.add(jMSemiFinal);
+
+        jMFinal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMFinal.setText("Final");
+        jMFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMFinalActionPerformed(evt);
+            }
+        });
+        jMOctavos.add(jMFinal);
 
         jMenu3.add(jMOctavos);
 
@@ -148,26 +168,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        int inicio = 0;
+        int limite = 8;
         //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
         if (miOpenAustralia.getPartidos().isEmpty()) {
             miOpenAustralia.generarOctavos();
         }
 
-        rondas.llenarTablaOctavos();
+        rondas.llenarTabla(inicio, limite);
         rondas.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMCuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCuartosActionPerformed
         // TODO add your handling code here:
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        int tamArreglo;
+        int inicioArray;
+        int finalArray;
+
+        int inicio = 8;
+        int limite = 12;
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
-            if (miOpenAustralia.numeroGanadores() == 8) {
-                if (miOpenAustralia.getPartidos().size() < 12) {
-                    miOpenAustralia.generarCuartos();
-                    rondas.llenarTablaCuartos();
+            if (miOpenAustralia.numeroGanadores() == 8 || miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
+                if (miOpenAustralia.getPartidos().size() < 15) {
+                    tamArreglo = 8;
+                    inicioArray = 0;
+                    finalArray = 8;
+
+                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
-                }else{
-                    rondas.llenarTablaCuartos();
+                } else {
+                    rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
                 }
 
@@ -182,7 +214,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
 //        } else if (miOpenAustralia.getPartidos().size() < 12) {
 //            System.out.println(miOpenAustralia.numeroGanadores()+" NUMERO DE GANADORES");
-//            miOpenAustralia.generarCuartos();
+//            miOpenAustralia.generarPartidos();
 //            rondas.llenarTablaCuartos();
 //            rondas.setVisible(true);
 //        } else {
@@ -190,7 +222,69 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //            rondas.setVisible(true);
 //        }
 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMCuartosActionPerformed
+
+    private void jMSemiFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSemiFinalActionPerformed
+        // TODO add your handling code here:
+        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        int tamArreglo;
+        int inicioArray;
+        int finalArray;
+
+        int inicio = 12;
+        int limite = 14;
+        if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            if (miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
+                if (miOpenAustralia.getPartidos().size() < 15) {
+                    tamArreglo = 4;
+                    inicioArray = 8;
+                    finalArray = 12;
+                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                } else {
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+        }
+    }//GEN-LAST:event_jMSemiFinalActionPerformed
+
+    private void jMFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFinalActionPerformed
+        // TODO add your handling code here:
+        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        int tamArreglo;
+        int inicioArray;
+        int finalArray;
+
+        int inicio = 14;
+        int limite = 15;
+        if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            if (miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
+                if (miOpenAustralia.getPartidos().size() < 15) {
+                    tamArreglo = 2;
+                    inicioArray = 12;
+                    finalArray = 14;
+                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                } else {
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+        }
+    }//GEN-LAST:event_jMFinalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +323,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMCuartos;
+    private javax.swing.JMenuItem jMFinal;
     private javax.swing.JMenu jMOctavos;
+    private javax.swing.JMenuItem jMSemiFinal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -237,7 +334,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 
 }

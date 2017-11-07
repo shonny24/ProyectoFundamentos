@@ -31,7 +31,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
         //Centrar Jframe
         setLocationRelativeTo(null);
         //************************
-//        llenarTablaOctavos();
+//        llenarTabla();
     }
 
     /**
@@ -176,53 +176,27 @@ public class VentanaVerRondas extends javax.swing.JFrame {
     private javax.swing.JTable jTableVerRondas;
     // End of variables declaration//GEN-END:variables
 
-    public void llenarTablaOctavos() {
+    public void llenarTabla(int inicio, int limite) {
         DefaultTableModel dtm = (DefaultTableModel) jTableVerRondas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
         //los datos se agregan la defaultTableModel.
-        ArrayList<Partido> octavos = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
+        ArrayList<Partido> llenar = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
 
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
         Object[] datos = new Object[5];
-//        System.out.println(octavos.size()+"-------------------------");
-        for (int i = 0; i < 8; i++) {
+//        System.out.println(llenar.size()+"-------------------------");
+        for (int i = inicio; i < limite; i++) {
 
-            Partido octa = octavos.get(i);
+            Partido parti = llenar.get(i);
             //Se agrega este if para evitar que el extraiga datos en un campo null
-            if (octa != null) {
+            if (parti != null) {
 
-                datos[0] = octa.getId();
-                datos[1] = octa.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
-                datos[2] = octa.getJugador1().getNombre();
-                datos[3] = octa.getJugador2().getNombre();
-                datos[4] = octa.getPista().getNombre();
-
-                //agrego al TableModleo ese arreglo
-                dtm.addRow(datos);
-            }
-        }
-    }
-    public void llenarTablaCuartos() {
-        DefaultTableModel dtm = (DefaultTableModel) jTableVerRondas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
-        dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
-        //los datos se agregan la defaultTableModel.
-        ArrayList<Partido> cuartos = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
-
-        //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
-        //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
-        Object[] datos = new Object[5];
-        for (int i = 8; i < 12; i++) {
-
-            Partido octa = cuartos.get(i);
-            //Se agrega este if para evitar que el extraiga datos en un campo null
-            if (octa != null) {
-
-                datos[0] = octa.getId();
-                datos[1] = octa.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
-                datos[2] = octa.getJugador1().getNombre();
-                datos[3] = octa.getJugador2().getNombre();
-                datos[4] = octa.getPista().getNombre();
+                datos[0] = parti.getId();
+                datos[1] = parti.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
+                datos[2] = parti.getJugador1().getNombre();
+                datos[3] = parti.getJugador2().getNombre();
+                datos[4] = parti.getPista().getNombre();
 
                 //agrego al TableModleo ese arreglo
                 dtm.addRow(datos);
