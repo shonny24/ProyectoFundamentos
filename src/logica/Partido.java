@@ -22,7 +22,9 @@ public class Partido {
     private String tiempo;
     private String fechaHora;
     private String sets[][];
-
+    private boolean deuce;
+    private boolean tieBreak;
+    private boolean time;
     private int setJ1 = 0;
     private int setJ2 = 0;
     private int nSet = 0;
@@ -35,8 +37,9 @@ public class Partido {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.pista = pista;
-//        this.estadistica = estadistica;
         this.fechaHora = fechaHoraAleatoria();
+        this.deuce=false;
+        this.tieBreak=false;
         this.sets = new String[2][6];
         inicializarSets();
 
@@ -143,6 +146,14 @@ public class Partido {
 
                 acumulador1 = 0;
                 acumulador2 = 0;
+                
+                j1 = (Integer.parseInt(sets[0][nSet]));
+                j2 = (Integer.parseInt(sets[1][nSet]));
+                if((j1==j2)&&(j1==6)&&(nSet < 4)){
+                    this.setTieBreak(true);
+                }else{
+                    this.setTieBreak(false);
+                }
 
                 setGanado = determinarGanadorSet(n);
                 if (setGanado == true) {
@@ -154,17 +165,11 @@ public class Partido {
                     }
                 }
             }
+        }else{
+            time=true;
         }
     }
-
-    public void inicializarSets() {
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 6; j++) {
-                sets[i][j] = "0";
-            }
-        }
-    }
-
+    
     public void generarJuegoAutomatico() {
         boolean ganador;
         ganador = determinarGanador();
@@ -176,8 +181,8 @@ public class Partido {
             }
             ganador = determinarGanador();
         }
-        sets[0][5] = "";
-        sets[1][5] = "";
+        sets[0][5] = "0";
+        sets[1][5] = "0";
         generarTiempoPartido();
     }
 
@@ -202,7 +207,7 @@ public class Partido {
         return punto;
     }
 
-    private boolean determinarGanador() {
+    public boolean determinarGanador() {
         boolean ganador = false;
         if (setJ1 >= 3) {
             ganador = true;
@@ -219,7 +224,7 @@ public class Partido {
         boolean ganadorTieBreak = false;
         int j1 = (Integer.parseInt(sets[0][set]));
         int j2 = (Integer.parseInt(sets[1][set]));
-        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))||((j1==7)||(j2==7)&&(nSet<4))) {
             ganadorSet = true;
         }
         while (ganadorSet == false) {
@@ -231,10 +236,8 @@ public class Partido {
                     ganadorTieBreak = jugarTieBreak(set);
                     ganadorSet = true;
                     if (ganadorTieBreak == true) {
-                        //sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + "";
                         setJ1++;
                     } else {
-                        //sets[1][set] = ((Integer.parseInt(sets[1][set])) + 1) + "";
                         setJ2++;
                     }
                 }
@@ -338,15 +341,23 @@ public class Partido {
 
                 case 3:
                     sets[0][5] = "40";
+                    if(sets[1][5].equals("40")){
+                        this.setDeuce(true);
+                    }
+                    else{
+                        this.setDeuce(false);
+                    }
                     break;
 
                 default:
                     if (comparador1 == comparador2) {
                         sets[0][5] = "40";
                         sets[1][5] = "40";
+                        this.setDeuce(true);
                     } else {
                         sets[0][5] = "AD";
                         sets[1][5] = "-";
+                        this.setDeuce(false);
                     }
                     break;
             }
@@ -362,15 +373,23 @@ public class Partido {
 
                 case 3:
                     sets[1][5] = "40";
+                    if(sets[0][5].equals("40")){
+                        this.setDeuce(true);
+                    }
+                    else{
+                        this.setDeuce(false);
+                    }
                     break;
 
                 default:
                     if (comparador2 == comparador1) {
                         sets[0][5] = "40";
                         sets[1][5] = "40";
+                        this.setDeuce(true);
                     } else {
                         sets[0][5] = "-";
                         sets[1][5] = "AD";
+                        this.setDeuce(false);
                     }
                     break;
             }
@@ -383,6 +402,7 @@ public class Partido {
         } else {
             sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + "";
         }
+        this.setTieBreak(false);
     }
 
     private boolean determinarGanadorGame(int acum1, int acum2, int n, boolean punto) {
@@ -410,8 +430,9 @@ public class Partido {
     }
 
     private void generarTiempoPartido() {
+        if(time==false){
         int hora, minuto, segundo;
-        String tiempo, min, seg;
+        String tiempo1, min, seg;
         Random aleatorio = new Random();
         hora = aleatorio.nextInt(4) + 1;
         minuto = aleatorio.nextInt(59) + 0;
@@ -424,8 +445,18 @@ public class Partido {
         if (segundo < 10) {
             seg = ("0" + segundo);
         }
-        tiempo = ("00:0" + hora + ":" + min + ":" + seg);
-        setTiempo(tiempo);
+        tiempo1 = ("00:0" + hora + ":" + min + ":" + seg);
+        setTiempo(tiempo1);
+        time=true;
+        }
+    }
+
+    public void inicializarSets() {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 6; j++) {
+                sets[i][j] = "0";
+            }
+        }
     }
 
     public Jugador getJugador1() {
@@ -482,5 +513,21 @@ public class Partido {
 
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
+    }
+    
+    public boolean getDeuce() {
+        return deuce;
+    }
+
+    public void setDeuce(boolean deuce) {
+        this.deuce = deuce;
+    }
+    
+    public boolean getTieBreak() {
+        return tieBreak;
+    }
+
+    public void setTieBreak(boolean tieBreak) {
+        this.tieBreak = tieBreak;
     }
 }
