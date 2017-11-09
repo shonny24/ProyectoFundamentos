@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import logica.OpenDeAustralia;
@@ -244,13 +245,24 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     private void jBJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBJugarActionPerformed
         // TODO add your handling code here:
         String id = jLidPartido.getText();
-        System.out.println(id);
-        Partido partido = miOpenAustralia.buscarPartido(id);
-        System.out.println(partido.getJugador1().getNombre());
-        partido.jugar();
+        Partido miPartido = miOpenAustralia.buscarPartido(id);
+        miPartido.jugar();
         llenarTablaJugarPartido();
+        
+        String tiempoLabel = jLTiempoPartido.getText();
+        miPartido.setTiempo(tiempoLabel);
+        
+        if(miPartido.getDeuce()==true){
+            JOptionPane.showMessageDialog(null,"¡DEUCE!");
+        }
+        if(miPartido.getTieBreak()==true){
+            JOptionPane.showMessageDialog(null,"¡TIEBREAK!");
+        }
         if(t.isRunning()==false){
             t.start();
+        }
+        if(miPartido.determinarGanador()==true){
+            t.stop();
         }
     }//GEN-LAST:event_jBJugarActionPerformed
 
