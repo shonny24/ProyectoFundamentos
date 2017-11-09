@@ -253,10 +253,10 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         miPartido.setTiempo(tiempoLabel);
         
         if(miPartido.getDeuce()==true){
-            JOptionPane.showMessageDialog(null,"¡DEUCE!");
+            JOptionPane.showMessageDialog(null," ¡DEUCE! ");
         }
         if(miPartido.getTieBreak()==true){
-            JOptionPane.showMessageDialog(null,"¡TIEBREAK!");
+            JOptionPane.showMessageDialog(null," ¡TIEBREAK! ");
         }
         if(t.isRunning()==false){
             t.start();
