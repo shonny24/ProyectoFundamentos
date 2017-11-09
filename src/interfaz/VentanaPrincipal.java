@@ -210,18 +210,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
         }
 
-//        if (miOpenAustralia.getPartidos().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los octavos");
-//        } else if (miOpenAustralia.getPartidos().size() < 12) {
-//            System.out.println(miOpenAustralia.numeroGanadores()+" NUMERO DE GANADORES");
-//            miOpenAustralia.generarPartidos();
-//            rondas.llenarTablaCuartos();
-//            rondas.setVisible(true);
-//        } else {
-//            rondas.llenarTablaCuartos();
-//            rondas.setVisible(true);
-//        }
-
     }//GEN-LAST:event_jMCuartosActionPerformed
 
     private void jMSemiFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSemiFinalActionPerformed
@@ -279,10 +267,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
         }
     }//GEN-LAST:event_jMFinalActionPerformed
 

@@ -8,7 +8,6 @@ package logica;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -164,62 +163,6 @@ public class Partido {
                 sets[i][j] = "0";
             }
         }
-    }
-
-    public Jugador getJugador1() {
-        return jugador1;
-    }
-
-    public void setJugador1(Jugador jugador1) {
-        this.jugador1 = jugador1;
-    }
-
-    public Jugador getJugador2() {
-        return jugador2;
-    }
-
-    public void setJugador2(Jugador jugador2) {
-        this.jugador2 = jugador2;
-    }
-
-    public Pista getPista() {
-        return pista;
-    }
-
-    public void setPista(Pista pista) {
-        this.pista = pista;
-    }
-
-    public String getFechaHora() {
-        return fechaHora;
-    }
-
-    public void setFechaHora(String fechaHora) {
-        this.fechaHora = fechaHora;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String[][] getSets() {
-        return sets;
-    }
-
-    public void setSets(String[][] sets) {
-        this.sets = sets;
-    }
-
-    public String getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
     }
 
     public void generarJuegoAutomatico() {
@@ -483,5 +426,61 @@ public class Partido {
         }
         tiempo = ("00:0" + hora + ":" + min + ":" + seg);
         setTiempo(tiempo);
+    }
+
+    public Jugador getJugador1() {
+        return jugador1;
+    }
+
+    public void setJugador1(Jugador jugador1) {
+        this.jugador1 = jugador1;
+    }
+
+    public Jugador getJugador2() {
+        return jugador2;
+    }
+
+    public void setJugador2(Jugador jugador2) {
+        this.jugador2 = jugador2;
+    }
+
+    public Pista getPista() {
+        return pista;
+    }
+
+    public void setPista(Pista pista) {
+        this.pista = pista;
+    }
+
+    public String getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String[][] getSets() {
+        return sets;
+    }
+
+    public void setSets(String[][] sets) {
+        this.sets = sets;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 }
