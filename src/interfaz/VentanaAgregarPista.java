@@ -24,6 +24,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     private VentanaPrincipal miVentanaPrincipal;
     /**
      * Creates new form VentanaAgragarPista
+     * @param open
      */
     public VentanaAgregarPista(OpenDeAustralia open) {
         miOpenAustralia = open;
@@ -347,6 +348,10 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     private void imprimir(String msj) {
         JOptionPane.showMessageDialog(null, msj);
     }
+
+    /**
+     *
+     */
     public void llenarTablaPista() {
         DefaultTableModel dtm = (DefaultTableModel) jTablePista.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
@@ -394,7 +399,13 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
         });
         //**************************************************
     }
-        public void validarNumeros(JTextField campo, KeyEvent evt) {
+
+    /**
+     *
+     * @param campo
+     * @param evt
+     */
+    public void validarNumeros(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
 
         if (Character.isLetter(c)) {
@@ -415,6 +426,11 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     * @param campo
+     * @param evt
+     */
     public void validarLetras(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
 
@@ -436,6 +452,10 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public String ValidarDatosAgregarPista() {//Metodo para comprobar que los datos esten completos
         String msj = "";
         if (jTIdPista.getText().equals("")) {//Si jTnombreCita esta vacio

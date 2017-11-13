@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import logica.*;
 
 /**
@@ -23,6 +25,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaAgregarJugador
+     * @param open
      */
     public VentanaAgregarJugador(OpenDeAustralia open) {
         miOpenAustralia = open;
@@ -386,10 +389,18 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     private javax.swing.JTextField jTnombreJugador;
     private javax.swing.JTextField jTrankingJugador;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     *
+     * @param msj
+     */
     public static void imprimir(String msj) {
         JOptionPane.showMessageDialog(null, msj);
     }
 
+    /**
+     *
+     */
     public void llenarTablaJugador() {
         DefaultTableModel dtm = (DefaultTableModel) jTableJugadores.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
@@ -440,7 +451,13 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         //**************************************************
 
     }
-        public void validarNumeros(JTextField campo, KeyEvent evt) {
+
+    /**
+     *
+     * @param campo
+     * @param evt
+     */
+    public void validarNumeros(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
 
         if (Character.isLetter(c)) {
@@ -461,6 +478,11 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     * @param campo
+     * @param evt
+     */
     public void validarLetras(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
 
@@ -482,6 +504,10 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String ValidarDatosAgregarJugador() {//Metodo para comprobar que los datos esten completos
         String msj = "";
         if (jTidJugador.getText().equals("")) {//Si jTnombreCita esta vacio

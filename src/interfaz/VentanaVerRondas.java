@@ -22,6 +22,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaVerRondas
+     * @param open
      */
     public VentanaVerRondas(OpenDeAustralia open) {
         miOpenAustralia = open;
@@ -176,6 +177,11 @@ public class VentanaVerRondas extends javax.swing.JFrame {
     private javax.swing.JTable jTableVerRondas;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @param inicio
+     * @param limite
+     */
     public void llenarTabla(int inicio, int limite) {
         DefaultTableModel dtm = (DefaultTableModel) jTableVerRondas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.

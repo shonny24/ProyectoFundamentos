@@ -22,6 +22,8 @@ public class Partido {
     private String tiempo;
     private String fechaHora;
     private String sets[][];
+    private int asistencia;
+
     private boolean deuce;
     private boolean tieBreak;
     private boolean time;
@@ -31,20 +33,43 @@ public class Partido {
     private int acumulador1 = 0;
     private int acumulador2 = 0;
 
+    /**
+     *
+     * @param id
+     * @param jugador1
+     * @param jugador2
+     * @param pista
+     */
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
-        this.tiempo = "00:00:00:00";
+        this.tiempo = "00:00:00";
         this.id = id;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.pista = pista;
         this.fechaHora = fechaHoraAleatoria();
-        this.deuce=false;
-        this.tieBreak=false;
+        this.asistencia = generarAsistenciaAleatoria();
+        this.deuce = false;
+        this.tieBreak = false;
         this.sets = new String[2][6];
         inicializarSets();
 
     }
 
+    /**
+     *
+     * @return
+     */
+    public int generarAsistenciaAleatoria() {
+        Random aleatorio = new Random();
+        int capacidad = pista.getCapacidadMax();
+        int res = aleatorio.nextInt(capacidad);
+        return res;
+    }
+
+    /**
+     *
+     * @return
+     */
     public String fechaHoraAleatoria() {
         Calendar unaFecha = Calendar.getInstance();
         Random aleatorio = new Random();
@@ -110,6 +135,9 @@ public class Partido {
         return fechaHora;
     }
 
+    /**
+     *
+     */
     public void jugar() {
         boolean ganador = determinarGanador();
         boolean punto = false;
@@ -146,12 +174,12 @@ public class Partido {
 
                 acumulador1 = 0;
                 acumulador2 = 0;
-                
+
                 j1 = (Integer.parseInt(sets[0][nSet]));
                 j2 = (Integer.parseInt(sets[1][nSet]));
-                if((j1==j2)&&(j1==6)&&(nSet < 4)){
+                if ((j1 == j2) && (j1 == 6) && (nSet < 4)) {
                     this.setTieBreak(true);
-                }else{
+                } else {
                     this.setTieBreak(false);
                 }
 
@@ -165,11 +193,14 @@ public class Partido {
                     }
                 }
             }
-        }else{
-            time=true;
+        } else {
+            time = true;
         }
     }
-    
+
+    /**
+     *
+     */
     public void generarJuegoAutomatico() {
         boolean ganador;
         ganador = determinarGanador();
@@ -207,6 +238,10 @@ public class Partido {
         return punto;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean determinarGanador() {
         boolean ganador = false;
         if (setJ1 >= 3) {
@@ -224,7 +259,7 @@ public class Partido {
         boolean ganadorTieBreak = false;
         int j1 = (Integer.parseInt(sets[0][set]));
         int j2 = (Integer.parseInt(sets[1][set]));
-        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))||((j1==7)||(j2==7)&&(nSet<4))) {
+        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1))) || ((j1 == 7) || (j2 == 7) && (nSet < 4))) {
             ganadorSet = true;
         }
         while (ganadorSet == false) {
@@ -323,6 +358,10 @@ public class Partido {
         return game;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean generarPuntos() {
         Random aleatorio = new Random();
         return aleatorio.nextBoolean();
@@ -341,10 +380,9 @@ public class Partido {
 
                 case 3:
                     sets[0][5] = "40";
-                    if(sets[1][5].equals("40")){
+                    if (sets[1][5].equals("40")) {
                         this.setDeuce(true);
-                    }
-                    else{
+                    } else {
                         this.setDeuce(false);
                     }
                     break;
@@ -373,10 +411,9 @@ public class Partido {
 
                 case 3:
                     sets[1][5] = "40";
-                    if(sets[0][5].equals("40")){
+                    if (sets[0][5].equals("40")) {
                         this.setDeuce(true);
-                    }
-                    else{
+                    } else {
                         this.setDeuce(false);
                     }
                     break;
@@ -430,27 +467,30 @@ public class Partido {
     }
 
     private void generarTiempoPartido() {
-        if(time==false){
-        int hora, minuto, segundo;
-        String tiempo1, min, seg;
-        Random aleatorio = new Random();
-        hora = aleatorio.nextInt(4) + 1;
-        minuto = aleatorio.nextInt(59) + 0;
-        segundo = aleatorio.nextInt(59) + 0;
-        min = (minuto + "");
-        seg = (segundo + "");
-        if (minuto < 10) {
-            min = ("0" + minuto);
-        }
-        if (segundo < 10) {
-            seg = ("0" + segundo);
-        }
-        tiempo1 = ("00:0" + hora + ":" + min + ":" + seg);
-        setTiempo(tiempo1);
-        time=true;
+        if (time == false) {
+            int hora, minuto, segundo;
+            String tiempo1, min, seg;
+            Random aleatorio = new Random();
+            hora = aleatorio.nextInt(4) + 1;
+            minuto = aleatorio.nextInt(59) + 0;
+            segundo = aleatorio.nextInt(59) + 0;
+            min = (minuto + "");
+            seg = (segundo + "");
+            if (minuto < 10) {
+                min = ("0" + minuto);
+            }
+            if (segundo < 10) {
+                seg = ("0" + segundo);
+            }
+            tiempo1 = ("0" + hora + ":" + min + ":" + seg);
+            setTiempo(tiempo1);
+            time = true;
         }
     }
 
+    /**
+     *
+     */
     public void inicializarSets() {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 6; j++) {
@@ -459,75 +499,163 @@ public class Partido {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Jugador getJugador1() {
         return jugador1;
     }
 
+    /**
+     *
+     * @param jugador1
+     */
     public void setJugador1(Jugador jugador1) {
         this.jugador1 = jugador1;
     }
 
+    /**
+     *
+     * @return
+     */
     public Jugador getJugador2() {
         return jugador2;
     }
 
+    /**
+     *
+     * @param jugador2
+     */
     public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
     }
 
+    /**
+     *
+     * @return
+     */
     public Pista getPista() {
         return pista;
     }
 
+    /**
+     *
+     * @param pista
+     */
     public void setPista(Pista pista) {
         this.pista = pista;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFechaHora() {
         return fechaHora;
     }
 
+    /**
+     *
+     * @param fechaHora
+     */
     public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[][] getSets() {
         return sets;
     }
 
+    /**
+     *
+     * @param sets
+     */
     public void setSets(String[][] sets) {
         this.sets = sets;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTiempo() {
         return tiempo;
     }
 
+    /**
+     *
+     * @param tiempo
+     */
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public boolean getDeuce() {
         return deuce;
     }
 
+    /**
+     *
+     * @param deuce
+     */
     public void setDeuce(boolean deuce) {
         this.deuce = deuce;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public boolean getTieBreak() {
         return tieBreak;
     }
 
+    /**
+     *
+     * @param tieBreak
+     */
     public void setTieBreak(boolean tieBreak) {
         this.tieBreak = tieBreak;
+    }
+
+    /**
+     *
+     * @param asistencia
+     */
+    public void setAsistencia(int asistencia) {
+        this.asistencia = asistencia;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getAsistencia() {
+        return asistencia;
     }
 }

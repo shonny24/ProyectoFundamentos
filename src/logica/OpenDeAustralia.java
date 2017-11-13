@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -19,16 +21,22 @@ public class OpenDeAustralia {
 
     private Jugador[] jugadores;
     private Pista[] pistas;
-
     private ArrayList<Partido> partidos;
+
     int aux;
 
+    /**
+     *
+     */
     public OpenDeAustralia() {
         this.partidos = new ArrayList<Partido>();
         this.jugadores = new Jugador[16];
         this.pistas = new Pista[5];
     }
 
+    /**
+     *
+     */
     public void generarOctavos() {
         Random aleatorio = new Random();
         Jugador jugador1 = null;
@@ -50,12 +58,19 @@ public class OpenDeAustralia {
 
     }
 
+    /**
+     *
+     * @param tamArreglo
+     * @param inicioArray
+     * @param finalArray
+     */
     public void generarPartidos(int tamArreglo, int inicioArray, int finalArray) {
         aux = -1;
+
         Jugador[] jugadoresCuartos = new Jugador[tamArreglo];
         Random aleatorio = new Random();
         Jugador jugadorGanador = null;
-        int jugador1Acumulador ;
+        int jugador1Acumulador;
         int jugador2Acumulador;
         Pista pista = null;
         Jugador jugador1 = null;
@@ -67,7 +82,7 @@ public class OpenDeAustralia {
             for (int j = 0; j < 5; j++) {
                 if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador1Acumulador++;
-                } else if(Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                } else if (Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador2Acumulador++;
                 }
             }
@@ -84,12 +99,18 @@ public class OpenDeAustralia {
             }
         }
 
-        for (int i = 0; i < (tamArreglo/2); i++) {
+        for (int i = 0; i < (tamArreglo / 2); i++) {
 
             jugador1 = jugadoresCuartos[i];
-            jugador2 = jugadoresCuartos[(tamArreglo-1) - i];
+            jugador2 = jugadoresCuartos[(tamArreglo - 1) - i];
             //Pista aleatoria
-            pista = pistas[aleatorio.nextInt(5)];
+            if (tamArreglo == 4) {
+                pista = pistas[aleatorio.nextInt(2) + 0];
+            } else if (tamArreglo == 2) {
+                pista = pistas[0];
+            } else {
+                pista = pistas[aleatorio.nextInt(5)];
+            }
             String idPartido = (partidos.size() + 1) + "";
             System.out.println(idPartido + "------ID PARTIDO");
             //creamos un objeto partido (llamamos al contructor para inicializar)
@@ -99,8 +120,37 @@ public class OpenDeAustralia {
 
         }
     }
-    
 
+    /**
+     *
+     * @return
+     */
+    public Jugador ganadorTorneo() {
+        int jugador1Acumulador;
+        int jugador2Acumulador;
+        Jugador jugadorGanador = null;
+            jugador1Acumulador = 0;
+            jugador2Acumulador = 0;
+            for (int j = 0; j < 5; j++) {
+                if (Integer.parseInt(partidos.get(14).getSets()[0][j]) > Integer.parseInt(partidos.get(14).getSets()[1][j])) {
+                    jugador1Acumulador++;
+                } else if (Integer.parseInt(partidos.get(14).getSets()[0][j]) < Integer.parseInt(partidos.get(14).getSets()[1][j])) {
+                    jugador2Acumulador++;
+                }
+            }
+            if (jugador1Acumulador > jugador2Acumulador) {
+                jugadorGanador = partidos.get(14).getJugador1();
+            } else if (jugador1Acumulador < jugador2Acumulador) {
+                jugadorGanador = partidos.get(14).getJugador2();
+            }
+        
+        return jugadorGanador;
+    }
+
+    /**
+     *
+     * @return
+     */
     public int numeroGanadores() {
         int jugador1Acumulador;
         int jugador2Acumulador;
@@ -113,7 +163,7 @@ public class OpenDeAustralia {
             for (int j = 0; j < 5; j++) {
                 if (Integer.parseInt(partidos.get(i).getSets()[0][j]) > Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador1Acumulador++;
-                } else if(Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
+                } else if (Integer.parseInt(partidos.get(i).getSets()[0][j]) < Integer.parseInt(partidos.get(i).getSets()[1][j])) {
                     jugador2Acumulador++;
                 }
             }
@@ -130,6 +180,11 @@ public class OpenDeAustralia {
         return res;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Partido buscarPartido(String id) {
         for (int i = 0; i < partidos.size(); i++) {
             Partido partido = partidos.get(i);
@@ -140,6 +195,11 @@ public class OpenDeAustralia {
         return null;
     }
 
+    /**
+     *
+     * @param juga
+     * @return
+     */
     public boolean agregarJugador(Jugador juga) {
         String id = juga.getIdJugador();
         Jugador verificacion = buscarJugador(id);
@@ -157,6 +217,11 @@ public class OpenDeAustralia {
         }
     }
 
+    /**
+     *
+     * @param idJugador
+     * @return
+     */
     public Jugador buscarJugador(String idJugador) {
         for (int i = 0; i < jugadores.length; i++) {
             Jugador j = jugadores[i];
@@ -169,6 +234,11 @@ public class OpenDeAustralia {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean eliminarJugador(String id) {
         for (int i = 0; i < jugadores.length; i++) {
             if (jugadores[i] != null) {
@@ -183,6 +253,13 @@ public class OpenDeAustralia {
     }
 
     // se puede volver mas pequeño es una prueba
+
+    /**
+     *
+     * @param id
+     * @param dato
+     * @param col
+     */
     public void modificarJugador(String id, String dato, int col) {
         switch (col) {
             case 1:
@@ -230,6 +307,11 @@ public class OpenDeAustralia {
 
     }
 
+    /**
+     *
+     * @param pis
+     * @return
+     */
     public boolean agregarPista(Pista pis) {
         String id = pis.getIdPista();
         Pista verificacion = buscarPista(id);
@@ -247,6 +329,11 @@ public class OpenDeAustralia {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean eliminarPista(String id) {
         for (int i = 0; i < pistas.length; i++) {
             if (pistas[i] != null) {
@@ -260,6 +347,11 @@ public class OpenDeAustralia {
         return false;
     }
 
+    /**
+     *
+     * @param idPista
+     * @return
+     */
     public Pista buscarPista(String idPista) {
         for (int i = 0; i < pistas.length; i++) {
             Pista p = pistas[i];
@@ -273,6 +365,13 @@ public class OpenDeAustralia {
     }
 
     // se puede volver mas pequeño es una prueba
+
+    /**
+     *
+     * @param id
+     * @param dato
+     * @param col
+     */
     public void modificarPista(String id, String dato, int col) {
         switch (col) {
             case 1:
@@ -299,6 +398,10 @@ public class OpenDeAustralia {
         }
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void inicializarAtributosJugador() throws IOException {
         FileReader lector = new FileReader("src/persistencia/Jugadores.txt");
         BufferedReader entradatxt = new BufferedReader(lector);
@@ -315,6 +418,10 @@ public class OpenDeAustralia {
         entradatxt.close();
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void inicializarAtributosPista() throws IOException {
         FileReader lector = new FileReader("src/persistencia/Pistas.txt");
         BufferedReader entradatxt = new BufferedReader(lector);
@@ -331,26 +438,50 @@ public class OpenDeAustralia {
         entradatxt.close();
     }
 
+    /**
+     *
+     * @return
+     */
     public Jugador[] getJugadores() {
         return jugadores;
     }
 
+    /**
+     *
+     * @param jugadores
+     */
     public void setJugadores(Jugador[] jugadores) {
         this.jugadores = jugadores;
     }
 
+    /**
+     *
+     * @return
+     */
     public Pista[] getPistas() {
         return pistas;
     }
 
+    /**
+     *
+     * @param pistas
+     */
     public void setPistas(Pista[] pistas) {
         this.pistas = pistas;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Partido> getPartidos() {
         return partidos;
     }
 
+    /**
+     *
+     * @param partidos
+     */
     public void setPartidos(ArrayList<Partido> partidos) {
         this.partidos = partidos;
     }

@@ -7,7 +7,11 @@ package interfaz;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import logica.*;
 
 /**
@@ -41,6 +45,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Centrar Jframe
         setLocationRelativeTo(null);
         //************************
+
     }
 
     /**
@@ -52,6 +57,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableEstadisticas = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLGanador = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -66,6 +76,70 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Open de Australia");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadistica generales"));
+
+        jTableEstadisticas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Jugador1", "Jugador2", "Pista", "Fecha/Hora", "Tiempo", "Asistencia"
+            }
+        ));
+        jTableEstadisticas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableEstadisticas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTableEstadisticasFocusGained(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableEstadisticas);
+        if (jTableEstadisticas.getColumnModel().getColumnCount() > 0) {
+            jTableEstadisticas.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jTableEstadisticas.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jTableEstadisticas.getColumnModel().getColumn(5).setPreferredWidth(30);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informes"));
+
+        jLGanador.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLGanador.setForeground(new java.awt.Color(255, 0, 51));
+        jLGanador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLGanador.setText("Ganador");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLGanador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLGanador)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("Archivo");
 
@@ -143,11 +217,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,19 +249,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pistas.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFinalActionPerformed
         // TODO add your handling code here:
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
-        int inicio = 0;
-        int limite = 8;
-        //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
-        if (miOpenAustralia.getPartidos().isEmpty()) {
-            miOpenAustralia.generarOctavos();
+        int tamArreglo;
+        int inicioArray;
+        int finalArray;
+
+        int inicio = 14;
+        int limite = 15;
+        if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            if (miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
+                if (miOpenAustralia.getPartidos().size() < 15) {
+                    tamArreglo = 2;
+                    inicioArray = 12;
+                    finalArray = 14;
+                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Final";
+                } else {
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Final";
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
         }
 
-        rondas.llenarTabla(inicio, limite);
-        rondas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMFinalActionPerformed
+
+    private void jMSemiFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSemiFinalActionPerformed
+        // TODO add your handling code here:
+        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
+        int tamArreglo;
+        int inicioArray;
+        int finalArray;
+
+        int inicio = 12;
+        int limite = 14;
+        if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            if (miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
+                if (miOpenAustralia.getPartidos().size() < 15) {
+                    tamArreglo = 4;
+                    inicioArray = 8;
+                    finalArray = 12;
+                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Semi Final";
+                } else {
+                    rondas.llenarTabla(inicio, limite);
+                    rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Semi Final";
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
+        }
+
+    }//GEN-LAST:event_jMSemiFinalActionPerformed
 
     private void jMCuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCuartosActionPerformed
         // TODO add your handling code here:
@@ -198,9 +336,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Cuartos Final";
                 } else {
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    VentanaJugarPartido.etapa = "Cuartos Final";
                 }
 
             } else {
@@ -212,67 +352,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMCuartosActionPerformed
 
-    private void jMSemiFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSemiFinalActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
-        int tamArreglo;
-        int inicioArray;
-        int finalArray;
+        int inicio = 0;
+        int limite = 8;
+        //se verifica si el arraylist esta vacio, si lo esta se agrega datos de lo contrario no se agrega nada
+        if (miOpenAustralia.getPartidos().isEmpty()) {
+            miOpenAustralia.generarOctavos();
 
-        int inicio = 12;
-        int limite = 14;
-        if (!(miOpenAustralia.getPartidos().isEmpty())) {
-            if (miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
-                if (miOpenAustralia.getPartidos().size() < 15) {
-                    tamArreglo = 4;
-                    inicioArray = 8;
-                    finalArray = 12;
-                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
-                    rondas.llenarTabla(inicio, limite);
-                    rondas.setVisible(true);
-                } else {
-                    rondas.llenarTabla(inicio, limite);
-                    rondas.setVisible(true);
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todos los cuartos");
         }
-    }//GEN-LAST:event_jMSemiFinalActionPerformed
 
-    private void jMFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFinalActionPerformed
+        rondas.llenarTabla(inicio, limite);
+        rondas.setVisible(true);
+        VentanaJugarPartido.etapa = "Octavos Final";
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jTableEstadisticasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableEstadisticasFocusGained
         // TODO add your handling code here:
-        VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
-        int tamArreglo;
-        int inicioArray;
-        int finalArray;
+        llenarTablaEstadisticas();
 
-        int inicio = 14;
-        int limite = 15;
-        if (!(miOpenAustralia.getPartidos().isEmpty())) {
-            if (miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
-                if (miOpenAustralia.getPartidos().size() < 15) {
-                    tamArreglo = 2;
-                    inicioArray = 12;
-                    finalArray = 14;
-                    miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
-                    rondas.llenarTabla(inicio, limite);
-                    rondas.setVisible(true);
-                } else {
-                    rondas.llenarTabla(inicio, limite);
-                    rondas.setVisible(true);
+            if (miOpenAustralia.numeroGanadores() == 15) {
+
+                    if (miOpenAustralia.ganadorTorneo() == null) {
+                        jLGanador.setText("Ganador");
+                    } else {
+                        jLGanador.setText(miOpenAustralia.ganadorTorneo().getNombre());
+                    }
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Primero se tiene que jugar todas las semi finales");
-        }
-    }//GEN-LAST:event_jMFinalActionPerformed
+            
+        
+    }//GEN-LAST:event_jTableEstadisticasFocusGained
 
     /**
      * @param args the command line arguments
@@ -311,6 +422,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLGanador;
     private javax.swing.JMenuItem jMCuartos;
     private javax.swing.JMenuItem jMFinal;
     private javax.swing.JMenu jMOctavos;
@@ -322,6 +434,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableEstadisticas;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     */
+    public void llenarTablaEstadisticas() {
+        DefaultTableModel dtm = (DefaultTableModel) jTableEstadisticas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
+        dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
+        //los datos se agregan la defaultTableModel.
+        ArrayList<Partido> llenar = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
+
+        //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
+        //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
+        Object[] datos = new Object[6];
+//        System.out.println(llenar.size()+"-------------------------");
+        for (int i = 0; i < llenar.size(); i++) {
+
+            Partido parti = llenar.get(i);
+            //Se agrega este if para evitar que el extraiga datos en un campo null
+            if (parti != null) {
+
+                datos[0] = parti.getJugador1().getNombre();
+                datos[1] = parti.getJugador2().getNombre();
+                datos[2] = parti.getPista().getNombre();
+                datos[3] = parti.getFechaHora();
+                datos[4] = parti.getTiempo();
+                if (parti.getTiempo().equals("00:00:00")) {
+                    datos[5] = "0";
+                } else {
+                    datos[5] = parti.getAsistencia();
+                }
+
+                //agrego al TableModleo ese arreglo
+                dtm.addRow(datos);
+            }
+        }
+
+        // Instanciamos el TableRowSorter y lo añadimos al JTable
+        TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<TableModel>(dtm);
+        jTableEstadisticas.setRowSorter(elQueOrdena);
+
+    }
 }
