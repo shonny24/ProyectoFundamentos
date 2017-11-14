@@ -136,60 +136,60 @@ public class Partido {
     }
 
     /**
-     *
+     *Metodo para jugar manualmente el partido
      */
     public void jugar() {
-        boolean ganador = determinarGanador();
-        boolean punto = false;
-        boolean gameGanado = false;
-        boolean setGanado = false;
+        boolean ganador = determinarGanador();                  // Se consulta si ya hay un ganador en este partido.
+        boolean punto = false;                                  // variable que indica cual jugador gana el siguiente punto del game.
+        boolean gameGanado = false;                             // Variable que indica si ya se gano el game en juego.
+        boolean setGanado = false;                              // Variable que indica si ya se gano el set en juego.
 
-        int j1 = (Integer.parseInt(sets[0][nSet]));
-        int j2 = (Integer.parseInt(sets[1][nSet]));
-        int n = 0;
+        int j1 = (Integer.parseInt(sets[0][nSet]));             // games ganados en el set en juego del jugador 1.
+        int j2 = (Integer.parseInt(sets[1][nSet]));             // games ganados en el set en juego del jugador 2.
+        int n = 0;                                              // Variable para determinar en el metodo en que se gana un game ya sea en tibreak o un game normal.
 
-        if (ganador == false) {
-            punto = generarPuntos();
-            if (punto == true) {
+        if (ganador == false) {                                 // Si no hay ganador en el partido se procede a jugar un nuevo punto.
+            punto = generarPuntos();                            // Se genera un boolean aleatorio para determinar quien gana el siguiente punto en el game
+            if (punto == true) {                                // Si punto es treu, el punto se le suma al jugador 1.
                 acumulador1++;
-            } else {
+            } else {                                            // De lo contrario se le suma el punto al jugador 2.
                 acumulador2++;
             }
-            if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {
-                sumarTiebreak(punto);
-                n = 5;
-            } else {
-                sumarPunto(acumulador1, acumulador2, punto);
+            if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {        // Sí el jugador se han juegado menos de 5 sets, y ambos jugadores tiene seis games ganados, se procede a sumar el siguiente punto con la regla del tiebreak.
+                sumarTiebreak(punto);                           // Se llama al metodo para sumar el punto en la matriz de la forma  tiebrak
+                n = 5;                                  
+            } else {                                            // De lo contrario se procede a sumar en punto como un game normal.
+                sumarPunto(acumulador1, acumulador2, punto);    // Se llama al metodo para sumar el punto en la matriz de la forma normal.
                 n = 3;
             }
-            gameGanado = determinarGanadorGame(acumulador1, acumulador2, n, punto);
-            if (gameGanado == true) {
-                if (punto == true) {
-                    sets[0][nSet] = ((Integer.parseInt(sets[0][nSet])) + 1) + "";
-                } else {
-                    sets[1][nSet] = ((Integer.parseInt(sets[1][nSet])) + 1) + "";
+            gameGanado = determinarGanadorGame(acumulador1, acumulador2, n, punto); // Se llama al metodo para saber si ya se gano el game o tiebrak en juego.
+            if (gameGanado == true) {                                               // Sí ya se gano el game o tiebreak.
+                if (punto == true) {                                                // Sí lo gano el jugador 1.
+                    sets[0][nSet] = ((Integer.parseInt(sets[0][nSet])) + 1) + "";   // Se aumenta un game en el set en juego en la posicion del set del jugador 1.
+                } else {                                                            // De lo contrario:
+                    sets[1][nSet] = ((Integer.parseInt(sets[1][nSet])) + 1) + "";   // Se aumenta un game en el set en juego en la posicion del set del jugador 2.
                 }
-                sets[0][5] = "0";
+                sets[0][5] = "0";                                                   // Se reician los acumuladores de los puntos de ambos jugadores.
                 sets[1][5] = "0";
 
                 acumulador1 = 0;
                 acumulador2 = 0;
 
-                j1 = (Integer.parseInt(sets[0][nSet]));
-                j2 = (Integer.parseInt(sets[1][nSet]));
-                if ((j1 == j2) && (j1 == 6) && (nSet < 4)) {
-                    this.setTieBreak(true);
-                } else {
-                    this.setTieBreak(false);
+                j1 = (Integer.parseInt(sets[0][nSet]));          // Games ganados en el set en juego del jugador 1.                   
+                j2 = (Integer.parseInt(sets[1][nSet]));          // Games ganados en el set en juego del jugador 2.
+                if ((j1 == j2) && (j1 == 6) && (nSet < 4)) {     // Sí se esta jugando del 1 al 4 set y los puntos de ambos jugadores son de 6 Games.
+                    this.setTieBreak(true);                      // Se pone en true la bandera del tieBreak para mostrar en mensaje en la interfaz.
+                } else {                                         // De lo contratio:
+                    this.setTieBreak(false);                     // Se pone en false la bandera del tiBreak.
                 }
 
-                setGanado = determinarGanadorSet(n);
-                if (setGanado == true) {
-                    nSet++;
-                    if (punto == true) {
-                        setJ1++;
-                    } else {
-                        setJ2++;
+                setGanado = determinarGanadorSet(n);             // Se llama al metodo para determinar sí ya hay ganador del set en juego.
+                if (setGanado == true) {                         // Sí ya se gano el set.
+                    nSet++;                                      // Se incrementa la variable de los sets jugados.
+                    if (punto == true) {                         // Sí el set lo gano el jugador 1
+                        setJ1++;                                 // Se aumenta la variable de los sets ganados del jugador 1.
+                    } else {                                     // De lo contrario:
+                        setJ2++;                                 // Se aumenta la variable de los sets ganados del jugador 2.
                     }
                 }
             }
