@@ -60,7 +60,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEstadisticas = new javax.swing.JTable();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablemayorAsistencia = new javax.swing.JTable();
         jLGanador = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -106,40 +114,91 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informes"));
+        jLabel1.setText("Jugador con mayor tiempo en la cancha:");
 
-        jLGanador.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLGanador.setForeground(new java.awt.Color(255, 0, 51));
-        jLGanador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLGanador.setText("Ganador");
+        jLabel2.setText("Jugador con menor tiempo en la cancha:");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLGanador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)))
+                .addContainerGap(432, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLGanador)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.addTab("Tiempo de Jugadores", jPanel2);
+
+        jTablemayorAsistencia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "# Partido", "Pista", "Asistencia", "Jugador 1", "Jugador2", "Fecha/Hora"
+            }
+        ));
+        jScrollPane2.setViewportView(jTablemayorAsistencia);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Cancha mayor asitencia", jPanel3);
+
+        jLGanador.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLGanador.setForeground(new java.awt.Color(255, 0, 51));
+        jLGanador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLGanador.setText("Ganador");
 
         jMenu1.setText("Archivo");
 
@@ -220,17 +279,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLGanador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLGanador)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -379,6 +441,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         jLGanador.setText("Ganador");
                     } else {
                         jLGanador.setText(miOpenAustralia.ganadorTorneo().getNombre());
+                        llenarTablaMayorAsistencia();
                     }
                 }
             
@@ -423,6 +486,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLGanador;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMCuartos;
     private javax.swing.JMenuItem jMFinal;
     private javax.swing.JMenu jMOctavos;
@@ -436,8 +503,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableEstadisticas;
+    private javax.swing.JTable jTablemayorAsistencia;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -477,7 +548,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         // Instanciamos el TableRowSorter y lo añadimos al JTable
         TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<TableModel>(dtm);
+       
         jTableEstadisticas.setRowSorter(elQueOrdena);
+
+    }
+    
+        public void llenarTablaMayorAsistencia() {
+        DefaultTableModel dtm = (DefaultTableModel) jTablemayorAsistencia.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
+        dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
+        //los datos se agregan la defaultTableModel.
+        Partido llenar = miOpenAustralia.mayorAsistencia();//sacando al informacion a agregar en la tabla.
+
+        //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
+        //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
+        Object[] datos = new Object[6];
+//        System.out.println(llenar.size()+"-------------------------");
+
+            //Se agrega este if para evitar que el extraiga datos en un campo null
+            if (llenar != null) {
+
+                datos[0] = llenar.getId();
+                datos[1] = llenar.getPista().getNombre();
+                datos[2] = llenar.getAsistencia();
+                datos[3] = llenar.getJugador1().getNombre();
+                datos[4] = llenar.getJugador2().getNombre();
+                datos[5] = llenar.getFechaHora();
+
+
+                //agrego al TableModleo ese arreglo
+                dtm.addRow(datos);
+            }
+        
 
     }
 }

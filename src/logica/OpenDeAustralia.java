@@ -129,23 +129,50 @@ public class OpenDeAustralia {
         int jugador1Acumulador;
         int jugador2Acumulador;
         Jugador jugadorGanador = null;
-            jugador1Acumulador = 0;
-            jugador2Acumulador = 0;
-            for (int j = 0; j < 5; j++) {
-                if (Integer.parseInt(partidos.get(14).getSets()[0][j]) > Integer.parseInt(partidos.get(14).getSets()[1][j])) {
-                    jugador1Acumulador++;
-                } else if (Integer.parseInt(partidos.get(14).getSets()[0][j]) < Integer.parseInt(partidos.get(14).getSets()[1][j])) {
-                    jugador2Acumulador++;
-                }
+        jugador1Acumulador = 0;
+        jugador2Acumulador = 0;
+        for (int j = 0; j < 5; j++) {
+            if (Integer.parseInt(partidos.get(14).getSets()[0][j]) > Integer.parseInt(partidos.get(14).getSets()[1][j])) {
+                jugador1Acumulador++;
+            } else if (Integer.parseInt(partidos.get(14).getSets()[0][j]) < Integer.parseInt(partidos.get(14).getSets()[1][j])) {
+                jugador2Acumulador++;
             }
-            if (jugador1Acumulador > jugador2Acumulador) {
-                jugadorGanador = partidos.get(14).getJugador1();
-            } else if (jugador1Acumulador < jugador2Acumulador) {
-                jugadorGanador = partidos.get(14).getJugador2();
-            }
-        
+        }
+        if (jugador1Acumulador > jugador2Acumulador) {
+            jugadorGanador = partidos.get(14).getJugador1();
+        } else if (jugador1Acumulador < jugador2Acumulador) {
+            jugadorGanador = partidos.get(14).getJugador2();
+        }
+
         return jugadorGanador;
     }
+
+    /**
+     *
+     * @return
+     */
+    public Partido mayorAsistencia() {
+        Partido respuesta = null;
+        int mayorAsistencia = 0;
+        for (int i = 0; i < partidos.size(); i++) {
+            if (mayorAsistencia < partidos.get(i).getAsistencia()) {
+                mayorAsistencia = partidos.get(i).getAsistencia();
+                respuesta = partidos.get(i);
+            }
+        }
+        return respuesta;
+    }
+
+//    public String jugadorMayorTiempo() {
+//        Jugador jugadorGanador = null;
+//        int acumulador;
+//        int jugador2Acumulador;
+//        Jugador jugador1 = null;
+//        Jugador jugador2 = null;
+//        for (int i = 0; i < partidos.size(); i++) {
+//            acumulador 
+//        }
+//    }
 
     /**
      *
@@ -253,7 +280,6 @@ public class OpenDeAustralia {
     }
 
     // se puede volver mas pequeño es una prueba
-
     /**
      *
      * @param id
@@ -365,7 +391,6 @@ public class OpenDeAustralia {
     }
 
     // se puede volver mas pequeño es una prueba
-
     /**
      *
      * @param id
