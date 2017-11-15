@@ -553,7 +553,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }
     
-        public void llenarTablaMayorAsistencia() {
+    /**
+     *
+     */
+    public void llenarTablaMayorAsistencia() {
         DefaultTableModel dtm = (DefaultTableModel) jTablemayorAsistencia.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
         //los datos se agregan la defaultTableModel.
