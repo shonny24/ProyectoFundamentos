@@ -23,6 +23,7 @@ public class Partido {
     private String fechaHora;
     private String sets[][];
     private int asistencia;
+    public boolean acumulador = false;
 
     private boolean deuce;
     private boolean tieBreak;
@@ -194,6 +195,7 @@ public class Partido {
                 }
             }
         } else {
+            aculumarTiempo();
             time = true;
         }
     }
@@ -664,5 +666,22 @@ public class Partido {
      */
     public int getAsistencia() {
         return asistencia;
+    }
+
+    private void aculumarTiempo() {
+        if((acumulador==false)&&(time==false)){
+            int acum=0;
+            String tiempos = getTiempo();
+            String[] partirHora = tiempos.split(":");
+            int h = Integer.parseInt(partirHora[0]);
+            int m = Integer.parseInt(partirHora[1]);
+            int s = Integer.parseInt(partirHora[2]);
+            acum=(s+(m*60)+(h*3600));
+            int tiempoJ1=(jugador1.getTiempoAcumulado()+acum);
+            int tiempoJ2=(jugador2.getTiempoAcumulado()+acum);
+            jugador1.setTiempoAcumulado(tiempoJ1);
+            jugador2.setTiempoAcumulado(tiempoJ2);
+            acumulador = true;
+        }
     }
 }
