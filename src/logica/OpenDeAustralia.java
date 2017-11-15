@@ -163,16 +163,75 @@ public class OpenDeAustralia {
         return respuesta;
     }
 
-//    public String jugadorMayorTiempo() {
-//        Jugador jugadorGanador = null;
-//        int acumulador;
-//        int jugador2Acumulador;
-//        Jugador jugador1 = null;
-//        Jugador jugador2 = null;
-//        for (int i = 0; i < partidos.size(); i++) {
-//            acumulador 
-//        }
-//    }
+    /**
+     *
+     * @return
+     */
+    public String jugadorMayorTiempo() {
+        Jugador miJugador = null;
+        int tiempo = 0;
+        String res="";
+        String nombre="";
+        String time;
+        for (int i = 0; i < 16; i++) {
+            miJugador = jugadores[i];
+            if(miJugador.getTiempoAcumulado()>tiempo){
+                nombre=miJugador.getNombre();
+                tiempo = miJugador.getTiempoAcumulado();
+            }
+        }
+        time=convertirTiempo(tiempo);
+        res = (nombre+"  "+ time);
+        return res;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public String jugadorMenorTiempo() {
+        Jugador miJugador = null;
+        int tiempo = jugadores[0].getTiempoAcumulado();
+        String res="";
+        String nombre="";
+        String time;
+        for (int i = 0; i < 16; i++) {
+            miJugador = jugadores[i];
+            if(miJugador.getTiempoAcumulado()<=tiempo){
+                nombre = miJugador.getNombre();
+                tiempo = miJugador.getTiempoAcumulado();
+            }
+        }
+        time=convertirTiempo(tiempo);
+        if(tiempo==0){
+            res = time;
+        }else{
+            res = (nombre +" "+ time);
+        }
+        return res;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    private String convertirTiempo(int tiempo) {
+        String res,min,seg;
+        int h,m,s;
+        h = tiempo/3600;
+        m = (tiempo%3600)/60;
+        s = (tiempo%3600)%60;
+        min = m+"";
+        seg = s+"";
+        if (m < 10) {
+                min = ("0" + m);
+            }
+        if (s < 10) {
+                seg = ("0" + s);
+            }
+        res=(h + ":" + min + ":" + seg);
+        return res;
+    }
 
     /**
      *
@@ -510,4 +569,5 @@ public class OpenDeAustralia {
     public void setPartidos(ArrayList<Partido> partidos) {
         this.partidos = partidos;
     }
+
 }
