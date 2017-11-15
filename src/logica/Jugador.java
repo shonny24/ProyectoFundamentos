@@ -16,6 +16,7 @@ public class Jugador {
     private int edad;
     private int rankinATP;
     private int puntosObtenidos;
+    public int tiempoAcumulado;
 
     /**
      *
@@ -30,6 +31,7 @@ public class Jugador {
         this.edad = edad;
         this.rankinATP = rankinATP;
         this.puntosObtenidos = 180;
+        this.tiempoAcumulado=0;
     }
 
     /**
@@ -110,5 +112,21 @@ public class Jugador {
      */
     public void setPuntosObtenidos(int puntosObtenidos) {
         this.puntosObtenidos = puntosObtenidos;
+    }
+    
+    /**
+     *
+     * @param tiempoAcumulado
+     */
+    public void setTiempoAcumulado(int tiempoAcumulado) {
+        this.tiempoAcumulado = tiempoAcumulado;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getTiempoAcumulado() {
+        return tiempoAcumulado;
     }
 }
