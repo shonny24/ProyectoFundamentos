@@ -468,7 +468,9 @@ public class Partido {
 
     private void generarTiempoPartido() {
         if (time == false) {
-            int hora, minuto, segundo;
+            int hora, minuto, segundo, tiempoAcum;
+            int tiempoJ1 = 0;
+            int tiempoJ2 = 0;
             String tiempo1, min, seg;
             Random aleatorio = new Random();
             hora = aleatorio.nextInt(4) + 1;
@@ -485,6 +487,11 @@ public class Partido {
             tiempo1 = ("0" + hora + ":" + min + ":" + seg);
             setTiempo(tiempo1);
             time = true;
+            tiempoAcum = (segundo+(minuto*60)+(hora*3600));
+            tiempoJ1=(jugador1.getTiempoAcumulado()+tiempoAcum);
+            tiempoJ2=(jugador2.getTiempoAcumulado()+tiempoAcum);
+            jugador1.setTiempoAcumulado(tiempoJ1);
+            jugador2.setTiempoAcumulado(tiempoJ2);
         }
     }
 
