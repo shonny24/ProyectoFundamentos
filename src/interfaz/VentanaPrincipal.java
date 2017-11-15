@@ -444,8 +444,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         llenarTablaMayorAsistencia();
                     }
                 }
-            
-        
+            jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());
+            jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());
     }//GEN-LAST:event_jTableEstadisticasFocusGained
 
     /**
