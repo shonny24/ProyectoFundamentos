@@ -180,8 +180,8 @@ public class OpenDeAustralia {
     }
 
     /**
-     *
-     * @return
+     * Metodo que determina cual jugador duro mas tiempo en cancha.
+     * @return String
      */
     public String jugadorMayorTiempo() {
         Jugador miJugador = null;
@@ -202,8 +202,8 @@ public class OpenDeAustralia {
     }
 
     /**
-     *
-     * @return
+     * Metodo que determina cual jugador duro menos tiempo en cancha.
+     * @return String
      */
     public String jugadorMenorTiempo() {
         Jugador miJugador = null;
@@ -228,8 +228,8 @@ public class OpenDeAustralia {
     }
 
     /**
-     *
-     * @return
+     * Metodo que convierte de segundos a horas minutos y segundos el tiempo el tiempo del jugador. 
+     * @return String
      */
     private String convertirTiempo(int tiempo) {
         String res, min, seg;
