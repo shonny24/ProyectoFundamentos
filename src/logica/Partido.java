@@ -137,7 +137,7 @@ public class Partido {
     }
 
     /**
-     *Metodo para jugar manualmente el partido
+     * Metodo para jugar manualmente el partido
      */
     public void jugar() {
         boolean ganador = determinarGanador();                  // Se consulta si ya hay un ganador en este partido.
@@ -158,7 +158,7 @@ public class Partido {
             }
             if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {        // Sí el jugador se han juegado menos de 5 sets, y ambos jugadores tiene seis games ganados, se procede a sumar el siguiente punto con la regla del tiebreak.
                 sumarTiebreak(punto);                           // Se llama al metodo para sumar el punto en la matriz de la forma  tiebrak
-                n = 5;                                  
+                n = 5;
             } else {                                            // De lo contrario se procede a sumar en punto como un game normal.
                 sumarPunto(acumulador1, acumulador2, punto);    // Se llama al metodo para sumar el punto en la matriz de la forma normal.
                 n = 3;
@@ -489,9 +489,9 @@ public class Partido {
             tiempo1 = ("0" + hora + ":" + min + ":" + seg);
             setTiempo(tiempo1);
             time = true;
-            tiempoAcum = (segundo+(minuto*60)+(hora*3600));
-            tiempoJ1=(jugador1.getTiempoAcumulado()+tiempoAcum);
-            tiempoJ2=(jugador2.getTiempoAcumulado()+tiempoAcum);
+            tiempoAcum = (segundo + (minuto * 60) + (hora * 3600));
+            tiempoJ1 = (jugador1.getTiempoAcumulado() + tiempoAcum);
+            tiempoJ2 = (jugador2.getTiempoAcumulado() + tiempoAcum);
             jugador1.setTiempoAcumulado(tiempoJ1);
             jugador2.setTiempoAcumulado(tiempoJ2);
         }
@@ -669,16 +669,16 @@ public class Partido {
     }
 
     private void aculumarTiempo() {
-        if((acumulador==false)&&(time==false)){
-            int acum=0;
+        if ((acumulador == false) && (time == false)) {
+            int acum = 0;
             String tiempos = getTiempo();
             String[] partirHora = tiempos.split(":");
             int h = Integer.parseInt(partirHora[0]);
             int m = Integer.parseInt(partirHora[1]);
             int s = Integer.parseInt(partirHora[2]);
-            acum=(s+(m*60)+(h*3600));
-            int tiempoJ1=(jugador1.getTiempoAcumulado()+acum);
-            int tiempoJ2=(jugador2.getTiempoAcumulado()+acum);
+            acum = (s + (m * 60) + (h * 3600));
+            int tiempoJ1 = (jugador1.getTiempoAcumulado() + acum);
+            int tiempoJ2 = (jugador2.getTiempoAcumulado() + acum);
             jugador1.setTiempoAcumulado(tiempoJ1);
             jugador2.setTiempoAcumulado(tiempoJ2);
             acumulador = true;

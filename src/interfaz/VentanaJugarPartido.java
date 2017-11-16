@@ -56,7 +56,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         t = new Timer(1, acciones);
         
         jLEtapa.setText(etapa);
-
+        
     }
 
     /**
@@ -444,5 +444,5 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s;
         jLTiempoPartido.setText(tiempo);
     }
-
+    
 }
