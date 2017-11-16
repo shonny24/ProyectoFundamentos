@@ -81,6 +81,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMCuartos = new javax.swing.JMenuItem();
         jMSemiFinal = new javax.swing.JMenuItem();
         jMFinal = new javax.swing.JMenuItem();
+        jMPuntosJugador = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Open de Australia");
@@ -94,7 +97,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             new String [] {
                 "Jugador1", "Jugador2", "Pista", "Fecha/Hora", "Tiempo", "Asistencia"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableEstadisticas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableEstadisticas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -271,7 +282,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu3.add(jMOctavos);
 
+        jMPuntosJugador.setText("Puntos Jugador");
+        jMPuntosJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMPuntosJugadorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMPuntosJugador);
+
         jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Ayuda");
+
+        jMenuItem4.setText("About");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -465,22 +496,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jTableEstadisticasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableEstadisticasFocusGained
         //llamamos el metodo llenarTablaEstadisticas
         llenarTablaEstadisticas();
-            //verificamos si el numero de ganadores es igual a 15(es por que termino el torneo)
-            if (miOpenAustralia.numeroGanadores() == 15) {
-                    //llamamos el metodo ganador torneo para luego agregar el nombre al Jlabel Ganador
-                    if (miOpenAustralia.ganadorTorneo() == null) {
-                        jLGanador.setText("Open de Australia");
-                    } else {
-                        //obtenemos el ganador del metodo ganadorTorneo y obtenemos el nombre
-                        jLGanador.setText(miOpenAustralia.ganadorTorneo().getNombre());
-                        //llenamos la tabla mayorAsistencia
-                        llenarTablaMayorAsistencia();
-                        
-                    }
-                }
-            jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());// Se obtiene el nombre y tiempo del jugador con mayor tiempo en cancha
-            jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());// Se obtiene el nombre y tiempo del jugador con menor tiempo en cancha
+        //verificamos si el numero de ganadores es igual a 15(es por que termino el torneo)
+        if (miOpenAustralia.numeroGanadores() == 15) {
+            //llamamos el metodo ganador torneo para luego agregar el nombre al Jlabel Ganador
+            if (miOpenAustralia.ganadorTorneo() == null) {
+                jLGanador.setText("Open de Australia");
+            } else {
+                //obtenemos el ganador del metodo ganadorTorneo y obtenemos el nombre
+                jLGanador.setText("Campeón: " + miOpenAustralia.ganadorTorneo().getNombre());
+                //llenamos la tabla mayorAsistencia
+                llenarTablaMayorAsistencia();
+
+            }
+        }
+        jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());// Se obtiene el nombre y tiempo del jugador con mayor tiempo en cancha
+        jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());// Se obtiene el nombre y tiempo del jugador con menor tiempo en cancha
     }//GEN-LAST:event_jTableEstadisticasFocusGained
+
+    private void jMPuntosJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPuntosJugadorActionPerformed
+        // TODO add your handling code here:
+        VentanaPuntosJugador puntosJugador = new VentanaPuntosJugador(miOpenAustralia);
+        puntosJugador.setVisible(true);
+    }//GEN-LAST:event_jMPuntosJugadorActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        VentanaAbout about =new VentanaAbout();
+        about.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,14 +571,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMCuartos;
     private javax.swing.JMenuItem jMFinal;
     private javax.swing.JMenu jMOctavos;
+    private javax.swing.JMenuItem jMPuntosJugador;
     private javax.swing.JMenuItem jMSemiFinal;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -547,7 +593,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     *
+     * Metodo para llenar la tablaEstadisticas
      */
     public void llenarTablaEstadisticas() {
         DefaultTableModel dtm = (DefaultTableModel) jTableEstadisticas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
@@ -582,11 +628,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         // Instanciamos el TableRowSorter y lo añadimos al JTable
         TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<TableModel>(dtm);
-       
+
         jTableEstadisticas.setRowSorter(elQueOrdena);
 
     }
-    
+
     /**
      *
      */
@@ -599,23 +645,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
         Object[] datos = new Object[6];
-//        System.out.println(llenar.size()+"-------------------------");
 
-            //Se agrega este if para evitar que el extraiga datos en un campo null
-            if (llenar != null) {
+        //Se agrega este if para evitar que el extraiga datos en un campo null
+        if (llenar != null) {
 
-                datos[0] = llenar.getId();
-                datos[1] = llenar.getPista().getNombre();
-                datos[2] = llenar.getAsistencia();
-                datos[3] = llenar.getJugador1().getNombre();
-                datos[4] = llenar.getJugador2().getNombre();
-                datos[5] = llenar.getFechaHora();
+            datos[0] = llenar.getId();
+            datos[1] = llenar.getPista().getNombre();
+            datos[2] = llenar.getAsistencia();
+            datos[3] = llenar.getJugador1().getNombre();
+            datos[4] = llenar.getJugador2().getNombre();
+            datos[5] = llenar.getFechaHora();
 
-
-                //agrego al TableModleo ese arreglo
-                dtm.addRow(datos);
-            }
-        
-
+            //agrego al TableModleo ese arreglo
+            dtm.addRow(datos);
+        }
     }
 }

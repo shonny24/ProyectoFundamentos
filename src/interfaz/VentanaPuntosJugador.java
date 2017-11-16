@@ -5,34 +5,30 @@
  */
 package interfaz;
 
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import logica.Jugador;
 import logica.OpenDeAustralia;
-import logica.Partido;
 
 /**
  *
  * @author Shonny
  */
-public class VentanaVerRondas extends javax.swing.JFrame {
+public class VentanaPuntosJugador extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia;
-
     /**
-     * Constructor
-     * @param open parametro de tipo OpenDeAustralia
+     * Creates new form VentanaPuntosJugador
      */
-    public VentanaVerRondas(OpenDeAustralia open) {
+    public VentanaPuntosJugador(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
-        //icono
         setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
-        //************************
         //Centrar Jframe
         setLocationRelativeTo(null);
-        //************************
+        llenarTablaJugador();
     }
 
     /**
@@ -46,41 +42,31 @@ public class VentanaVerRondas extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableVerRondas = new javax.swing.JTable();
+        jTablePuntosJugador = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Etapa");
+        setTitle("Puntos Jugador");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Partidos"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntos Jugador"));
 
-        jTableVerRondas.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePuntosJugador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Hora y Fecha", "Jugador 1", "Jugador 2", "Pista"
+                "Nombre", "Puntos ATP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableVerRondas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTableVerRondas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableVerRondasMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableVerRondas);
-        if (jTableVerRondas.getColumnModel().getColumnCount() > 0) {
-            jTableVerRondas.getColumnModel().getColumn(0).setPreferredWidth(5);
-            jTableVerRondas.getColumnModel().getColumn(1).setPreferredWidth(150);
-        }
+        jScrollPane1.setViewportView(jTablePuntosJugador);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,14 +74,14 @@ public class VentanaVerRondas extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -119,26 +105,6 @@ public class VentanaVerRondas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTableVerRondasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVerRondasMouseClicked
-        // Evento de click que se ejecuta sobre las filas de la tablaVerRondas
-        //inicializa la VentanaJugarPartido
-        VentanaJugarPartido partido = new VentanaJugarPartido(miOpenAustralia);
-        int filSelec;
-        String id;
-        filSelec = jTableVerRondas.getSelectedRow();//obtiene la fila selccionada retorna -1 cuando no tiene selecionado nada
-        //if para vericar el doble click de mouse
-        if (evt.getClickCount() == 2 && filSelec != -1) {
-            //obtengo los datos de la columna 0 y la fila seleccionada
-            id = jTableVerRondas.getValueAt(filSelec, 0).toString();
-            //llamo la variable idPatido que esta en VentanaJugarPartido
-            VentanaJugarPartido.idPartido = id;
-            //llamo el metodo inicializarDatosVentanaPartido que esta en la VentanaJugarPartido
-            partido.inicializarDatosVentanaPartido();
-            //hagovisible la VentanaJugarPartido
-            partido.setVisible(true);
-        }
-    }//GEN-LAST:event_jTableVerRondasMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -156,20 +122,20 @@ public class VentanaVerRondas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaVerRondas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPuntosJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaVerRondas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPuntosJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaVerRondas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPuntosJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaVerRondas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPuntosJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaVerRondas(null).setVisible(true);
+                new VentanaPuntosJugador(null).setVisible(true);
             }
         });
     }
@@ -177,38 +143,35 @@ public class VentanaVerRondas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableVerRondas;
+    private javax.swing.JTable jTablePuntosJugador;
     // End of variables declaration//GEN-END:variables
-
     /**
-     * Metodo que me llena la tabla dependiendo la etapa (Octavos,Cuartos, Semifinales, Finales)
-     * @param inicio inicio del arraylist
-     * @param limite limite del arraylist
+     * metodo para llenar la tabla de Jugadores
      */
-    public void llenarTabla(int inicio, int limite) {
-        DefaultTableModel dtm = (DefaultTableModel) jTableVerRondas.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
+    public void llenarTablaJugador() {
+        DefaultTableModel dtm = (DefaultTableModel) jTablePuntosJugador.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
         dtm.setRowCount(0);//eliminando la s filas que ya hay. para agregar desde el principio.
         //los datos se agregan la defaultTableModel.
-        ArrayList<Partido> llenar = miOpenAustralia.getPartidos();//sacando al informacion a agregar en la tabla.
+
+        Jugador[] juga = miOpenAustralia.getJugadores();//sacando al informacion a agregar en la tabla.
 
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
-        Object[] datos = new Object[5];
-        for (int i = inicio; i < limite; i++) {
+        Object[] datos = new Object[2];
 
-            Partido parti = llenar.get(i);
+        for (int i = 0; i < juga.length; i++) {
+
+            Jugador jugador = juga[i];
             //Se agrega este if para evitar que el extraiga datos en un campo null
-            if (parti != null) {
+            if (jugador != null) {
 
-                datos[0] = parti.getId();
-                datos[1] = parti.getFechaHora();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
-                datos[2] = parti.getJugador1().getNombre();
-                datos[3] = parti.getJugador2().getNombre();
-                datos[4] = parti.getPista().getNombre();
+                datos[0] = jugador.getNombre();//el primer elemetno del arreglo va a ser el id,la primera col en la Tabla.
+                datos[1] = jugador.getPuntosObtenidos();
 
                 //agrego al TableModleo ese arreglo
                 dtm.addRow(datos);
             }
         }
+
     }
 }

@@ -350,7 +350,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * metodo para llenar la tabla de Pistas
      */
     public void llenarTablaPista() {
         DefaultTableModel dtm = (DefaultTableModel) jTablePista.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
@@ -401,9 +401,9 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param campo
-     * @param evt
+     * metodo que sirve para validar letras  y este es llamado cuando existe un evento de teclado
+     * @param campo campo al cual se aplica la validacion
+     * @param evt evento de teclado
      */
     public void validarNumeros(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
@@ -427,9 +427,9 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param campo
-     * @param evt
+     * metodo que sirve para validar letras  y este es llamado cuando existe un evento de teclado
+     * @param campo campo al cual se aplica la validacion
+     * @param evt evento de teclado
      */
     public void validarLetras(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
@@ -453,18 +453,18 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     }
     
     /**
-     *
-     * @return
+     * metodo que sirve para validar que los campos no esten vacios
+     * @return un mensaje de error dependiendo si el campo esta vacio
      */
     public String ValidarDatosAgregarPista() {//Metodo para comprobar que los datos esten completos
         String msj = "";
-        if (jTIdPista.getText().equals("")) {//Si jTnombreCita esta vacio
+        if (jTIdPista.getText().equals("")) {//Si jTIdPista esta vacio
             msj += "Por favor digite el Id de la pista. \n";
         }
-        if (jTNombrePista.getText().equals("")) {//Si jTidCita esta vacio
+        if (jTNombrePista.getText().equals("")) {//Si jTNombrePista esta vacio
             msj += "Por favor digite el Nombre de la pista. \n";
         }
-        if (jTCapacidadPista.getText().equals("")) {//Si jTidCita esta vacio
+        if (jTCapacidadPista.getText().equals("")) {//Si jTCapacidadPista esta vacio
             msj += "Por favor digite la Capacidad de la pista. \n";
         }
         return msj;//devuelve msj

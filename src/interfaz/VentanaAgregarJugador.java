@@ -371,7 +371,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * metodo para llenar la tabla de Jugadores
      */
     public void llenarTablaJugador() {
         DefaultTableModel dtm = (DefaultTableModel) jTableJugadores.getModel();//se usa DefaultTableModel para manipular facilmente el Tablemodel
@@ -402,6 +402,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         //metodo que modifica las celdas de la tabla
         dtm.addTableModelListener(new TableModelListener() {
             //metodo que verifica si existe un cambio en la tabla
+            
             @Override
             public void tableChanged(TableModelEvent e) {
                 //if que verifica si existe cambio
@@ -418,15 +419,16 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                     miOpenAustralia.modificarJugador(id, dato, columna);
                 }
             }
+            
         });
         //**************************************************
 
     }
 
     /**
-     *
-     * @param campo
-     * @param evt
+     * metodo que sirve para validar numeros  y este es llamado cuando existe un evento de teclado
+     * @param campo campo al cual se aplica la validacion
+     * @param evt evento de teclado
      */
     public void validarNumeros(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
@@ -450,9 +452,9 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param campo
-     * @param evt
+     * metodo que sirve para validar letras  y este es llamado cuando existe un evento de teclado
+     * @param campo campo al cual se aplica la validacion
+     * @param evt evento de teclado
      */
     public void validarLetras(JTextField campo, KeyEvent evt) {
         char c = evt.getKeyChar();
@@ -476,18 +478,18 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @return
+     * metodo que sirve para validar que los campos no esten vacios
+     * @return un mensaje de error dependiendo si el campo esta vacio
      */
     public String ValidarDatosAgregarJugador() {//Metodo para comprobar que los datos esten completos
         String msj = "";
-        if (jTidJugador.getText().equals("")) {//Si jTnombreCita esta vacio
+        if (jTidJugador.getText().equals("")) {//Si jTidJugador esta vacio
             msj += "Por favor digite el Id. \n";
         }
-        if (jTnombreJugador.getText().equals("")) {//Si jTidCita esta vacio
+        if (jTnombreJugador.getText().equals("")) {//Si jTnombreJugador esta vacio
             msj += "Por favor digite el Nombre. \n";
         }
-        if (jTedadJugador.getText().equals("")) {//Si jTidCita esta vacio
+        if (jTedadJugador.getText().equals("")) {//Si jTedadJugador esta vacio
             msj += "Por favor digite la Edad. \n";
         }
         return msj;//devuelve msj
