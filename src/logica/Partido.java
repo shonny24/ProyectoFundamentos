@@ -128,7 +128,7 @@ public class Partido {
 //
 //            "MMM" -> "Jul"
 //
-//            "MMMM" -> "Deciembre"
+//            "MMMM" -> "Diciembre"
 //
 //            Día del mes
 //
@@ -136,7 +136,26 @@ public class Partido {
 //
 //            "dd" -> "03″
 //
-        unaFecha.set(2017, aleatorio.nextInt(3) + 9, aleatorio.nextInt(30) + 1, aleatorio.nextInt(24) + 1, aleatorio.nextInt(60));//Generamos la fecha y hora aleatoria
+       int x=0; //Variable del tope final del dia del partido.
+       int y=0; //Variable del tope inicial del dia del partido.
+       int codigo = Integer.parseInt(id);//Se obtiene el id del partido en curso.
+       if(codigo<9){//Si el partido es de octavos.
+           x=5;     // Se generan los requisitos para que el partido sea entre el 15 al 19 de Enero.
+           y=15;
+       }
+       if((codigo>8)&&(codigo<13)){// Sí el partido es de cuartos.
+           x=3;     // Se generan los requisitos para que el partido sea entre el 20 al 23 de Enero.
+           y=21;
+       }
+       if((codigo>12)&&(codigo<15)){ // Sí el partido es de semifinal.
+           x=2;     // Se generan los requisitos para que el partido sea entre el 25 al 26 de Enero.
+           y=25;
+       }
+       if(codigo==15){ // Sí el partido es la final.
+           x=1;        // Se generan los requisitos para que el partido sea el 28 de Enero.
+           y=28;
+       }
+        unaFecha.set(2018, 0, aleatorio.nextInt(x) + y, aleatorio.nextInt(8) + 12, 00);//Generamos la fecha y hora aleatoria
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa -- dd/MMMMM/yyyy");//Damos formato a la fecha y hora
         String fechaHora = sdf.format(unaFecha.getTime()); //obtenemos la fecha y hora ya formateados para pasarlos a un String
 
