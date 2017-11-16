@@ -14,7 +14,7 @@ public class Jugador {
     private String idJugador;
     private String nombre;
     private int edad;
-    private int rankinATP;
+//    private int rankinATP;
     private int puntosObtenidos;
     public int tiempoAcumulado;
 
@@ -25,11 +25,11 @@ public class Jugador {
      * @param edad
      * @param rankinATP
      */
-    public Jugador(String idJugador, String nombre, int edad, int rankinATP) {
+    public Jugador(String idJugador, String nombre, int edad) {
         this.idJugador = idJugador;
         this.nombre = nombre;
         this.edad = edad;
-        this.rankinATP = rankinATP;
+//        this.rankinATP = rankinATP;
         this.puntosObtenidos = 180;
         this.tiempoAcumulado=0;
     }
@@ -80,22 +80,6 @@ public class Jugador {
      */
     public void setEdad(int edad) {
         this.edad = edad;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getRankinATP() {
-        return rankinATP;
-    }
-
-    /**
-     *
-     * @param rankinATP
-     */
-    public void setRankinATP(int rankinATP) {
-        this.rankinATP = rankinATP;
     }
 
     /**

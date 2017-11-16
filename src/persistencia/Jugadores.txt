@@ -1,16 +1,16 @@
-1--Rafael Nadal--31--1
-2--Roger Federer--36--2
-3--Andy Murray--30--3
-4--Alexander Zverev--20--4
+1--Rafael Nadal--31
+2--Roger Federer--36
+3--Andy Murray--30
+4--Alexander Zverev--20
 5--Marin Cilic--28--5
-6--Novak Djokovic--30--6
-7--Dominic Thiem--24--7
-8--Grigor Dimitrov--26--8
-9--Stan Wawrinka--32--9
-10--Pablo Carreno Busta--26--10
-11--Milos Raonic--26--11
-12--David Goffin--26--12
-13--Roberto Bautista Agut--29--13
-14--Kei Nishikori--27--14
-15--Kevin Anderson--31--15
-16--Sam Querrey--29--16
+6--Novak Djokovic--30
+7--Dominic Thiem--24
+8--Grigor Dimitrov--26
+9--Stan Wawrinka--32
+10--Pablo Carreno Busta--26
+11--Milos Raonic--26
+12--David Goffin--26
+13--Roberto Bautista Agut--29
+14--Kei Nishikori--27
+15--Kevin Anderson--31
+16--Sam Querrey--29

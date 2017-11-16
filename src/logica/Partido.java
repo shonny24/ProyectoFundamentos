@@ -680,15 +680,15 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get Id Partido
+     * @return Id Partido
      */
     public String getId() {
         return id;
     }
 
     /**
-     *
+     *Metodo Set Id Partido
      * @param id
      */
     public void setId(String id) {
@@ -696,15 +696,15 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     *Metodo Get Sets
+     * @return sets
      */
     public String[][] getSets() {
         return sets;
     }
 
     /**
-     *
+     *Metodo Set Id Partido
      * @param sets
      */
     public void setSets(String[][] sets) {
@@ -712,15 +712,15 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     *Metodo Get Tiempo
+     * @return tiempo
      */
     public String getTiempo() {
         return tiempo;
     }
 
     /**
-     *
+     *Metodo Set tiempo
      * @param tiempo
      */
     public void setTiempo(String tiempo) {
@@ -760,7 +760,7 @@ public class Partido {
     }
 
     /**
-     *
+     *Metodo Set Asistencia
      * @param asistencia
      */
     public void setAsistencia(int asistencia) {
@@ -768,8 +768,8 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     *Metodo Get Asistencia
+     * @return asistencia
      */
     public int getAsistencia() {
         return asistencia;

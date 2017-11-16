@@ -51,11 +51,9 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTidJugador = new javax.swing.JTextField();
         jTnombreJugador = new javax.swing.JTextField();
-        jTrankingJugador = new javax.swing.JTextField();
         jTedadJugador = new javax.swing.JTextField();
         jBagregarJugador = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -73,8 +71,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Ranking ATP:");
-
         jLabel4.setText("Edad:");
 
         jTidJugador.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -86,12 +82,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         jTnombreJugador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTnombreJugadorKeyTyped(evt);
-            }
-        });
-
-        jTrankingJugador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTrankingJugadorKeyTyped(evt);
             }
         });
 
@@ -126,13 +116,9 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                             .addComponent(jTnombreJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(jTidJugador)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTrankingJugador)
-                            .addComponent(jTedadJugador))))
+                        .addComponent(jLabel4)
+                        .addGap(54, 54, 54)
+                        .addComponent(jTedadJugador)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,10 +136,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTedadJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTrankingJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBagregarJugador)
                 .addContainerGap())
@@ -166,11 +148,11 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Edad", "Puntos ATP", "Ranking ATP"
+                "Id", "Nombre", "Edad", "Puntos ATP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -187,7 +169,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jTableJugadores.getColumnModel().getColumn(2).setResizable(false);
             jTableJugadores.getColumnModel().getColumn(2).setPreferredWidth(20);
             jTableJugadores.getColumnModel().getColumn(3).setResizable(false);
-            jTableJugadores.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jBborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/borrar16.png"))); // NOI18N
@@ -252,10 +233,9 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             String idJuga = jTidJugador.getText();
             String nombre = jTnombreJugador.getText();
             int edad = Integer.parseInt(jTedadJugador.getText());
-            int rankinAtp = Integer.parseInt(jTrankingJugador.getText());
 
             //llamamos al contructor de jugador
-            miJugador = new Jugador(idJuga, nombre, edad, rankinAtp);
+            miJugador = new Jugador(idJuga, nombre, edad);
 
             //llamamos el metodo agregar
             boolean agregarJuga = miOpenAustralia.agregarJugador(miJugador);
@@ -274,7 +254,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
             jTidJugador.setText(null);
             jTnombreJugador.setText(null);
             jTedadJugador.setText(null);
-            jTrankingJugador.setText(null);
 
             //se llama el metodo validar datos y se imprime en un joptionpane
         } else {
@@ -298,11 +277,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         // TODO add your handling code here:
         validarNumeros(jTedadJugador, evt);
     }//GEN-LAST:event_jTedadJugadorKeyTyped
-
-    private void jTrankingJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTrankingJugadorKeyTyped
-        // TODO add your handling code here:
-        validarNumeros(jTrankingJugador, evt);
-    }//GEN-LAST:event_jTrankingJugadorKeyTyped
 
     private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
         // TODO add your handling code here:
@@ -378,7 +352,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     private javax.swing.JButton jBborrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -387,7 +360,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     private javax.swing.JTextField jTedadJugador;
     private javax.swing.JTextField jTidJugador;
     private javax.swing.JTextField jTnombreJugador;
-    private javax.swing.JTextField jTrankingJugador;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -422,7 +394,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
                 datos[1] = jugador.getNombre();
                 datos[2] = jugador.getEdad();
                 datos[3] = jugador.getPuntosObtenidos();
-                datos[4] = jugador.getRankinATP();
 
                 //agrego al TableModleo ese arreglo
                 dtm.addRow(datos);
@@ -518,9 +489,6 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
         }
         if (jTedadJugador.getText().equals("")) {//Si jTidCita esta vacio
             msj += "Por favor digite la Edad. \n";
-        }
-        if (jTrankingJugador.getText().equals("")) {//Si jTidCita esta vacio
-            msj += "Por favor digite el Ranking ATP. \n";
         }
         return msj;//devuelve msj
     }
