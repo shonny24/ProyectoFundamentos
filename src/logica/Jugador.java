@@ -18,22 +18,24 @@ public class Jugador {
     public int tiempoAcumulado;//tiempo acumulado del jugador
 
     /**
-     *Contructor de la clase Jugador
+     * Contructor de la clase Jugador
+     *
      * @param idJugador
      * @param nombre
      * @param edad
-     * @param rankinATP
+     *
      */
     public Jugador(String idJugador, String nombre, int edad) {
         this.idJugador = idJugador;
         this.nombre = nombre;
         this.edad = edad;
         this.puntosObtenidos = 180;//se inicializa 180 puntos ya que se juega desde los octavos de final
-        this.tiempoAcumulado=0;//se inicializa en 0 ya que en ese momento no se han jugado partidos
+        this.tiempoAcumulado = 0;//se inicializa en 0 ya que en ese momento no se han jugado partidos
     }
 
     /**
      * Metodo Get id Jugador
+     *
      * @return id del jugador
      */
     public String getIdJugador() {
@@ -41,7 +43,8 @@ public class Jugador {
     }
 
     /**
-     *Metodo Set id Jugador
+     * Metodo Set id Jugador
+     *
      * @param idJugador id del jugador
      */
     public void setIdJugador(String idJugador) {
@@ -49,30 +52,34 @@ public class Jugador {
     }
 
     /**
+     * Metodo Get Nombre
      *
-     * @return
+     * @return Nombre
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
+     * Metodo Set Nombre
      *
-     * @param nombre
+     * @param nombre Nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
+     * Metodo Get Edad
      *
-     * @return
+     * @return edad
      */
     public int getEdad() {
         return edad;
     }
 
     /**
+     * Metodo Set edad
      *
      * @param edad
      */
@@ -81,22 +88,25 @@ public class Jugador {
     }
 
     /**
+     * Metodo Get Puntos Obtenidos
      *
-     * @return
+     * @return puntos obtenidos
      */
     public int getPuntosObtenidos() {
         return puntosObtenidos;
     }
 
     /**
+     * Metodo Set Puntos Obtenidos
      *
-     * @param puntosObtenidos
+     * @param puntosObtenidos Puntos obtenidos
      */
     public void setPuntosObtenidos(int puntosObtenidos) {
         this.puntosObtenidos = puntosObtenidos;
     }
-    
+
     /**
+     * Metodo Set Tiempo Acumulado
      *
      * @param tiempoAcumulado
      */
@@ -105,8 +115,9 @@ public class Jugador {
     }
 
     /**
+     * Metodo Get Tiempo Acumulado
      *
-     * @return
+     * @return tiempo acumulado
      */
     public int getTiempoAcumulado() {
         return tiempoAcumulado;
