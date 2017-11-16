@@ -15,7 +15,8 @@ public class Pista {
     private int capacidadMax;
 
     /**
-     *
+     * Constructor
+     * 
      * @param idPista
      * @param nombre
      * @param capacidadMax
@@ -27,15 +28,15 @@ public class Pista {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get id Pista 
+     * @return idPista
      */
     public String getIdPista() {
         return idPista;
     }
 
     /**
-     *
+     * Metodo Set id Pista 
      * @param idPista
      */
     public void setIdPista(String idPista) {
@@ -43,15 +44,15 @@ public class Pista {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get Nombre
+     * @return Nombre
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     *
+     * Metodo Set Nombre
      * @param nombre
      */
     public void setNombre(String nombre) {
@@ -59,15 +60,15 @@ public class Pista {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get Capacidad Maxima
+     * @return capacidadMaxima
      */
     public int getCapacidadMax() {
         return capacidadMax;
     }
 
     /**
-     *
+     * Metodo Set Capacidad Maxima
      * @param capacidadMax
      */
     public void setCapacidadMax(int capacidadMax) {

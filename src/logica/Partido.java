@@ -15,16 +15,19 @@ import java.util.Random;
  */
 public class Partido {
 
-    private String id;
-    private Jugador jugador1;
-    private Jugador jugador2;
-    private Pista pista;
-    private String tiempo;
-    private String fechaHora;
-    private String sets[][];
-    private int asistencia;
-    public boolean acumulador = false;
+    private String id;//id del partido
+    private Jugador jugador1;//jugador 1
+    private Jugador jugador2;//jugador 2
+    private Pista pista;//pista
+    private String tiempo;//Tiempo que dura un partido
+    private String fechaHora;//Fecha y hora en que se juega un partido
+    private String sets[][];//Sets de cada partido
+    private int asistencia;//Asistencia de cada partido
 
+    /**
+     *
+     */
+    public boolean acumulador = false;
     private boolean deuce;
     private boolean tieBreak;
     private boolean time;
@@ -35,6 +38,7 @@ public class Partido {
     private int acumulador2 = 0;
 
     /**
+     * Constructor
      *
      * @param id
      * @param jugador1
@@ -42,38 +46,41 @@ public class Partido {
      * @param pista
      */
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
-        this.tiempo = "00:00:00";
+        this.tiempo = "00:00:00"; //Cuando se crea un registro/objeto se inicializa el tiempo en "00:00:00"
         this.id = id;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.pista = pista;
-        this.fechaHora = fechaHoraAleatoria();
-        this.asistencia = generarAsistenciaAleatoria();
+        this.fechaHora = fechaHoraAleatoria(); //Cuando se crea un registro/objeto se inicializa con el metodo Fecha y hora aleatoria
+        this.asistencia = generarAsistenciaAleatoria(); //Cuando se crea un registro/objeto se inicializa con el metodo generarAsistenciasAleatorias
         this.deuce = false;
         this.tieBreak = false;
         this.sets = new String[2][6];
-        inicializarSets();
+        inicializarSets(); //Se llama el metodo para inicializar los sets
 
     }
 
     /**
+     * Metodo que genera aleatoriamente la asistencia dependiendo la campacidad
+     * maxima de una pista
      *
-     * @return
+     * @return Asistencia por partido
      */
     public int generarAsistenciaAleatoria() {
-        Random aleatorio = new Random();
-        int capacidad = pista.getCapacidadMax();
-        int res = aleatorio.nextInt(capacidad);
-        return res;
+        Random aleatorio = new Random(); //Clase Random de java
+        int capacidad = pista.getCapacidadMax(); //Se obtiene la capacidad maxima de la pista
+        int res = aleatorio.nextInt(capacidad); //Se genera un valor aleatorio dependiendo la capacidad de la pista
+        return res; //retorna el numero aleatorio
     }
 
     /**
+     * Metodo que genera una fecha y hora aleatoria
      *
-     * @return
+     * @return Fecha y hora Aleatoria
      */
     public String fechaHoraAleatoria() {
-        Calendar unaFecha = Calendar.getInstance();
-        Random aleatorio = new Random();
+        Calendar unaFecha = Calendar.getInstance(); //Clase Calendar de java
+        Random aleatorio = new Random(); //Clase Random de java
 
 //        Expresión                         Distancia
 //        generator.nextInt(100)            0 a 99
@@ -129,11 +136,11 @@ public class Partido {
 //
 //            "dd" -> "03″
 //
-        unaFecha.set(2017, aleatorio.nextInt(3) + 9, aleatorio.nextInt(30) + 1, aleatorio.nextInt(24) + 1, aleatorio.nextInt(60));
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa -- dd/MMMMM/yyyy");
-        String fechaHora = sdf.format(unaFecha.getTime());
+        unaFecha.set(2017, aleatorio.nextInt(3) + 9, aleatorio.nextInt(30) + 1, aleatorio.nextInt(24) + 1, aleatorio.nextInt(60));//Generamos la fecha y hora aleatoria
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa -- dd/MMMMM/yyyy");//Damos formato a la fecha y hora
+        String fechaHora = sdf.format(unaFecha.getTime()); //obtenemos la fecha y hora ya formateados para pasarlos a un String
 
-        return fechaHora;
+        return fechaHora; //retornamos fecha y hora
     }
 
     /**
@@ -219,7 +226,11 @@ public class Partido {
         generarTiempoPartido();
     }
 
-    private boolean jugarGame() {//Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano ese game.
+    /**
+     *
+     * @return
+     */
+    public boolean jugarGame() {//Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano ese game.
         boolean punto = false;
         boolean ganarPunto = false;
         int comparador1 = 0;
@@ -255,7 +266,11 @@ public class Partido {
         return ganador;
     }
 
-    private void jugarSet(int set) {
+    /**
+     *
+     * @param set
+     */
+    public void jugarSet(int set) {
         boolean ganadorSet = false;
         boolean game;
         boolean ganadorTieBreak = false;
@@ -299,7 +314,12 @@ public class Partido {
         }
     }
 
-    private boolean jugarTieBreak(int set) {
+    /**
+     *
+     * @param set
+     * @return
+     */
+    public boolean jugarTieBreak(int set) {
         sets[0][5] = "0";
         sets[1][5] = "0";
         int j1 = 0;
@@ -328,7 +348,11 @@ public class Partido {
         return punto;
     }
 
-    private boolean jugarDobleGame() {
+    /**
+     *
+     * @return
+     */
+    public boolean jugarDobleGame() {
         int j1 = (Integer.parseInt(sets[0][4]));
         int j2 = (Integer.parseInt(sets[1][4]));
         boolean ganarDobleGame = false;
@@ -369,7 +393,14 @@ public class Partido {
         return aleatorio.nextBoolean();
     }
 
-    private void sumarPunto(int comparador1, int comparador2, boolean punto) {
+    /**
+     *
+     *
+     * @param comparador1
+     * @param comparador2
+     * @param punto
+     */
+    public void sumarPunto(int comparador1, int comparador2, boolean punto) {
         if (punto == true) {
             switch (comparador1) {
                 case 1:
@@ -435,7 +466,12 @@ public class Partido {
         }
     }
 
-    private void sumarTiebreak(boolean punto) {
+    /**
+     *
+     *
+     * @param punto
+     */
+    public void sumarTiebreak(boolean punto) {
         if (punto == true) {
             sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + "";
         } else {
@@ -444,7 +480,16 @@ public class Partido {
         this.setTieBreak(false);
     }
 
-    private boolean determinarGanadorGame(int acum1, int acum2, int n, boolean punto) {
+    /**
+     *
+     *
+     * @param acum1
+     * @param acum2
+     * @param n
+     * @param punto
+     * @return
+     */
+    public boolean determinarGanadorGame(int acum1, int acum2, int n, boolean punto) {
         boolean ganador = false;
         if (((acum1 > n) && (acum2 < (acum1 - 1))) || ((acum2 > n) && (acum1 < (acum2 - 1)))) {
             ganador = true;
@@ -452,7 +497,13 @@ public class Partido {
         return ganador;
     }
 
-    private boolean determinarGanadorSet(int n) {
+    /**
+     *
+     *
+     * @param n
+     * @return
+     */
+    public boolean determinarGanadorSet(int n) {
         boolean ganador = false;
 
         int j1 = (Integer.parseInt(sets[0][nSet]));
@@ -468,7 +519,11 @@ public class Partido {
         return ganador;
     }
 
-    private void generarTiempoPartido() {
+    /**
+     *
+     *
+     */
+    public void generarTiempoPartido() {
         if (time == false) {
             int hora, minuto, segundo, tiempoAcum;
             int tiempoJ1 = 0;
@@ -510,13 +565,35 @@ public class Partido {
 
     /**
      *
-     * @return
+     */
+    public void aculumarTiempo() {
+        if ((acumulador == false) && (time == false)) {
+            int acum = 0;
+            String tiempos = getTiempo();
+            String[] partirHora = tiempos.split(":");
+            int h = Integer.parseInt(partirHora[0]);
+            int m = Integer.parseInt(partirHora[1]);
+            int s = Integer.parseInt(partirHora[2]);
+            acum = (s + (m * 60) + (h * 3600));
+            int tiempoJ1 = (jugador1.getTiempoAcumulado() + acum);
+            int tiempoJ2 = (jugador2.getTiempoAcumulado() + acum);
+            jugador1.setTiempoAcumulado(tiempoJ1);
+            jugador2.setTiempoAcumulado(tiempoJ2);
+            acumulador = true;
+        }
+    }
+
+    /**
+     * Metodo Get Jugador1
+     *
+     * @return Jugador1
      */
     public Jugador getJugador1() {
         return jugador1;
     }
 
     /**
+     * Metodo Get Jugador1
      *
      * @param jugador1
      */
@@ -666,22 +743,5 @@ public class Partido {
      */
     public int getAsistencia() {
         return asistencia;
-    }
-
-    private void aculumarTiempo() {
-        if ((acumulador == false) && (time == false)) {
-            int acum = 0;
-            String tiempos = getTiempo();
-            String[] partirHora = tiempos.split(":");
-            int h = Integer.parseInt(partirHora[0]);
-            int m = Integer.parseInt(partirHora[1]);
-            int s = Integer.parseInt(partirHora[2]);
-            acum = (s + (m * 60) + (h * 3600));
-            int tiempoJ1 = (jugador1.getTiempoAcumulado() + acum);
-            int tiempoJ2 = (jugador2.getTiempoAcumulado() + acum);
-            jugador1.setTiempoAcumulado(tiempoJ1);
-            jugador2.setTiempoAcumulado(tiempoJ2);
-            acumulador = true;
-        }
     }
 }
