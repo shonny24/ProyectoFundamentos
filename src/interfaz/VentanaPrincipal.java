@@ -20,11 +20,11 @@ import logica.*;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     private OpenDeAustralia miOpenAustralia = new OpenDeAustralia();//llamo la clase OpenDeAustralia y la inicializo (asigno espacio de memoria)
-    private Jugador miJugador;
-    private Partido miPartido;
+    private Jugador miJugador;//Variable de tipo jugador
+    private Partido miPartido;//variable de tipo partido
 
     /**
-     * Creates new form VentanaPrincipal
+     * Constructor de la ventana principal
      */
     public VentanaPrincipal() {
         initComponents();
@@ -32,7 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
         //*********************************
         //inicializamos la persistencia del jugador
-        try {
+        try {//excepción
             miOpenAustralia.inicializarAtributosJugador();
             miOpenAustralia.inicializarAtributosPista();
         } catch (IOException ex) {
@@ -306,19 +306,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        //Inicializamos la ventana agregarjugador y le pasamos como parametro OpenDeAutralia para evitar que se reinicie los datos
         VentanaAgregarJugador agregarJugador = new VentanaAgregarJugador(miOpenAustralia);
         agregarJugador.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        //Inicializamos la VentanaAgregarPista y le pasamos como parametro OpenDeAutralia para evitar que se reinicie los datos
         VentanaAgregarPista pistas = new VentanaAgregarPista(miOpenAustralia);
         pistas.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFinalActionPerformed
-        // TODO add your handling code here:
+        //Inicializamos la VentanaVerRondas y le pasamos como parametro OpenDeAutralia para evitar que se reinicie los datos
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
         int tamArreglo;
         int inicioArray;
@@ -326,19 +327,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         int inicio = 14;
         int limite = 15;
+        //verificamos si el arraylist esta con contenido
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            //llamamos el numero de ganadores y verificamos si esta el rango de 14 a 15
             if (miOpenAustralia.numeroGanadores() >= 14 && miOpenAustralia.numeroGanadores() <= 15) {
+                //verificamos si el arraylist tiene menos de 15
                 if (miOpenAustralia.getPartidos().size() < 15) {
                     tamArreglo = 2;
                     inicioArray = 12;
                     finalArray = 14;
+                    //llamamos al metodo generarPatidos
                     miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Final";
                 } else {
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Final";
                 }
 
@@ -352,7 +361,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMFinalActionPerformed
 
     private void jMSemiFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSemiFinalActionPerformed
-        // TODO add your handling code here:
+        //Inicializamos la VentanaVerRondas y le pasamos como parametro OpenDeAutralia para evitar que se reinicie los datos
         VentanaVerRondas rondas = new VentanaVerRondas(miOpenAustralia);
         int tamArreglo;
         int inicioArray;
@@ -360,19 +369,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         int inicio = 12;
         int limite = 14;
+        //verificamos si el arraylist esta con contenido
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            //llamamos el numero de ganadores y verificamos si esta el rango de 12 a 15
             if (miOpenAustralia.numeroGanadores() >= 12 && miOpenAustralia.numeroGanadores() <= 15) {
+                //verificamos si el arraylist tiene menos de 14
                 if (miOpenAustralia.getPartidos().size() < 14) {
                     tamArreglo = 4;
                     inicioArray = 8;
                     finalArray = 12;
+                    //llamamos al metodo generarPatidos
                     miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Semi Final";
                 } else {
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Semi Final";
                 }
 
@@ -394,20 +411,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         int inicio = 8;
         int limite = 12;
+        //verificamos si el arraylist esta con contenido
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
+            //llamamos el numero de ganadores y verificamos si esta el rango de 8 a 15
             if (miOpenAustralia.numeroGanadores() >= 8 && miOpenAustralia.numeroGanadores() <= 15) {
+                //verificamos si el arraylist tiene menos de 12
                 if (miOpenAustralia.getPartidos().size() < 12) {
                     tamArreglo = 8;
                     inicioArray = 0;
                     finalArray = 8;
-
+                    //llamamos al metodo generarPatidos
                     miOpenAustralia.generarPartidos(tamArreglo, inicioArray, finalArray);
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Cuartos Final";
                 } else {
+                    //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
                     rondas.llenarTabla(inicio, limite);
                     rondas.setVisible(true);
+                    //llamamos el parametro etapa que esta en la ventanaJugarPartido
                     VentanaJugarPartido.etapa = "Cuartos Final";
                 }
 
@@ -430,27 +454,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             miOpenAustralia.generarOctavos();
 
         }
-
+        //llamamos el metodo llenar tabla que esta en la ventanaVerRondas
         rondas.llenarTabla(inicio, limite);
         rondas.setVisible(true);
+        //llamamos el parametro etapa que esta en la ventanaJugarPartido
         VentanaJugarPartido.etapa = "Octavos Final";
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
+    //Evento que se ejecuta cuando se hace focus a la tabla Estadisticas
     private void jTableEstadisticasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableEstadisticasFocusGained
-        // TODO add your handling code here:
+        //llamamos el metodo llenarTablaEstadisticas
         llenarTablaEstadisticas();
-
+            //verificamos si el numero de ganadores es igual a 15(es por que termino el torneo)
             if (miOpenAustralia.numeroGanadores() == 15) {
-
+                    //llamamos el metodo ganador torneo para luego agregar el nombre al Jlabel Ganador
                     if (miOpenAustralia.ganadorTorneo() == null) {
-                        jLGanador.setText("Ganador");
+                        jLGanador.setText("Open de Australia");
                     } else {
+                        //obtenemos el ganador del metodo ganadorTorneo y obtenemos el nombre
                         jLGanador.setText(miOpenAustralia.ganadorTorneo().getNombre());
+                        //llenamos la tabla mayorAsistencia
                         llenarTablaMayorAsistencia();
                         
                     }
                 }
+            //Jlabels de los Jugadores con mayor y menor tiempo en la cancha
             jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());
             jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());
     }//GEN-LAST:event_jTableEstadisticasFocusGained
@@ -531,7 +559,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //como se va a llenar una tabla de 5 columnas, se crea un vector de 3 elementos.
         //se usa un arreglo de Object para poder agregar a la tabla cualquier tipo de datos.
         Object[] datos = new Object[6];
-//        System.out.println(llenar.size()+"-------------------------");
         for (int i = 0; i < llenar.size(); i++) {
 
             Partido parti = llenar.get(i);
