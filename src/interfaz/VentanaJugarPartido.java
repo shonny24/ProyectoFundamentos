@@ -43,7 +43,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     /**
      * Constructor VentanaJugarPartido
      *
-     * @param open
+     * @param open OpenDeAustralia
      */
     public VentanaJugarPartido(OpenDeAustralia open) {
         miOpenAustralia = open;

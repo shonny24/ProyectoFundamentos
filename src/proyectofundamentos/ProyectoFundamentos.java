@@ -9,7 +9,7 @@ import interfaz.VentanaPrincipal;
 
 /**
  *
- * @author Shonny & juank
+ * @author Shonny y juank
  */
 public class ProyectoFundamentos {
 

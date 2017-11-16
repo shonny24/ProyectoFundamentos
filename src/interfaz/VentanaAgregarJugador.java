@@ -25,7 +25,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaAgregarJugador
-     * @param open
+     * @param open OpenDeAustralia
      */
     public VentanaAgregarJugador(OpenDeAustralia open) {
         miOpenAustralia = open;
@@ -364,7 +364,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
 
     /**
      *
-     * @param msj
+     * @param msj String
      */
     public static void imprimir(String msj) {
         JOptionPane.showMessageDialog(null, msj);

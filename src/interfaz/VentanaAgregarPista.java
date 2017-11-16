@@ -24,7 +24,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     private VentanaPrincipal miVentanaPrincipal;
     /**
      * Creates new form VentanaAgragarPista
-     * @param open
+     * @param open OpenDeAustralia
      */
     public VentanaAgregarPista(OpenDeAustralia open) {
         miOpenAustralia = open;

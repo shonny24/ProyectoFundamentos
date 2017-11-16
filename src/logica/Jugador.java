@@ -7,7 +7,7 @@ package logica;
 
 /**
  *
- * @author Shonny & Juank
+ * @author Shonny y Juank
  */
 public class Jugador {
 
@@ -20,9 +20,9 @@ public class Jugador {
     /**
      * Contructor de la clase Jugador
      *
-     * @param idJugador
-     * @param nombre
-     * @param edad
+     * @param idJugador id jugador
+     * @param nombre nombre jugador
+     * @param edad edad jugador
      *
      */
     public Jugador(String idJugador, String nombre, int edad) {
@@ -81,7 +81,7 @@ public class Jugador {
     /**
      * Metodo Set edad
      *
-     * @param edad
+     * @param edad edad
      */
     public void setEdad(int edad) {
         this.edad = edad;
@@ -108,7 +108,7 @@ public class Jugador {
     /**
      * Metodo Set Tiempo Acumulado
      *
-     * @param tiempoAcumulado
+     * @param tiempoAcumulado tiempo acumulado
      */
     public void setTiempoAcumulado(int tiempoAcumulado) {
         this.tiempoAcumulado = tiempoAcumulado;

@@ -7,7 +7,7 @@ package logica;
 
 /**
  *
- * @author Shonny & juank
+ * @author Shonny y juank
  */
 public class Pista {
     private String idPista;
@@ -17,9 +17,9 @@ public class Pista {
     /**
      * Constructor
      * 
-     * @param idPista
-     * @param nombre
-     * @param capacidadMax
+     * @param idPista ide la pista
+     * @param nombre nombre de la pista
+     * @param capacidadMax capacidad maxima de la pista
      */
     public Pista(String idPista, String nombre, int capacidadMax) {
         this.idPista = idPista;
@@ -37,7 +37,7 @@ public class Pista {
 
     /**
      * Metodo Set id Pista 
-     * @param idPista
+     * @param idPista String
      */
     public void setIdPista(String idPista) {
         this.idPista = idPista;
@@ -53,7 +53,7 @@ public class Pista {
 
     /**
      * Metodo Set Nombre
-     * @param nombre
+     * @param nombre Nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -69,7 +69,7 @@ public class Pista {
 
     /**
      * Metodo Set Capacidad Maxima
-     * @param capacidadMax
+     * @param capacidadMax entero
      */
     public void setCapacidadMax(int capacidadMax) {
         this.capacidadMax = capacidadMax;

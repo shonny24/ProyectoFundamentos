@@ -15,7 +15,7 @@ import logica.*;
 
 /**
  *
- * @author Shonny & juank
+ * @author Shonny y juank
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 

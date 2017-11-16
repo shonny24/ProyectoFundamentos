@@ -40,10 +40,10 @@ public class Partido {
     /**
      * Constructor
      *
-     * @param id
-     * @param jugador1
-     * @param jugador2
-     * @param pista
+     * @param id id de partido
+     * @param jugador1 jugador1 del partido
+     * @param jugador2 jugador 2 del partido
+     * @param pista pista del partido
      */
     public Partido(String id, Jugador jugador1, Jugador jugador2, Pista pista) {
         this.tiempo = "00:00:00"; //Cuando se crea un registro/objeto se inicializa el tiempo en "00:00:00"
@@ -249,7 +249,7 @@ public class Partido {
 
     /**
      *
-     * @return
+     * @return boolean
      */
     public boolean jugarGame() {                   //Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano el game en juego.
         boolean punto = false;                      //Variable que determina cual de los jugadores gana el punto en juego.
@@ -274,7 +274,7 @@ public class Partido {
 
     /**
      *
-     * @return
+     * @return boolean
      */
     public boolean determinarGanador() {    // Metodo que determina si ya hay un ganador del partido
         boolean ganador = false;            // Variable que determina si se gano el partido.
@@ -289,7 +289,7 @@ public class Partido {
 
     /**
      *
-     * @param set
+     * @param set sets
      */
     public void jugarSet(int set) {                     // Metodo que ejecuta todo un set.
         boolean ganadorSet = false;                     // Variable que determina si ya se gano el set en juego.
@@ -337,8 +337,8 @@ public class Partido {
 
     /**
      *
-     * @param set
-     * @return
+     * @param set sets
+     * @return boolean
      */
     public boolean jugarTieBreak(int set) { // Metodo que ejecuta un tieBreak
         sets[0][5] = "0";
@@ -374,7 +374,7 @@ public class Partido {
      * partido cualquier jugador debe ganar por minimo 2 games de diferencia con
      * respecto al otro jugador.
      *
-     * @return
+     * @return boolean
      */
     public boolean jugarDobleGame() {
         int j1 = (Integer.parseInt(sets[0][4]));
@@ -407,7 +407,7 @@ public class Partido {
     /**
      * Metodo que genera un punto al azar.
      *
-     * @return
+     * @return boolean
      */
     public boolean generarPuntos() {
         Random aleatorio = new Random();
@@ -419,9 +419,9 @@ public class Partido {
      * Metodo que suma los puntos de un game teniendo en cuenta que la suma es:
      * 15-30-40, puede haber un deuce si ambos jugadores llegan a 40.
      *
-     * @param comparador1
-     * @param comparador2
-     * @param punto
+     * @param comparador1 comparador1 
+     * @param comparador2 comparador2 
+     * @param punto boolean
      */
     public void sumarPunto(int comparador1, int comparador2, boolean punto) {
         if (punto == true) {
@@ -492,7 +492,7 @@ public class Partido {
     /**
      * Metodo que suma los puntos del tibreak en la matriz del partido.
      *
-     * @param punto
+     * @param punto boolean
      */
     public void sumarTiebreak(boolean punto) {
         if (punto == true) {
@@ -506,11 +506,11 @@ public class Partido {
     /**
      * Metodo que determina si ya hay un ganador del game en curso.
      *
-     * @param acum1
-     * @param acum2
-     * @param n
-     * @param punto
-     * @return
+     * @param acum1 entero
+     * @param acum2 entero
+     * @param n entero
+     * @param punto boolean
+     * @return boolean
      */
     public boolean determinarGanadorGame(int acum1, int acum2, int n, boolean punto) {
         boolean ganador = false;
@@ -523,8 +523,8 @@ public class Partido {
     /**
      * Metodo que determina si ya hay un ganador del set en curso.
      *
-     * @param n
-     * @return
+     * @param n entero
+     * @return boolean
      */
     public boolean determinarGanadorSet(int n) {
         boolean ganador = false;
@@ -644,7 +644,7 @@ public class Partido {
     /**
      * Metodo Get Jugador1
      *
-     * @param jugador1
+     * @param jugador1 Jugador
      */
     public void setJugador1(Jugador jugador1) {
         this.jugador1 = jugador1;
@@ -662,7 +662,7 @@ public class Partido {
     /**
      * Metodo Set Jugador2
      *
-     * @param jugador2
+     * @param jugador2 Jugador
      */
     public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
@@ -680,14 +680,14 @@ public class Partido {
     /**
      * Metodo Set Pista
      *
-     * @param pista
+     * @param pista Pista
      */
     public void setPista(Pista pista) {
         this.pista = pista;
     }
 
     /**
-     * Metodo Get fecha & hora
+     * Metodo Get fecha y hora
      *
      * @return fechaHora
      */
@@ -696,9 +696,9 @@ public class Partido {
     }
 
     /**
-     * Metodo Set fecha & hora
+     * Metodo Set fecha y hora
      *
-     * @param fechaHora
+     * @param fechaHora String
      */
     public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
@@ -716,7 +716,7 @@ public class Partido {
     /**
      * Metodo Set Id Partido
      *
-     * @param id
+     * @param id String
      */
     public void setId(String id) {
         this.id = id;
@@ -734,7 +734,7 @@ public class Partido {
     /**
      * Metodo Set Id Partido
      *
-     * @param sets
+     * @param sets Asrregl ode String
      */
     public void setSets(String[][] sets) {
         this.sets = sets;
@@ -752,39 +752,39 @@ public class Partido {
     /**
      * Metodo Set tiempo
      *
-     * @param tiempo
+     * @param tiempo String
      */
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
     }
 
     /**
-     *
-     * @return
+     * metodo get Deuce
+     * @return boolean
      */
     public boolean getDeuce() {
         return deuce;
     }
 
     /**
-     *
-     * @param deuce
+     * Metodo Set Deuce
+     * @param deuce boolean
      */
     public void setDeuce(boolean deuce) {
         this.deuce = deuce;
     }
 
     /**
-     *
-     * @return
+     * Metodo Get TieBreak
+     * @return boolean
      */
     public boolean getTieBreak() {
         return tieBreak;
     }
 
     /**
-     *
-     * @param tieBreak
+     * Metodo set TieBreak
+     * @param tieBreak boolean
      */
     public void setTieBreak(boolean tieBreak) {
         this.tieBreak = tieBreak;
@@ -793,7 +793,7 @@ public class Partido {
     /**
      * Metodo Set Asistencia
      *
-     * @param asistencia
+     * @param asistencia entero
      */
     public void setAsistencia(int asistencia) {
         this.asistencia = asistencia;

@@ -21,6 +21,7 @@ public class VentanaPuntosJugador extends javax.swing.JFrame {
     private OpenDeAustralia miOpenAustralia;
     /**
      * Creates new form VentanaPuntosJugador
+     * @param open OpenDeAustralia
      */
     public VentanaPuntosJugador(OpenDeAustralia open) {
         miOpenAustralia = open;

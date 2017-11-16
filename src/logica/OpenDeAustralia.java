@@ -13,7 +13,7 @@ import java.util.Random;
 
 /**
  *
- * @author Shonny & juank
+ * @author Shonny y juank
  */
 public class OpenDeAustralia {
 
@@ -287,7 +287,7 @@ public class OpenDeAustralia {
     /**
      * Busca un partido por ID
      *
-     * @param id
+     * @param id id partido
      * @return Partido
      */
     public Partido buscarPartido(String id) {
@@ -503,7 +503,7 @@ public class OpenDeAustralia {
     /**
      * Metodo que carga el archivo Jugadores.txt en el arreglo (persistencia)
      *
-     * @throws IOException
+     * @throws IOException excepción del archivo
      */
     public void inicializarAtributosJugador() throws IOException {
         FileReader lector = new FileReader("src/persistencia/Jugadores.txt");//Inicializa la variable con la ruta del archivo
@@ -524,7 +524,7 @@ public class OpenDeAustralia {
     /**
      * Metodo que carga el archivo Pistas.txt en el arreglo (persistencia)
      *
-     * @throws IOException
+     * @throws IOException excepción del archivo
      */
     public void inicializarAtributosPista() throws IOException {
         FileReader lector = new FileReader("src/persistencia/Pistas.txt");//Inicializa la variable con la ruta del archivo
@@ -572,7 +572,7 @@ public class OpenDeAustralia {
     /**
      * Metodo Set Pistas
      *
-     * @param pistas
+     * @param pistas pista
      */
     public void setPistas(Pista[] pistas) {
         this.pistas = pistas;
