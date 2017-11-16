@@ -214,6 +214,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Australian-Open.png"))); // NOI18N
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Archivo.png"))); // NOI18N
         jMenu1.setText("Archivo");
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/agregar2.png"))); // NOI18N
@@ -243,11 +244,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Ver.png"))); // NOI18N
         jMenu3.setText("Ver");
 
+        jMOctavos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Etapa.png"))); // NOI18N
         jMOctavos.setText("Rondas");
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/podio.png"))); // NOI18N
         jMenuItem3.setText("Octavos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +261,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMOctavos.add(jMenuItem3);
 
         jMCuartos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMCuartos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/podio.png"))); // NOI18N
         jMCuartos.setText("Cuartos");
         jMCuartos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +271,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMOctavos.add(jMCuartos);
 
         jMSemiFinal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMSemiFinal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/podio.png"))); // NOI18N
         jMSemiFinal.setText("Semi Final");
         jMSemiFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,6 +281,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMOctavos.add(jMSemiFinal);
 
         jMFinal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMFinal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/podio.png"))); // NOI18N
         jMFinal.setText("Final");
         jMFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +292,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu3.add(jMOctavos);
 
+        jMPuntosJugador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Puntos.png"))); // NOI18N
         jMPuntosJugador.setText("Puntos Jugador");
         jMPuntosJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,8 +303,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/Ayuda2.png"))); // NOI18N
         jMenu2.setText("Ayuda");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/images/about.png"))); // NOI18N
         jMenuItem4.setText("About");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
