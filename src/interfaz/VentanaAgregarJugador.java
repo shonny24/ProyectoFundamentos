@@ -30,7 +30,7 @@ public class VentanaAgregarJugador extends javax.swing.JFrame {
     public VentanaAgregarJugador(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
 
         //************************
         //Centrar Jframe

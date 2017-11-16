@@ -29,7 +29,7 @@ public class VentanaAgregarPista extends javax.swing.JFrame {
     public VentanaAgregarPista(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
         //************************
         //Centrar Jframe
         setLocationRelativeTo(null);

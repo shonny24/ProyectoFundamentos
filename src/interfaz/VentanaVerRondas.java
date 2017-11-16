@@ -27,7 +27,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
     public VentanaVerRondas(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
         //************************
         //Centrar Jframe
         setLocationRelativeTo(null);
@@ -49,7 +49,7 @@ public class VentanaVerRondas extends javax.swing.JFrame {
         jTableVerRondas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Octavos de Final");
+        setTitle("Etapa");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Partidos"));

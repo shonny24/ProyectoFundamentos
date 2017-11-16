@@ -11,15 +11,14 @@ package logica;
  */
 public class Jugador {
 
-    private String idJugador;
-    private String nombre;
-    private int edad;
-//    private int rankinATP;
-    private int puntosObtenidos;
-    public int tiempoAcumulado;
+    private String idJugador;//id del partido
+    private String nombre;//nombre del jugador
+    private int edad;//edad del jugador
+    private int puntosObtenidos;//puntos obtenidos del jugador
+    public int tiempoAcumulado;//tiempo acumulado del jugador
 
     /**
-     *
+     *Contructor de la clase Jugador
      * @param idJugador
      * @param nombre
      * @param edad
@@ -29,22 +28,21 @@ public class Jugador {
         this.idJugador = idJugador;
         this.nombre = nombre;
         this.edad = edad;
-//        this.rankinATP = rankinATP;
-        this.puntosObtenidos = 180;
-        this.tiempoAcumulado=0;
+        this.puntosObtenidos = 180;//se inicializa 180 puntos ya que se juega desde los octavos de final
+        this.tiempoAcumulado=0;//se inicializa en 0 ya que en ese momento no se han jugado partidos
     }
 
     /**
-     *
-     * @return
+     * Metodo Get id Jugador
+     * @return id del jugador
      */
     public String getIdJugador() {
         return idJugador;
     }
 
     /**
-     *
-     * @param idJugador
+     *Metodo Set id Jugador
+     * @param idJugador id del jugador
      */
     public void setIdJugador(String idJugador) {
         this.idJugador = idJugador;

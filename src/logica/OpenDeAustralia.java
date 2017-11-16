@@ -9,8 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -109,12 +107,19 @@ public class OpenDeAustralia {
             jugador1 = jugadoresCuartos[i];//jugador de la primera posicion
             jugador2 = jugadoresCuartos[(tamArreglo - 1) - i];//jugador de la ultima posicion
             //Pista aleatoria
-            if (tamArreglo == 4) {//si es semifinal
-                pista = pistas[aleatorio.nextInt(2) + 0];
-            } else if (tamArreglo == 2) {//si es final
-                pista = pistas[0];
-            } else {//para cualquiera etapa
-                pista = pistas[aleatorio.nextInt(5)];
+            switch (tamArreglo) {
+                case 4:
+                    //si es semifinal
+                    pista = pistas[aleatorio.nextInt(2) + 0];
+                    break;
+                case 2:
+                    //si es final
+                    pista = pistas[0];
+                    break;
+                default:
+                    //para cualquiera etapa
+                    pista = pistas[aleatorio.nextInt(5)];
+                    break;
             }
             String idPartido = (partidos.size() + 1) + "";//auto incremnto del id
             //creamos un objeto partido (llamamos al contructor para inicializar)
@@ -281,6 +286,7 @@ public class OpenDeAustralia {
 
     /**
      * Busca un partido por ID
+     *
      * @param id
      * @return Partido
      */
@@ -296,8 +302,9 @@ public class OpenDeAustralia {
 
     /**
      * Agrega un jugador primero verificando si existe mediante el id
-     * @param juga 
-     * @return
+     *
+     * @param juga Objeto de tipo Jugadores
+     * @return true si agrego false si no agrego el Jugador
      */
     public boolean agregarJugador(Jugador juga) {
         String id = juga.getIdJugador();
@@ -317,13 +324,13 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Buscar el jugador por medio del ID en el arreglo
      *
-     * @param idJugador
-     * @return
+     * @param idJugador id del jugador
+     * @return un Juagador
      */
     public Jugador buscarJugador(String idJugador) {
-        for (int i = 0; i < jugadores.length; i++) {
-            Jugador j = jugadores[i];
+        for (Jugador j : jugadores) {
             if (j != null) {
                 if (idJugador.equals(j.getIdJugador())) {
                     return j;
@@ -334,9 +341,10 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Busca en el arreglo el id y si lo encuentra lo elimina
      *
-     * @param id
-     * @return
+     * @param id id del jugador
+     * @return true si elimino false si no lo elimino
      */
     public boolean eliminarJugador(String id) {
         for (int i = 0; i < jugadores.length; i++) {
@@ -351,40 +359,42 @@ public class OpenDeAustralia {
         return false;
     }
 
-    // se puede volver mas pequeño es una prueba
     /**
+     * Este metodo sirve para modificar los datos directamente desde las celdas
+     * de la tabla
      *
-     * @param id
-     * @param dato
-     * @param col
+     * @param id id del Jugador
+     * @param dato dato modificado
+     * @param col indica que variable se va modificar (es el numero de la
+     * columna)
      */
     public void modificarJugador(String id, String dato, int col) {
         switch (col) {
             case 1:
-                for (int i = 0; i < jugadores.length; i++) {
-                    if (jugadores[i] != null) {
-                        if (id.equals(jugadores[i].getIdJugador())) {
-                            jugadores[i].setNombre(dato);
+                for (Jugador jugadore : jugadores) {
+                    if (jugadore != null) {
+                        if (id.equals(jugadore.getIdJugador())) {
+                            jugadore.setNombre(dato);
                         }
                     }
                 }
                 break;
             case 2:
                 int edad = Integer.parseInt(dato);
-                for (int i = 0; i < jugadores.length; i++) {
-                    if (jugadores[i] != null) {
-                        if (id.equals(jugadores[i].getIdJugador())) {
-                            jugadores[i].setEdad(edad);
+                for (Jugador jugadore : jugadores) {
+                    if (jugadore != null) {
+                        if (id.equals(jugadore.getIdJugador())) {
+                            jugadore.setEdad(edad);
                         }
                     }
                 }
                 break;
             case 3:
                 int puntosAtp = Integer.parseInt(dato);
-                for (int i = 0; i < jugadores.length; i++) {
-                    if (jugadores[i] != null) {
-                        if (id.equals(jugadores[i].getIdJugador())) {
-                            jugadores[i].setPuntosObtenidos(puntosAtp);
+                for (Jugador jugadore : jugadores) {
+                    if (jugadore != null) {
+                        if (id.equals(jugadore.getIdJugador())) {
+                            jugadore.setPuntosObtenidos(puntosAtp);
                         }
                     }
                 }
@@ -396,9 +406,11 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Este metodo agrega una pista verificando primero si la pista existe
+     * mediante el id
      *
-     * @param pis
-     * @return
+     * @param pis objeto de tipo Pista
+     * @return true si lo agrego false si no lo agrego
      */
     public boolean agregarPista(Pista pis) {
         String id = pis.getIdPista();
@@ -418,9 +430,10 @@ public class OpenDeAustralia {
     }
 
     /**
+     * metodo que elimina una pista mediante el id
      *
-     * @param id
-     * @return
+     * @param id id de la pista
+     * @return true si se elimino y false si no se elimino
      */
     public boolean eliminarPista(String id) {
         for (int i = 0; i < pistas.length; i++) {
@@ -436,13 +449,13 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Metodo que busca una pista por el id
      *
-     * @param idPista
-     * @return
+     * @param idPista id de la pista
+     * @return Pista
      */
     public Pista buscarPista(String idPista) {
-        for (int i = 0; i < pistas.length; i++) {
-            Pista p = pistas[i];
+        for (Pista p : pistas) {
             if (p != null) {
                 if (idPista.equals(p.getIdPista())) {
                     return p;
@@ -452,30 +465,32 @@ public class OpenDeAustralia {
         return null;
     }
 
-    // se puede volver mas pequeño es una prueba
     /**
+     * Este metodo sirve para modificar los datos de la pista directamente desde
+     * la tabla
      *
-     * @param id
-     * @param dato
-     * @param col
+     * @param id de la pista
+     * @param dato dato modificado
+     * @param col indica que variable se va modificar (es el numero de la
+     * columna)
      */
     public void modificarPista(String id, String dato, int col) {
         switch (col) {
             case 1:
-                for (int i = 0; i < pistas.length; i++) {
-                    if (pistas[i] != null) {
-                        if (id.equals(pistas[i].getIdPista())) {
-                            pistas[i].setNombre(dato);
+                for (Pista pista : pistas) {
+                    if (pista != null) {
+                        if (id.equals(pista.getIdPista())) {
+                            pista.setNombre(dato);
                         }
                     }
                 }
                 break;
             case 2:
                 int capacidadMaxi = Integer.parseInt(dato);
-                for (int i = 0; i < pistas.length; i++) {
-                    if (pistas[i] != null) {
-                        if (id.equals(pistas[i].getIdPista())) {
-                            pistas[i].setCapacidadMax(capacidadMaxi);
+                for (Pista pista : pistas) {
+                    if (pista != null) {
+                        if (id.equals(pista.getIdPista())) {
+                            pista.setCapacidadMax(capacidadMaxi);
                         }
                     }
                 }
@@ -486,70 +501,76 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Metodo que carga el archivo Jugadores.txt en el arreglo (persistencia)
      *
      * @throws IOException
      */
     public void inicializarAtributosJugador() throws IOException {
-        FileReader lector = new FileReader("src/persistencia/Jugadores.txt");
-        BufferedReader entradatxt = new BufferedReader(lector);
-        String linea = entradatxt.readLine();
-        int i = 0;
+        FileReader lector = new FileReader("src/persistencia/Jugadores.txt");//Inicializa la variable con la ruta del archivo
+        try (BufferedReader entradatxt = new BufferedReader(lector)) {//excepción
+            String linea = entradatxt.readLine();//guarda una linea del archivo en la variable
+            int i = 0;
 
-        while (linea != null) {
-            String ep[] = linea.split("--");
-            Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]));
-            jugadores[i] = nuevoJugador;
-            i++;
-            linea = entradatxt.readLine();
+            while (linea != null) {
+                String ep[] = linea.split("--");//hace split a la linea para separarla y irla guardando en el arreglo
+                Jugador nuevoJugador = new Jugador(ep[0], ep[1], Integer.parseInt(ep[2]));
+                jugadores[i] = nuevoJugador;
+                i++;
+                linea = entradatxt.readLine();
+            }
         }
-        entradatxt.close();
     }
 
     /**
+     * Metodo que carga el archivo Pistas.txt en el arreglo (persistencia)
      *
      * @throws IOException
      */
     public void inicializarAtributosPista() throws IOException {
-        FileReader lector = new FileReader("src/persistencia/Pistas.txt");
-        BufferedReader entradatxt = new BufferedReader(lector);
-        String linea = entradatxt.readLine();
-        int i = 0;
+        FileReader lector = new FileReader("src/persistencia/Pistas.txt");//Inicializa la variable con la ruta del archivo
+        try (BufferedReader entradatxt = new BufferedReader(lector)) {//excepción
+            String linea = entradatxt.readLine();//guarda una linea del archivo en la variable
+            int i = 0;
 
-        while (linea != null) {
-            String pist[] = linea.split("--");
-            Pista nuevaPista = new Pista(pist[0], pist[1], Integer.parseInt(pist[2]));
-            pistas[i] = nuevaPista;
-            i++;
-            linea = entradatxt.readLine();
+            while (linea != null) {
+                String pist[] = linea.split("--");//hace split a la linea para separarla y irla guardando en el arreglo
+                Pista nuevaPista = new Pista(pist[0], pist[1], Integer.parseInt(pist[2]));
+                pistas[i] = nuevaPista;
+                i++;
+                linea = entradatxt.readLine();
+            }
         }
-        entradatxt.close();
     }
 
     /**
+     * Metodo Get Jugadores
      *
-     * @return
+     * @return arreglo de jugadores
      */
     public Jugador[] getJugadores() {
         return jugadores;
     }
 
     /**
+     * Metodo Set Jugadores
      *
-     * @param jugadores
+     * @param jugadores arreglo de Jugadores
      */
     public void setJugadores(Jugador[] jugadores) {
         this.jugadores = jugadores;
     }
 
     /**
+     * Metodo Get Pistas
      *
-     * @return
+     * @return Un arreglo de tipo Pistas
      */
     public Pista[] getPistas() {
         return pistas;
     }
 
     /**
+     * Metodo Set Pistas
      *
      * @param pistas
      */
@@ -558,16 +579,18 @@ public class OpenDeAustralia {
     }
 
     /**
+     * Metodo Get Patidos
      *
-     * @return
+     * @return Un ArrayList de tipo Patidos
      */
     public ArrayList<Partido> getPartidos() {
         return partidos;
     }
 
     /**
+     * Metodo Get partidos
      *
-     * @param partidos
+     * @param partidos recibe un ArrayList
      */
     public void setPartidos(ArrayList<Partido> partidos) {
         this.partidos = partidos;

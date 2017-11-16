@@ -165,7 +165,7 @@ public class Partido {
             }
             if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {        // Sí el jugador se han juegado menos de 5 sets, y ambos jugadores tiene seis games ganados, se procede a sumar el siguiente punto con la regla del tiebreak.
                 sumarTiebreak(punto);                           // Se llama al metodo para sumar el punto en la matriz de la forma  tiebrak
-                n = 5;                                  
+                n = 5;
             } else {                                            // De lo contrario se procede a sumar en punto como un game normal.
                 sumarPunto(acumulador1, acumulador2, punto);    // Se llama al metodo para sumar el punto en la matriz de la forma normal.
                 n = 3;
@@ -265,7 +265,7 @@ public class Partido {
         if (setJ2 >= 3) {                   // Si el jugador 2 gano 3 sets.
             ganador = true;                 // El partido ya termina.
         }
-        return ganador;                     
+        return ganador;
     }
 
     /**
@@ -347,14 +347,17 @@ public class Partido {
         } else { // De lo contrario:
             sets[1][set] = "7"; // El jugador 2 llega a 7 games ganados.
         }
-        return punto; 
+        return punto;
     }
 
     /**
-     * Metodo que ejecuta la muerte subita en el quinto set, para ganar el partido cualquier jugador debe ganar por minimo 2 games de diferencia con respecto al otro jugador.
+     * Metodo que ejecuta la muerte subita en el quinto set, para ganar el
+     * partido cualquier jugador debe ganar por minimo 2 games de diferencia con
+     * respecto al otro jugador.
+     *
      * @return
      */
-    public boolean jugarDobleGame() { 
+    public boolean jugarDobleGame() {
         int j1 = (Integer.parseInt(sets[0][4]));
         int j2 = (Integer.parseInt(sets[1][4]));
         boolean ganarDobleGame = false;
@@ -378,16 +381,13 @@ public class Partido {
             j1 = (Integer.parseInt(sets[0][4]));
             j2 = (Integer.parseInt(sets[1][4]));
         }
-        if (j1 > j2) {
-            game = true;
-        } else {
-            game = false;
-        }
+        game = j1 > j2;
         return game;
     }
 
     /**
      * Metodo que genera un punto al azar.
+     *
      * @return
      */
     public boolean generarPuntos() {
@@ -397,7 +397,9 @@ public class Partido {
 
     /**
      *
-     * Metodo que suma los puntos de un game teniendo en cuenta que la suma es: 15-30-40, puede haber un deuce si ambos jugadores llegan a 40.
+     * Metodo que suma los puntos de un game teniendo en cuenta que la suma es:
+     * 15-30-40, puede haber un deuce si ambos jugadores llegan a 40.
+     *
      * @param comparador1
      * @param comparador2
      * @param punto
@@ -470,6 +472,7 @@ public class Partido {
 
     /**
      * Metodo que suma los puntos del tibreak en la matriz del partido.
+     *
      * @param punto
      */
     public void sumarTiebreak(boolean punto) {
@@ -483,6 +486,7 @@ public class Partido {
 
     /**
      * Metodo que determina si ya hay un ganador del game en curso.
+     *
      * @param acum1
      * @param acum2
      * @param n
@@ -499,6 +503,7 @@ public class Partido {
 
     /**
      * Metodo que determina si ya hay un ganador del set en curso.
+     *
      * @param n
      * @return
      */
@@ -580,26 +585,27 @@ public class Partido {
             acumulador = true;
         }
     }
-     /**
+
+    /**
      * Metedo que acumula los puntos de cada jugador tras cada partido.
      */
     public void acumularPuntos() {
-        if(time==false){
+        if (time == false) {
             int codigo = Integer.parseInt(id);
             int puntos;
-            if(codigo<13){
-                if(setJ1==3){
-                    puntos = jugador1.getPuntosObtenidos()*2;
+            if (codigo < 13) {
+                if (setJ1 == 3) {
+                    puntos = jugador1.getPuntosObtenidos() * 2;
                     jugador1.setPuntosObtenidos(puntos);
-                }else{
-                    puntos = jugador2.getPuntosObtenidos()*2;
+                } else {
+                    puntos = jugador2.getPuntosObtenidos() * 2;
                     jugador2.setPuntosObtenidos(puntos);
                 }
-            }else if(codigo==15){
-                if(setJ1==3){
+            } else if (codigo == 15) {
+                if (setJ1 == 3) {
                     jugador1.setPuntosObtenidos(2000);
                     jugador2.setPuntosObtenidos(1200);
-                }else{
+                } else {
                     jugador1.setPuntosObtenidos(1200);
                     jugador2.setPuntosObtenidos(2000);
                 }
@@ -627,7 +633,7 @@ public class Partido {
 
     /**
      * Metodo Get Jugador2
-     * 
+     *
      * @return Jugador2
      */
     public Jugador getJugador2() {
@@ -636,6 +642,7 @@ public class Partido {
 
     /**
      * Metodo Set Jugador2
+     *
      * @param jugador2
      */
     public void setJugador2(Jugador jugador2) {
@@ -644,6 +651,7 @@ public class Partido {
 
     /**
      * Metodo Get Pista
+     *
      * @return Pista
      */
     public Pista getPista() {
@@ -652,6 +660,7 @@ public class Partido {
 
     /**
      * Metodo Set Pista
+     *
      * @param pista
      */
     public void setPista(Pista pista) {
@@ -660,6 +669,7 @@ public class Partido {
 
     /**
      * Metodo Get fecha & hora
+     *
      * @return fechaHora
      */
     public String getFechaHora() {
@@ -667,7 +677,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Set fecha & hora
+     * Metodo Set fecha & hora
+     *
      * @param fechaHora
      */
     public void setFechaHora(String fechaHora) {
@@ -676,6 +687,7 @@ public class Partido {
 
     /**
      * Metodo Get Id Partido
+     *
      * @return Id Partido
      */
     public String getId() {
@@ -683,7 +695,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Set Id Partido
+     * Metodo Set Id Partido
+     *
      * @param id
      */
     public void setId(String id) {
@@ -691,7 +704,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Get Sets
+     * Metodo Get Sets
+     *
      * @return sets
      */
     public String[][] getSets() {
@@ -699,7 +713,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Set Id Partido
+     * Metodo Set Id Partido
+     *
      * @param sets
      */
     public void setSets(String[][] sets) {
@@ -707,7 +722,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Get Tiempo
+     * Metodo Get Tiempo
+     *
      * @return tiempo
      */
     public String getTiempo() {
@@ -715,7 +731,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Set tiempo
+     * Metodo Set tiempo
+     *
      * @param tiempo
      */
     public void setTiempo(String tiempo) {
@@ -755,7 +772,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Set Asistencia
+     * Metodo Set Asistencia
+     *
      * @param asistencia
      */
     public void setAsistencia(int asistencia) {
@@ -763,7 +781,8 @@ public class Partido {
     }
 
     /**
-     *Metodo Get Asistencia
+     * Metodo Get Asistencia
+     *
      * @return asistencia
      */
     public int getAsistencia() {

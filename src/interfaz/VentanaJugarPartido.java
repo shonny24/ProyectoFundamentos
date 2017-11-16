@@ -48,7 +48,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
     public VentanaJugarPartido(OpenDeAustralia open) {
         miOpenAustralia = open;
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/logo.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/images/Australian_Open_Logo.png")).getImage());
         //************************
         //Centrar Jframe
         setLocationRelativeTo(null);
@@ -86,6 +86,7 @@ public class VentanaJugarPartido extends javax.swing.JFrame {
         jBAutomatico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Jugar Partido");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
