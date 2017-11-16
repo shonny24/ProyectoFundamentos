@@ -442,6 +442,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     } else {
                         jLGanador.setText(miOpenAustralia.ganadorTorneo().getNombre());
                         llenarTablaMayorAsistencia();
+                        
                     }
                 }
             jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());
