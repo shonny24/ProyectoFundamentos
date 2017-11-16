@@ -156,7 +156,7 @@ public class Partido {
         int j2 = (Integer.parseInt(sets[1][nSet]));             // games ganados en el set en juego del jugador 2.
         int n = 0;                                              // Variable para determinar en el metodo en que se gana un game ya sea en tibreak o un game normal.
 
-        if (ganador == false) {                                 // Si no hay ganador en el partido se procede a jugar un nuevo punto.
+        if (ganador == false) {                                 // Sí no hay ganador en el partido se procede a jugar un nuevo punto.
             punto = generarPuntos();                            // Se genera un boolean aleatorio para determinar quien gana el siguiente punto en el game
             if (punto == true) {                                // Si punto es treu, el punto se le suma al jugador 1.
                 acumulador1++;
@@ -165,7 +165,7 @@ public class Partido {
             }
             if ((nSet < 4) && (j1 == j2) && (j1 == 6)) {        // Sí el jugador se han juegado menos de 5 sets, y ambos jugadores tiene seis games ganados, se procede a sumar el siguiente punto con la regla del tiebreak.
                 sumarTiebreak(punto);                           // Se llama al metodo para sumar el punto en la matriz de la forma  tiebrak
-                n = 5;
+                n = 5;                                  
             } else {                                            // De lo contrario se procede a sumar en punto como un game normal.
                 sumarPunto(acumulador1, acumulador2, punto);    // Se llama al metodo para sumar el punto en la matriz de la forma normal.
                 n = 3;
@@ -201,81 +201,84 @@ public class Partido {
                     }
                 }
             }
-        } else {
-            aculumarTiempo();
-            time = true;
+        } else {                                                // De lo contrario:
+            aculumarTiempo();                                   // Se acumula el tiempo de los 2 jugadores
+            acumularPuntos();
+            time = true;                                        // Se activa la bandera para detener el cronometro.
         }
     }
 
     /**
      *
      */
-    public void generarJuegoAutomatico() {
-        boolean ganador;
-        ganador = determinarGanador();
-        for (int i = 0; i < 5; i++) {
-            if (ganador == false) {
-                jugarSet(i);
-            } else {
-                i = 5;
+    public void generarJuegoAutomatico() {          // Se ejecuta el metodo para jugar todo el partido de una manera automatica
+        boolean ganador;                            // Varible que indica si ya se gano el partido
+        ganador = determinarGanador();              // Se llama al metodo para determinar si ya hay ganador del partido
+        for (int i = 0; i < 5; i++) {               // Se inicia el recorrido por cada unos de los sets del partido
+            if (ganador == false) {                 // Sí no hay ganador del partdido se procede a jugar el set en la posicion i
+                jugarSet(i);                        // Se llama al metodo para jugar el set en la posicion i.
+            } else {                                // De lo contratio:
+                i = 5;                              // Se rompe el ciclo de recorrido por los sets.
             }
-            ganador = determinarGanador();
+            ganador = determinarGanador();          // Se llama al metodo para determinar si ya hay ganador del partido
         }
-        sets[0][5] = "0";
-        sets[1][5] = "0";
-        generarTiempoPartido();
+        sets[0][5] = "0";                           // Se resetea la posicion que lleva los puntos de los games.
+        sets[1][5] = "0";                           // Se resetea la posicion que lleva los puntos de los games.
+        acumularPuntos();
+        generarTiempoPartido();                     // Se llama al metodo par generar el tiempo de duracion del partido
     }
 
     /**
      *
      * @return
      */
-    public boolean jugarGame() {//Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano ese game.
-        boolean punto = false;
-        boolean ganarPunto = false;
-        int comparador1 = 0;
-        int comparador2 = 0;
-        while (ganarPunto == false) {
-            if (((comparador1 > 3) && (comparador2 < (comparador1 - 1))) || ((comparador2 > 3) && (comparador1 < (comparador2 - 1)))) {
-                ganarPunto = true;
-            } else {
-                punto = generarPuntos();
-                if (punto == true) {
-                    comparador1++;
-                } else {
-                    comparador2++;
+    public boolean jugarGame() {                   //Se ejecuta el metodo generaGame el cual retorna un boolean para saber quien gano el game en juego.
+        boolean punto = false;                      //Variable que determina cual de los jugadores gana el punto en juego.
+        boolean ganarPunto = false;                 //Variable que determina si ya se gano el game en juego
+        int comparador1 = 0;                        //Acumulador de los puntos del jugador 1.
+        int comparador2 = 0;                        //Acumulador de los puntos del jugador 2.
+        while (ganarPunto == false) {               //Mientras no halla ganador del game.
+            if (((comparador1 > 3) && (comparador2 < (comparador1 - 1))) || ((comparador2 > 3) && (comparador1 < (comparador2 - 1)))) {// Condicion para determinar si se gano el game en juego
+                ganarPunto = true;                  //Se rompe el ciclo while
+            } else {                                //De lo contrario:
+                punto = generarPuntos();            // Se genera un nuevo punto.
+                if (punto == true) {                // Si punto es true 
+                    comparador1++;                  // Se incrementa el acuumulador de puntos del jugador 1.
+                } else {                            // De lo contratio:
+                    comparador2++;                  // Se incrementa el acuumulador de puntos del jugador 2.
                 }
-                sumarPunto(comparador1, comparador2, punto);
+                sumarPunto(comparador1, comparador2, punto);    // Se llama al metodo para sumar los puntos en la matriz.
             }
         }
-        return punto;
+        return punto; //Retorna el ganador del ultimo punto, que es a su vez el ganador del game.
     }
 
     /**
      *
      * @return
      */
-    public boolean determinarGanador() {
-        boolean ganador = false;
-        if (setJ1 >= 3) {
-            ganador = true;
+    public boolean determinarGanador() {    // Metodo que determina si ya hay un ganador del partido
+        boolean ganador = false;            // Variable que determina si se gano el partido.
+        if (setJ1 >= 3) {                   // Si el jugador 1 gano 3 sets.
+            ganador = true;                 // El partido ya termina.
         }
-        if (setJ2 >= 3) {
-            ganador = true;
+        if (setJ2 >= 3) {                   // Si el jugador 2 gano 3 sets.
+            ganador = true;                 // El partido ya termina.
         }
-        return ganador;
+        return ganador;                     
     }
 
     /**
      *
      * @param set
      */
-    public void jugarSet(int set) {
-        boolean ganadorSet = false;
-        boolean game;
-        boolean ganadorTieBreak = false;
-        int j1 = (Integer.parseInt(sets[0][set]));
-        int j2 = (Integer.parseInt(sets[1][set]));
+    public void jugarSet(int set) {                    // Metodo que ejecuta todo un set.
+        boolean ganadorSet = false;                     // Variable que determina si ya se gano el set en juego.
+        boolean game;                                   // Variable que determina quien gana el game en juego en el set.
+        boolean ganadorTieBreak = false;                // Variable que determina quien gana el tieBreak
+        int j1 = (Integer.parseInt(sets[0][set]));      // Variable que contiene los puntos del jugador 1 en el set en juego.
+        int j2 = (Integer.parseInt(sets[1][set]));      // Variable que contiene los puntos del jugador 2 en el set en juego.
+
         if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1))) || ((j1 == 7) || (j2 == 7) && (nSet < 4))) {
             ganadorSet = true;
         }
@@ -582,6 +585,32 @@ public class Partido {
             acumulador = true;
         }
     }
+        /**
+     *
+     */
+    public void acumularPuntos() {
+        if(time==false){
+            int codigo = Integer.parseInt(id);
+            int puntos;
+            if(codigo<13){
+                if(setJ1==3){
+                    puntos = jugador1.getPuntosObtenidos()*2;
+                    jugador1.setPuntosObtenidos(puntos);
+                }else{
+                    puntos = jugador2.getPuntosObtenidos()*2;
+                    jugador2.setPuntosObtenidos(puntos);
+                }
+            }else if(codigo==15){
+                if(setJ1==3){
+                    jugador1.setPuntosObtenidos(2000);
+                    jugador2.setPuntosObtenidos(1200);
+                }else{
+                    jugador1.setPuntosObtenidos(1200);
+                    jugador2.setPuntosObtenidos(2000);
+                }
+            }
+        }
+    }
 
     /**
      * Metodo Get Jugador1
@@ -602,15 +631,16 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get Jugador2
+     * 
+     * @return Jugador2
      */
     public Jugador getJugador2() {
         return jugador2;
     }
 
     /**
-     *
+     * Metodo Set Jugador2
      * @param jugador2
      */
     public void setJugador2(Jugador jugador2) {
@@ -618,15 +648,15 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get Pista
+     * @return Pista
      */
     public Pista getPista() {
         return pista;
     }
 
     /**
-     *
+     * Metodo Set Pista
      * @param pista
      */
     public void setPista(Pista pista) {
@@ -634,15 +664,15 @@ public class Partido {
     }
 
     /**
-     *
-     * @return
+     * Metodo Get fecha & hora
+     * @return fechaHora
      */
     public String getFechaHora() {
         return fechaHora;
     }
 
     /**
-     *
+     *Metodo Set fecha & hora
      * @param fechaHora
      */
     public void setFechaHora(String fechaHora) {
