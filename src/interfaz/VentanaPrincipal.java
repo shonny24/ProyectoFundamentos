@@ -356,7 +356,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int limite = 14;
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
             if (miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
-                if (miOpenAustralia.getPartidos().size() < 15) {
+                if (miOpenAustralia.getPartidos().size() < 14) {
                     tamArreglo = 4;
                     inicioArray = 8;
                     finalArray = 12;
@@ -390,7 +390,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int limite = 12;
         if (!(miOpenAustralia.getPartidos().isEmpty())) {
             if (miOpenAustralia.numeroGanadores() == 8 || miOpenAustralia.numeroGanadores() == 12 || miOpenAustralia.numeroGanadores() == 14 || miOpenAustralia.numeroGanadores() == 15) {
-                if (miOpenAustralia.getPartidos().size() < 15) {
+                if (miOpenAustralia.getPartidos().size() < 12) {
                     tamArreglo = 8;
                     inicioArray = 0;
                     finalArray = 8;
