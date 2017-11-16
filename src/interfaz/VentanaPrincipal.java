@@ -451,8 +451,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         
                     }
                 }
-            jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());
-            jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());
+            jLabel3.setText(miOpenAustralia.jugadorMayorTiempo());// Se obtiene el nombre y tiempo del jugador con mayor tiempo en cancha
+            jLabel4.setText(miOpenAustralia.jugadorMenorTiempo());// Se obtiene el nombre y tiempo del jugador con menor tiempo en cancha
     }//GEN-LAST:event_jTableEstadisticasFocusGained
 
     /**

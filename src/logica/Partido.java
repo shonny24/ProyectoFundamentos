@@ -27,15 +27,15 @@ public class Partido {
     /**
      *
      */
-    public boolean acumulador = false;
-    private boolean deuce;
-    private boolean tieBreak;
-    private boolean time;
-    private int setJ1 = 0;
-    private int setJ2 = 0;
-    private int nSet = 0;
-    private int acumulador1 = 0;
-    private int acumulador2 = 0;
+    public boolean acumulador = false;// Bandera para la acumulacion del tiempo del partido.
+    private boolean deuce; // Bandera que indica el deuce.
+    private boolean tieBreak;// Bandera que indica el tieBreak.
+    private boolean time;// Bandeta que permite generar el tiempo del partido y acumularlo una unica vez por partido.
+    private int setJ1 = 0;// Sets ganados por el jugador 1 en el partido en juego.
+    private int setJ2 = 0;// Sets ganados por el jugador 2 en el partido en juego.
+    private int nSet = 0;// Numero de sets jugados en el partido en curso.
+    private int acumulador1 = 0;//Acumulador de puntos del jugador 1.
+    private int acumulador2 = 0;//Acumulador de puntos del jugador 2.
 
     /**
      * Constructor
