@@ -272,46 +272,45 @@ public class Partido {
      *
      * @param set
      */
-    public void jugarSet(int set) {                    // Metodo que ejecuta todo un set.
+    public void jugarSet(int set) {                     // Metodo que ejecuta todo un set.
         boolean ganadorSet = false;                     // Variable que determina si ya se gano el set en juego.
         boolean game;                                   // Variable que determina quien gana el game en juego en el set.
         boolean ganadorTieBreak = false;                // Variable que determina quien gana el tieBreak
         int j1 = (Integer.parseInt(sets[0][set]));      // Variable que contiene los puntos del jugador 1 en el set en juego.
         int j2 = (Integer.parseInt(sets[1][set]));      // Variable que contiene los puntos del jugador 2 en el set en juego.
-
-        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1))) || ((j1 == 7) || (j2 == 7) && (nSet < 4))) {
+        if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1))) || ((j1 == 7) || (j2 == 7) && (nSet < 4))) {// Condicion para determinar si se galo el set en juego.
             ganadorSet = true;
         }
-        while (ganadorSet == false) {
-            if ((j1 == j2) && ((j1 == 6) && (j2 == 6))) {
-                if (set == 4) {
-                    jugarDobleGame();
-                    ganadorSet = true;
-                } else {
-                    ganadorTieBreak = jugarTieBreak(set);
-                    ganadorSet = true;
-                    if (ganadorTieBreak == true) {
-                        setJ1++;
-                    } else {
-                        setJ2++;
+        while (ganadorSet == false) {                     // Mientras no se halla ganado el set.
+            if ((j1 == j2) && ((j1 == 6) && (j2 == 6))) { // Condicion para determinar si se debe jugar un tieBreak o muerte subita
+                if (set == 4) {                           // Condicion para jugar muerte subita
+                    jugarDobleGame();                     // Se juega la muerte subita
+                    ganadorSet = true;                    // Ya se gano el set.
+                } else {                                  // De lo contrario:
+                    ganadorTieBreak = jugarTieBreak(set); // Se juega el tieBreak.
+                    ganadorSet = true;                    // Ya se gano el set.
+                    if (ganadorTieBreak == true) {        // Condicion para determinar quien gano el tieBreak
+                        setJ1++;                          // Si el set lo gano el jugador 1 se incrementan los sets ganados del jugador 1.
+                    } else {                              // De lo contrario:
+                        setJ2++;                          // Si el set lo gano el jugador 2 se incrementan los sets ganados del jugador 2.
                     }
                 }
-            } else {
-                game = jugarGame();
-                if (game == true) {
-                    sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + "";
-                } else {
-                    sets[1][set] = ((Integer.parseInt(sets[1][set])) + 1) + "";
+            } else {                                      // De lo contrario 
+                game = jugarGame();                       // Se juega un game normal.
+                if (game == true) {                       // Si el game lo gano el jugador 1.
+                    sets[0][set] = ((Integer.parseInt(sets[0][set])) + 1) + ""; // Se incrementa un game en el set en juego del jugador 1.
+                } else {                                  // De lo contrario:
+                    sets[1][set] = ((Integer.parseInt(sets[1][set])) + 1) + ""; // Se incrementa un game en el set en juego del jugador 2.
                 }
             }
             j1 = (Integer.parseInt(sets[0][set]));
             j2 = (Integer.parseInt(sets[1][set]));
-            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {//Condicion para determinar si ya se gano el set en juego.
                 ganadorSet = true;
-                if (j1 > j2) {
-                    setJ1++;
-                } else {
-                    setJ2++;
+                if (j1 > j2) {// Sí el set lo gano el jugador 1
+                    setJ1++;  // Se incrementa un set al jugador 1.
+                } else {      // De lo contratio:
+                    setJ2++;  // Se incrementa un set al jugador 2.
                 }
             }
         }
@@ -322,40 +321,40 @@ public class Partido {
      * @param set
      * @return
      */
-    public boolean jugarTieBreak(int set) {
+    public boolean jugarTieBreak(int set) { // Metodo que ejecuta un tieBreak
         sets[0][5] = "0";
         sets[1][5] = "0";
-        int j1 = 0;
-        int j2 = 0;
-        boolean ganarTieBreak = false;
-        boolean punto = false;
-        while (ganarTieBreak == false) {
-            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) {
+        int j1 = 0;  // Variable que acumula los putos del jugador 1 en el tiebreak.
+        int j2 = 0;  // Variable que acumula los putos del jugador 2 en el tiebreak.
+        boolean ganarTieBreak = false; // Variable que determina si ya se gano el tieBreak.
+        boolean punto = false;         // Varable que determina quien gana el siguiente punto del tieBreak.
+        while (ganarTieBreak == false) { // Mientras no se halla ganado el tieBreak.
+            if (((j1 > 5) && (j2 < (j1 - 1))) || ((j2 > 5) && (j1 < (j2 - 1)))) { // Condicion para determinar si ya se gano el tieBreak.
                 ganarTieBreak = true;
-            } else {
-                punto = generarPuntos();
-                if (punto == true) {
-                    sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + "";
-                } else {
-                    sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + "";
+            } else { // De lo contrario:
+                punto = generarPuntos(); // Se genera un nuevo punto.
+                if (punto == true) {     // Sí el punto lo gano el jugador 1.
+                    sets[0][5] = ((Integer.parseInt(sets[0][5])) + 1) + ""; // Se incrementa un punto al jugador 1.
+                } else { // De lo contrario:
+                    sets[1][5] = ((Integer.parseInt(sets[1][5])) + 1) + ""; // Se incrementa un punto al jugador 2.
                 }
             }
             j1 = (Integer.parseInt(sets[0][5]));
             j2 = (Integer.parseInt(sets[1][5]));
         }
-        if (punto == true) {
-            sets[0][set] = "7";
-        } else {
-            sets[1][set] = "7";
+        if (punto == true) { // Sí el ultimo punto lo gano el jugador 1, significa que el jugador 1 gano el tiebreak.
+            sets[0][set] = "7"; // Por lo tanto el jugador 1 llega a 7 games ganados.
+        } else { // De lo contrario:
+            sets[1][set] = "7"; // El jugador 2 llega a 7 games ganados.
         }
-        return punto;
+        return punto; 
     }
 
     /**
-     *
+     * Metodo que ejecuta la muerte subita en el quinto set, para ganar el partido cualquier jugador debe ganar por minimo 2 games de diferencia con respecto al otro jugador.
      * @return
      */
-    public boolean jugarDobleGame() {
+    public boolean jugarDobleGame() { 
         int j1 = (Integer.parseInt(sets[0][4]));
         int j2 = (Integer.parseInt(sets[1][4]));
         boolean ganarDobleGame = false;
@@ -388,7 +387,7 @@ public class Partido {
     }
 
     /**
-     *
+     * Metodo que genera un punto al azar.
      * @return
      */
     public boolean generarPuntos() {
@@ -398,7 +397,7 @@ public class Partido {
 
     /**
      *
-     *
+     * Metodo que suma los puntos de un game teniendo en cuenta que la suma es: 15-30-40, puede haber un deuce si ambos jugadores llegan a 40.
      * @param comparador1
      * @param comparador2
      * @param punto
@@ -470,8 +469,7 @@ public class Partido {
     }
 
     /**
-     *
-     *
+     * Metodo que suma los puntos del tibreak en la matriz del partido.
      * @param punto
      */
     public void sumarTiebreak(boolean punto) {
@@ -484,8 +482,7 @@ public class Partido {
     }
 
     /**
-     *
-     *
+     * Metodo que determina si ya hay un ganador del game en curso.
      * @param acum1
      * @param acum2
      * @param n
@@ -501,8 +498,7 @@ public class Partido {
     }
 
     /**
-     *
-     *
+     * Metodo que determina si ya hay un ganador del set en curso.
      * @param n
      * @return
      */
@@ -523,8 +519,7 @@ public class Partido {
     }
 
     /**
-     *
-     *
+     * Metodo que genera el tiempo del partido cuando se juega en automatico.
      */
     public void generarTiempoPartido() {
         if (time == false) {
@@ -556,7 +551,7 @@ public class Partido {
     }
 
     /**
-     *
+     * Metodo que inicia la matriz del partido.
      */
     public void inicializarSets() {
         for (int i = 0; i < 2; i++) {
@@ -567,7 +562,7 @@ public class Partido {
     }
 
     /**
-     *
+     * Metodo que acula el tiempo de los jugadores tras cada partido.
      */
     public void aculumarTiempo() {
         if ((acumulador == false) && (time == false)) {
@@ -585,8 +580,8 @@ public class Partido {
             acumulador = true;
         }
     }
-        /**
-     *
+     /**
+     * Metedo que acumula los puntos de cada jugador tras cada partido.
      */
     public void acumularPuntos() {
         if(time==false){
